@@ -1,0 +1,47 @@
+.container {
+  display: flex;
+  align-items: center;
+  padding: 50px;
+
+  h1 {
+    padding: 20px;
+  }
+}
+
+#iconTitle {
+  width: 85px;
+  height: 85px;
+}
+
+.sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.sidebar-menu ul {
+  margin-left: 4%;
+  list-style: none;
+}
+
+.sidebar-menu li {
+  margin: 25px 0;
+}
+
+.sidebar-menu a {
+  display: flex;
+  align-items: center;
+
+  text-decoration: none;
+}
+
+.sidebar-menu a:hover {
+  text-decoration: underline;
+  text-decoration: none;
+  transition-duration: 0.3s;
+  color: #654ea3;
+}
+
+span {
+  padding: 20px;
+}

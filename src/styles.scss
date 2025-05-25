@@ -1,1 +1,24 @@
-/* You can add global styles to this file, and also import other style files */
+h1 {
+  font-size: 45px;
+  margin: 0;
+  font-weight: initial;
+}
+
+html {
+  color: white;
+  font-size: 20px;
+  background: linear-gradient(to right, #1b192f, #4e476f);
+  background: #1b192f; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #1b192f, #4e476f);
+  font-family: system-ui;
+  font-weight: normal;
+}
+
+.icon {
+  width: 45px;
+  height: 45px;
+}
+
+a {
+  color: inherit;
+}
