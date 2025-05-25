@@ -1,0 +1,84 @@
+.container {
+  text-align: justify;
+  width: 40%;
+  margin-top: 5%;
+  margin-right: 30%;
+  margin-left: 30%;
+}
+
+h1 {
+  font-weight: bold;
+}
+
+p {
+  margin-bottom: 25px;
+}
+
+$primary: #8c8994;
+$secondary: #303869;
+$white: #fff;
+
+.inputForm {
+  position: relative;
+  padding: 15px 0 0;
+  margin-top: 10px;
+}
+
+.inputField {
+  font-family: inherit;
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid $primary;
+  outline: 0;
+  color: $white;
+  padding: 7px 0;
+  background: transparent;
+  transition: border-color 0.5s;
+
+  &::placeholder {
+    color: transparent;
+  }
+
+  &:placeholder-shown ~ #inputLabel {
+    cursor: text;
+    top: 30px;
+  }
+}
+
+#inputLabel {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.3s;
+  color: $primary;
+}
+
+.inputField:focus {
+  ~ #inputLabel {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.3s;
+    color: $primary;
+  }
+  padding-bottom: 6px;
+  transition: 0.3s;
+  border-image-slice: 1;
+}
+
+.inputField {
+  &:required,
+  &:invalid {
+    box-shadow: none;
+  }
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #222222;
+}

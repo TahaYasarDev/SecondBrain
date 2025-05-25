@@ -1,7 +1,9 @@
-.container {
+.title,
+.button {
   display: flex;
   align-items: center;
-  padding: 50px;
+  justify-content: center;
+  margin-top: 10px;
 
   h1 {
     padding: 20px;
@@ -9,8 +11,8 @@
 }
 
 #iconTitle {
-  width: 85px;
-  height: 85px;
+  width: 35px;
+  height: 35px;
 }
 
 .sidebar-menu {
@@ -20,18 +22,14 @@
 }
 
 .sidebar-menu ul {
-  margin-left: 4%;
+  padding-left: 35px;
   list-style: none;
-}
-
-.sidebar-menu li {
-  margin: 25px 0;
 }
 
 .sidebar-menu a {
   display: flex;
   align-items: center;
-
+  margin-bottom: 15px;
   text-decoration: none;
 }
 
@@ -39,9 +37,29 @@
   text-decoration: underline;
   text-decoration: none;
   transition-duration: 0.3s;
-  color: #654ea3;
+  color: #8ca6db;
 }
 
 span {
-  padding: 20px;
+  margin-left: 10px;
+}
+
+.mode {
+  text-align: center;
+}
+
+#modeButton {
+  background-color: #20203e;
+  color: white;
+  border-radius: 5px;
+  height: 35px;
+  width: 120px;
+  border: 2px solid #3f3b5c;
+  font-size: 16px;
+}
+
+#modeButton:hover {
+  background-color: #1b1b2c;
+  transition-duration: 0.3s;
+  cursor: pointer;
 }

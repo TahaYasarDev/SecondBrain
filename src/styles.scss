@@ -1,24 +1,25 @@
-h1 {
-  font-size: 45px;
+body {
   margin: 0;
-  font-weight: initial;
 }
 
 html {
   color: white;
-  font-size: 20px;
-  background: linear-gradient(to right, #1b192f, #4e476f);
-  background: #1b192f; /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #1b192f, #4e476f);
+  font-size: 15px;
   font-family: system-ui;
   font-weight: normal;
 }
 
-.icon {
-  width: 45px;
-  height: 45px;
+h1 {
+  font-size: 30px;
+  margin: 0;
+  font-weight: initial;
 }
 
 a {
   color: inherit;
+}
+
+.icon {
+  width: 15px;
+  height: 15px;
 }

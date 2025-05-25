@@ -1,4 +1,23 @@
+main {
+  display: flex;
+}
 app-sidebar {
-  width: 30%;
-  display: block;
+  height: 100vh;
+  width: 15%;
+  background: #20203e;
+
+  border: 2px solid #53527d;
+  border-right: 0px;
+}
+
+.view {
+  width: 85%;
+  background: linear-gradient(
+    341deg,
+    rgb(24, 21, 42) 0%,
+    rgb(43, 35, 66) 24%,
+    rgb(48, 56, 105) 35%,
+    rgb(24, 21, 42) 100%
+  );
+  border: 2px solid #53527d;
 }
