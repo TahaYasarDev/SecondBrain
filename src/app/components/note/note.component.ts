@@ -52,7 +52,7 @@ export class NoteComponent {
       case 'text-area':
         compRef = this.container.createComponent(TextAreaBlockComponent);
         break;
-      case 'heading':
+      case 'h1':
         compRef = this.container.createComponent(H1BlockComponent);
         break;
       default:
@@ -74,6 +74,7 @@ export class NoteComponent {
     }
   }
 
+  // Suppression d'un composant
   removeComponent(compRef: ComponentRef<any>) {
     // Trouve l'index dans le tableau
     const index = this.componentsRefs.indexOf(compRef);

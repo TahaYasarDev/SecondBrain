@@ -1,4 +1,4 @@
-.title,
+.secondBrain,
 .button {
   display: flex;
   align-items: center;
@@ -10,9 +10,9 @@
   }
 }
 
-#iconTitle {
-  width: 35px;
-  height: 35px;
+#iconSeconbBrain {
+  width: 45px;
+  height: 45px;
 }
 
 .sidebar-menu {
@@ -36,8 +36,8 @@
 .sidebar-menu a:hover {
   text-decoration: underline;
   text-decoration: none;
-  transition-duration: 0.3s;
-  color: #8ca6db;
+  transition-duration: 0.5s;
+  color: white;
 }
 
 span {
@@ -60,6 +60,6 @@ span {
 
 #modeButton:hover {
   background-color: #1b1b2c;
-  transition-duration: 0.3s;
+  transition-duration: 0.5s;
   cursor: pointer;
 }
