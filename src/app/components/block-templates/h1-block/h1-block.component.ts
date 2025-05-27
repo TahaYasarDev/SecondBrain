@@ -7,10 +7,10 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrl: './h1-block.component.scss',
 })
 export class H1BlockComponent {
-  @Output() delete = new EventEmitter<void>();
+  @Output() deleteH1 = new EventEmitter<void>();
 
-  deleteH1() {
-    this.delete.emit();
+  delete() {
+    this.deleteH1.emit();
   }
 
   onInput(event: Event) {

@@ -3,7 +3,9 @@
 
   <div class="informations">
     <app-paragraph-block
+      *ngIf="showInitialParagraph"
       (baliseSelected)="handleBaliseSelected($event)"
+      (deleteParagraph)="handleDeleteParagraph()"
     ></app-paragraph-block>
 
     <ng-template #container></ng-template>

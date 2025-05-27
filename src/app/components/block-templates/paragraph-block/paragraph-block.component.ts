@@ -11,7 +11,7 @@ import { InsertBlockComponent } from '../../insert-block/insert-block.component'
 })
 export class ParagraphBlockComponent {
   // Variable permettant le déclenchement de la suppresion du composant
-  @Output() delete = new EventEmitter<void>();
+  @Output() deleteParagraph = new EventEmitter<void>();
 
   // Variable permettant la création d'une balise
   @Output() createBalise = new EventEmitter<string>();
@@ -19,8 +19,8 @@ export class ParagraphBlockComponent {
   // Variable permettant l'envoi de la balise selectionnée
   @Output() baliseSelected = new EventEmitter<string>();
 
-  deleteParagraph() {
-    this.delete.emit();
+  delete() {
+    this.deleteParagraph.emit();
   }
 
   onInput(event: Event) {

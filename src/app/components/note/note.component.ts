@@ -6,6 +6,7 @@ import {
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 // Component
@@ -23,6 +24,7 @@ import { TextAreaBlockComponent } from '../block-templates/text-area-block/text-
     H1BlockComponent,
     ParagraphBlockComponent,
     TextAreaBlockComponent,
+    CommonModule,
   ],
   templateUrl: './note.component.html',
   styleUrl: './note.component.scss',
@@ -33,12 +35,21 @@ export class NoteComponent {
 
   @Output() baliseSelected = new EventEmitter<string>();
 
+  @Output() deleteParagraph = new EventEmitter<string>();
+
+  showInitialParagraph: boolean = true;
+
   // Stocke toutes les références des composants créés
   componentsRefs: ComponentRef<any>[] = [];
 
   // Evènement lors du choix de la balise que l'utilisateur souhaite insérer
   handleBaliseSelected(baliseType: string) {
     this.onInsertBlock(baliseType);
+  }
+
+  // Evènement lors du choix de la balise que l'utilisateur souhaite insérer
+  handleDeleteParagraph() {
+    this.showInitialParagraph = false;
   }
 
   // Création d'une balise
