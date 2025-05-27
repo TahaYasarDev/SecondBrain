@@ -6,19 +6,10 @@
       (baliseSelected)="handleBaliseSelected($event)"
     ></app-paragraph-block>
 
-    <ng-template #container></ng-template>
-  </div>
+    <app-text-area-block
+      (baliseSelected)="handleBaliseSelected($event)"
+    ></app-text-area-block>
 
-  <div class="inputForm field">
-    <textarea
-      (input)="onInputChange($event)"
-      class="inputField"
-      placeholder="inputText"
-      id="inputArea"
-      required
-    ></textarea>
-    <label for="inputArea" id="inputLabel">
-      Écrivez, tapez « / » pour afficher les commandes…
-    </label>
+    <ng-template #container></ng-template>
   </div>
 </div>

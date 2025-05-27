@@ -1,0 +1,18 @@
+<div>
+  <app-insert-block
+    (baliseSelected)="handleBaliseSelected($event)"
+  ></app-insert-block>
+
+  <div class="inputForm field">
+    <textarea
+      (input)="onInputChange($event)"
+      class="inputField"
+      placeholder="inputText"
+      id="inputArea"
+      required
+    ></textarea>
+    <label for="inputArea" id="inputLabel">
+      Écrivez, tapez « / » pour afficher les commandes…
+    </label>
+  </div>
+</div>

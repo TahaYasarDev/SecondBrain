@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { ParagraphBlockComponent } from '../block-templates/paragraph-block/paragraph-block.component';
 import { H1BlockComponent } from '../block-templates/h1-block/h1-block.component';
 import { InsertBlockComponent } from '../insert-block/insert-block.component';
+import { TextAreaBlockComponent } from '../block-templates/text-area-block/text-area-block.component';
 
 @Component({
   selector: 'app-note',
@@ -21,6 +22,7 @@ import { InsertBlockComponent } from '../insert-block/insert-block.component';
     InsertBlockComponent,
     H1BlockComponent,
     ParagraphBlockComponent,
+    TextAreaBlockComponent,
   ],
   templateUrl: './note.component.html',
   styleUrl: './note.component.scss',
@@ -46,6 +48,9 @@ export class NoteComponent {
     switch (type) {
       case 'paragraph':
         compRef = this.container.createComponent(ParagraphBlockComponent);
+        break;
+      case 'text-area':
+        compRef = this.container.createComponent(TextAreaBlockComponent);
         break;
       case 'heading':
         compRef = this.container.createComponent(H1BlockComponent);
@@ -79,18 +84,6 @@ export class NoteComponent {
 
       // Retire la référence du tableau
       this.componentsRefs.splice(index, 1);
-    }
-  }
-
-  onInputChange(event: Event) {
-    const value = (event.target as HTMLTextAreaElement).value;
-    const textarea = event.target as HTMLTextAreaElement;
-
-    if (value.length > 100) {
-      textarea.style.height = 'auto';
-      textarea.style.height = textarea.scrollHeight + 'px';
-    } else {
-      textarea.style.height = '50px';
     }
   }
 }
