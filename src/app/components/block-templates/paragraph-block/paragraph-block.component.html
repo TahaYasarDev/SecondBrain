@@ -1,0 +1,14 @@
+<button (click)="deleteParagraph()">Supprimer</button>
+
+<div>
+  <app-insert-block
+    (baliseSelected)="handleBaliseSelected($event)"
+  ></app-insert-block>
+
+  <p
+    class="editable-paragraph"
+    contenteditable="true"
+    data-placeholder="Ecrivez, appuyer sur la touche / pour insérer des éléments ..."
+    (input)="onInput($event)"
+  ></p>
+</div>

@@ -1,0 +1,24 @@
+<div class="container">
+  <app-h1-block></app-h1-block>
+
+  <div class="informations">
+    <app-paragraph-block
+      (baliseSelected)="handleBaliseSelected($event)"
+    ></app-paragraph-block>
+
+    <ng-template #container></ng-template>
+  </div>
+
+  <div class="inputForm field">
+    <textarea
+      (input)="onInputChange($event)"
+      class="inputField"
+      placeholder="inputText"
+      id="inputArea"
+      required
+    ></textarea>
+    <label for="inputArea" id="inputLabel">
+      Écrivez, tapez « / » pour afficher les commandes…
+    </label>
+  </div>
+</div>

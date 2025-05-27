@@ -1,0 +1,17 @@
+* {
+  display: flex;
+}
+
+app-insert-block {
+  width: 10%;
+}
+
+.editable-paragraph {
+  width: 90%;
+}
+
+.editable-paragraph:empty:before {
+  content: attr(data-placeholder);
+  color: #aaa;
+  pointer-events: none;
+}

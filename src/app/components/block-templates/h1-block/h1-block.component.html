@@ -1,0 +1,8 @@
+<button (click)="deleteH1()">Supprimer</button>
+
+<h1
+  class="editable-h1"
+  contenteditable="true"
+  data-placeholder="Nouveau titre"
+  (input)="onInput($event)"
+></h1>
