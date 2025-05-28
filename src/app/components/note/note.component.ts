@@ -33,6 +33,8 @@ export class NoteComponent {
   @ViewChild('container', { read: ViewContainerRef, static: true })
   container!: ViewContainerRef;
 
+  @ViewChild('initialParagraph') initialParagraph!: ParagraphBlockComponent;
+
   @Output() baliseSelected = new EventEmitter<string>();
 
   @Output() deleteParagraph = new EventEmitter<string>();
@@ -50,6 +52,12 @@ export class NoteComponent {
   // Evènement lors du choix de la balise que l'utilisateur souhaite insérer
   handleDeleteParagraph() {
     this.showInitialParagraph = false;
+  }
+
+  showParagraph() {
+    if (this.initialParagraph == null) {
+      this.showInitialParagraph = true;
+    }
   }
 
   // Création d'une balise
@@ -96,6 +104,13 @@ export class NoteComponent {
 
       // Retire la référence du tableau
       this.componentsRefs.splice(index, 1);
+    }
+  }
+
+  onInputTitle(event: Event) {
+    const el = event.target as HTMLElement;
+    if (el.innerText.trim() === '') {
+      el.innerHTML = '';
     }
   }
 }

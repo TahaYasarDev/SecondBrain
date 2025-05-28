@@ -1,8 +1,18 @@
 <div class="container">
-  <app-h1-block></app-h1-block>
+  <p
+    id="title"
+    data-placeholder="Nouveau titre ..."
+    contenteditable="true"
+    (input)="onInputTitle($event)"
+  ></p>
 
-  <div class="informations">
+  <div
+    [ngStyle]="{ height: showInitialParagraph ? 'auto' : '100vh' }"
+    class="informations"
+    (click)="showParagraph()"
+  >
     <app-paragraph-block
+      #initialParagraph
       *ngIf="showInitialParagraph"
       (baliseSelected)="handleBaliseSelected($event)"
       (deleteParagraph)="handleDeleteParagraph()"
