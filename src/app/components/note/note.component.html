@@ -7,17 +7,18 @@
   ></p>
 
   <div
+    class="template"
     [ngStyle]="{ height: showInitialParagraph ? 'auto' : '100vh' }"
-    class="informations"
     (click)="showParagraph()"
   >
-    <app-paragraph-block
-      #initialParagraph
-      *ngIf="showInitialParagraph"
-      (baliseSelected)="handleBaliseSelected($event)"
-      (deleteParagraph)="handleDeleteParagraph()"
-    ></app-paragraph-block>
-
+    <div class="block-item">
+      <app-paragraph-block
+        #initialParagraph
+        *ngIf="showInitialParagraph"
+        (baliseSelected)="handleBaliseSelected($event)"
+        (deleteParagraph)="handleDeleteParagraph()"
+      ></app-paragraph-block>
+    </div>
     <ng-template #container></ng-template>
   </div>
 </div>
