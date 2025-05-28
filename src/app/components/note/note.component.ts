@@ -81,8 +81,10 @@ export class NoteComponent {
     this.componentsRefs.push(compRef);
 
     // On écoute / s'abonne la propriété delete de l'enfant
-    if (compRef.instance.delete) {
-      compRef.instance.delete.subscribe(() => this.removeComponent(compRef));
+    if (compRef.instance.deleteParagraph) {
+      compRef.instance.deleteParagraph.subscribe(() =>
+        this.removeComponent(compRef)
+      );
     }
 
     // On écoute / s'abonne la propriété delete de l'enfant
