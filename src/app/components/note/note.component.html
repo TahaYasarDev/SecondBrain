@@ -11,14 +11,13 @@
     [ngStyle]="{ height: showInitialParagraph ? 'auto' : '100vh' }"
     (click)="showParagraph()"
   >
-    <div class="block-item">
-      <app-paragraph-block
-        #initialParagraph
-        *ngIf="showInitialParagraph"
-        (baliseSelected)="handleBaliseSelected($event)"
-        (deleteParagraph)="handleDeleteParagraph()"
-      ></app-paragraph-block>
-    </div>
+    <app-paragraph-block
+      #initialParagraph
+      *ngIf="showInitialParagraph"
+      (baliseSelected)="handleBaliseSelected($event)"
+      (deleteParagraph)="handleDeleteParagraph()"
+    ></app-paragraph-block>
+
     <ng-template #container></ng-template>
   </div>
 </div>
