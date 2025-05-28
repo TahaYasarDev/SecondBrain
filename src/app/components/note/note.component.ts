@@ -55,7 +55,7 @@ export class NoteComponent {
   }
 
   showParagraph() {
-    if (this.initialParagraph == null) {
+    if (this.initialParagraph == null && this.componentsRefs.length == 0) {
       this.showInitialParagraph = true;
     }
   }
