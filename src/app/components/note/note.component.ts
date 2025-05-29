@@ -21,6 +21,7 @@ import { ParagraphBlockComponent } from '../block-templates/paragraph-block/para
 import { H1BlockComponent } from '../block-templates/h1-block/h1-block.component';
 import { InsertBlockComponent } from '../insert-block/insert-block.component';
 import { TextAreaBlockComponent } from '../block-templates/text-area-block/text-area-block.component';
+import { TodoBlockComponent } from '../block-templates/todo-block/todo-block.component';
 
 @Component({
   selector: 'app-note',
@@ -31,6 +32,7 @@ import { TextAreaBlockComponent } from '../block-templates/text-area-block/text-
     H1BlockComponent,
     ParagraphBlockComponent,
     TextAreaBlockComponent,
+    TodoBlockComponent,
     CommonModule,
     CdkDropList,
     CdkDrag,

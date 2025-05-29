@@ -7,14 +7,13 @@ import {
   transition,
   AnimationEvent,
 } from '@angular/animations';
-import { CdkDrag } from '@angular/cdk/drag-drop';
 
 // Component
 import { InsertBlockComponent } from '../../insert-block/insert-block.component';
 
 @Component({
   selector: 'app-paragraph-block',
-  imports: [InsertBlockComponent, CdkDrag],
+  imports: [InsertBlockComponent],
   templateUrl: './paragraph-block.component.html',
   styleUrl: './paragraph-block.component.scss',
   animations: [
