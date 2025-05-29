@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
+
+// Service
+import { LayoutService } from '../../services/layout.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,4 +10,11 @@ import { Component } from '@angular/core';
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
 })
-export class SidebarComponent {}
+export class SidebarComponent {
+  constructor(private layoutService: LayoutService, private el: ElementRef) {}
+
+  ngAfterViewInit() {
+    const width = this.el.nativeElement.offsetWidth;
+    this.layoutService.setSidebarWidth(width);
+  }
+}
