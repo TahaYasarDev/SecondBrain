@@ -1,4 +1,5 @@
 <div
+  cdkDrag
   [@fadeIn]="isVisible ? 'visible' : 'hidden'"
   (@fadeIn.done)="onFadeDone($event)"
 >
@@ -13,5 +14,6 @@
     contenteditable="true"
     data-placeholder="Ecrivez, appuyer sur la touche / pour insérer des éléments ..."
     (input)="onInput($event)"
+    [innerHTML]="data"
   ></p>
 </div>

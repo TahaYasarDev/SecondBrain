@@ -7,13 +7,14 @@ import {
   transition,
   AnimationEvent,
 } from '@angular/animations';
+import { CdkDrag } from '@angular/cdk/drag-drop';
 
 // Component
 import { InsertBlockComponent } from '../../insert-block/insert-block.component';
 
 @Component({
   selector: 'app-paragraph-block',
-  imports: [InsertBlockComponent],
+  imports: [InsertBlockComponent, CdkDrag],
   templateUrl: './paragraph-block.component.html',
   styleUrl: './paragraph-block.component.scss',
   animations: [
@@ -50,6 +51,8 @@ export class ParagraphBlockComponent {
 
   isVisible = true;
 
+  data: string = '<strong>TEST</strong>';
+
   delete() {
     this.isVisible = false; // déclenche l'animation 'hidden'
   }
@@ -64,6 +67,8 @@ export class ParagraphBlockComponent {
     const el = event.target as HTMLElement;
     if (el.innerText.trim() === '') {
       el.innerHTML = '';
+    } else {
+      this.data = el.innerText;
     }
   }
 

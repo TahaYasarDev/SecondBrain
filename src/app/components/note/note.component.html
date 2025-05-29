@@ -7,6 +7,9 @@
   ></p>
 
   <div
+    cdkDropList
+    [cdkDropListData]="componentsRefs"
+    (cdkDropListDropped)="drop($event)"
     class="template"
     [ngStyle]="{ height: showInitialParagraph ? 'auto' : '100vh' }"
     (click)="showParagraph()"
