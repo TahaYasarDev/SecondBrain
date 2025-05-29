@@ -42,12 +42,6 @@ export class ParagraphBlockComponent {
   // Variable permettant le déclenchement de la suppresion du composant
   @Output() deleteParagraph = new EventEmitter<void>();
 
-  // Variable permettant la création d'une balise
-  @Output() createBalise = new EventEmitter<string>();
-
-  // Variable permettant l'envoi de la balise selectionnée
-  @Output() baliseSelected = new EventEmitter<string>();
-
   isVisible = true;
 
   data: string = '<strong>TEST</strong>';
@@ -69,10 +63,5 @@ export class ParagraphBlockComponent {
     } else {
       this.data = el.innerText;
     }
-  }
-
-  handleBaliseSelected(balise: string) {
-    this.baliseSelected.emit(balise);
-    this.createBalise.emit(balise);
   }
 }

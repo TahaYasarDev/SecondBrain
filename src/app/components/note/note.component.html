@@ -5,21 +5,10 @@
     contenteditable="true"
     (input)="onInputTitle($event)"
   ></p>
-
-  <div
-    class="template"
-    [ngStyle]="{ height: showInitialParagraph ? 'auto' : '100vh' }"
-    (click)="showParagraph()"
-  >
-    <app-paragraph-block
-      #initialParagraph
-      *ngIf="showInitialParagraph"
-      (baliseSelected)="handleBaliseSelected($event)"
-      (deleteParagraph)="handleDeleteParagraph()"
-    ></app-paragraph-block>
-
-    <app-todo-block></app-todo-block>
-
+  <app-insert-block
+    (baliseSelected)="handleBaliseSelected($event)"
+  ></app-insert-block>
+  <div class="template">
     <ng-template #container></ng-template>
   </div>
 </div>

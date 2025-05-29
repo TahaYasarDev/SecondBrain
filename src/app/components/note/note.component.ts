@@ -44,38 +44,22 @@ export class NoteComponent {
   @ViewChild('container', { read: ViewContainerRef })
   container!: ViewContainerRef;
 
-  @ViewChild('initialParagraph') initialParagraph!: ParagraphBlockComponent;
-
   @Output() baliseSelected = new EventEmitter<string>();
-
-  @Output() deleteParagraph = new EventEmitter<string>();
-
-  showInitialParagraph: boolean = true;
 
   // Stocke toutes les références des composants créés
   componentsRefs: ComponentRef<any>[] = [];
 
   savedComponentsData: Array<{ type: string; content: string }> = [];
 
+  //#region Méthode pour l'insertion et la suppression des nouveaux blocs
+
+  // Gestion des balises
+
   // Evènement lors du choix de la balise que l'utilisateur souhaite insérer
   handleBaliseSelected(baliseType: string) {
     this.onInsertBlock(baliseType);
   }
 
-  // Evènement lors du choix de la balise que l'utilisateur souhaite insérer
-  handleDeleteParagraph() {
-    this.showInitialParagraph = false;
-  }
-
-  showParagraph() {
-    if (this.initialParagraph == null && this.componentsRefs.length == 0) {
-      this.showInitialParagraph = true;
-    }
-  }
-
-  //#region Méthode pour l'insertion et la suppression des nouveaux blocs
-
-  // Création d'une balise
   onInsertBlock(type: string) {
     let componentType: Type<any>;
 
