@@ -96,13 +96,4 @@ export class NoteComponent {
     }
   }
   //#endregion
-
-  //#region Méthode pour le nouveau titre de la page
-  onInputTitle(event: Event) {
-    const el = event.target as HTMLElement;
-    if (el.innerText.trim() === '') {
-      el.innerHTML = '';
-    }
-  }
-  //#endregion
 }

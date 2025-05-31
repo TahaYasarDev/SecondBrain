@@ -14,14 +14,21 @@ p {
   margin-bottom: 25px;
 }
 
-#title {
-  font-size: 40px;
-  color: white;
-}
-
 #title:empty:before {
   font-size: 40px;
   content: attr(data-placeholder);
   color: rgb(55, 55, 55);
   pointer-events: none;
+}
+
+/* Style pour le p titre */
+#title {
+  width: 100%;
+  max-width: 400px;
+
+  min-width: 200px;
+  border-radius: 6px;
+  outline: none;
+  font-size: 40px;
+  color: white;
 }

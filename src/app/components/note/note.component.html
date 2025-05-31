@@ -1,13 +1,10 @@
-<div class="container">
-  <p
-    id="title"
-    data-placeholder="Nouveau titre ..."
-    contenteditable="true"
-    (input)="onInputTitle($event)"
-  ></p>
+<div class="wrapper">
   <app-insert-block
     (baliseSelected)="handleBaliseSelected($event)"
   ></app-insert-block>
+</div>
+
+<div class="container">
   <div class="template">
     <ng-template #container></ng-template>
   </div>

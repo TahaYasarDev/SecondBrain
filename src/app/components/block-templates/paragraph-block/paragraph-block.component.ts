@@ -1,10 +1,4 @@
-import {
-  Component,
-  Output,
-  EventEmitter,
-  AfterViewInit,
-  ElementRef,
-} from '@angular/core';
+import { Component, Output, EventEmitter, AfterViewInit } from '@angular/core';
 import {
   trigger,
   state,
@@ -56,7 +50,7 @@ export class ParagraphBlockComponent implements AfterViewInit {
 
   data: string = '<strong>TEST</strong>';
 
-  constructor(private layoutService: LayoutService, private el: ElementRef) {}
+  constructor(private layoutService: LayoutService) {}
 
   ngAfterViewInit(): void {
     const sidebarWidth = this.layoutService.getSidebarWidth();
