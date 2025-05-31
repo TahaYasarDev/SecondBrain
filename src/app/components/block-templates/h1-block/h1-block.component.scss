@@ -1,0 +1,5 @@
+.editable-h1:empty:before {
+  content: attr(data-placeholder);
+  color: #aaa;
+  pointer-events: none;
+}
