@@ -1,5 +1,5 @@
 // Angular
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 
 // Component
 import { ToolbarBlockComponent } from '../toolbar-block/toolbar-block.component';

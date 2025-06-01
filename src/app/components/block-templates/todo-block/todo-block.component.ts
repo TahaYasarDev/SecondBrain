@@ -1,13 +1,18 @@
-import { AfterViewInit, Component, EventEmitter, Output } from '@angular/core';
+// Angular
+import { AfterViewInit, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common'; // <- importer CommonModule
+import { CommonModule } from '@angular/common';
 import {
   CdkDrag,
   CdkDragDrop,
   CdkDropList,
   moveItemInArray,
 } from '@angular/cdk/drag-drop';
+
+// Component
 import { ToolbarBlockComponent } from '../toolbar-block/toolbar-block.component';
+
+// Shared
 import { fadeInAnimation } from '../../../shared/animation';
 import { BaseUiBehavior } from '../../../shared/base-ui-behavior';
 
