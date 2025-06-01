@@ -36,44 +36,10 @@ $primary: #8c8994;
   word-break: break-word;
 }
 
-#text-toolbar {
-  padding: 4px;
-}
-
 .resize-drag {
   user-select: text; // assure que le texte est sélectionnable
 }
 
-.toolbar-container {
-  display: flex;
-  align-items: center; /* aligne verticalement au centre */
-  gap: 10px; /* espace entre la toolbar et l'icône */
-  margin-bottom: 15px;
-}
-
-.icon {
-  width: 17px;
-  height: 17px;
-  padding: 5px;
-  cursor: pointer;
-}
-
 #move-btn {
   cursor: all-scroll;
-}
-
-#text-toolbar {
-  width: 100%;
-}
-
-#text-delete {
-  text-align: right;
-  width: 100%;
-}
-
-#toggle-case-btn {
-  width: 25px;
-  height: 25px;
-  padding: 0px;
-  margin-right: 2px;
 }

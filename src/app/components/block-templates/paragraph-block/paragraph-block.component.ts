@@ -23,10 +23,11 @@ import { InsertBlockComponent } from '../../insert-block/insert-block.component'
 // Librairie
 import interact from 'interactjs';
 import { LayoutService } from '../../../services/layout.service';
+import { ToolbarBlockComponent } from '../toolbar-block/toolbar-block.component';
 
 @Component({
   selector: 'app-paragraph-block',
-  imports: [CommonModule, InsertBlockComponent],
+  imports: [CommonModule, InsertBlockComponent, ToolbarBlockComponent],
   templateUrl: './paragraph-block.component.html',
   styleUrl: './paragraph-block.component.scss',
   animations: [
@@ -55,15 +56,12 @@ export class ParagraphBlockComponent implements AfterViewInit {
   placeHolder: string = 'Écrivez, tapez « / » pour afficher les commandes…';
   hasContent = false;
 
-  private interactable: any;
-  private enableResizeDrag = true;
-  private releaseTimeout: any = null;
-  private resetTimeout: any = null;
+  interactable: any;
+  enableResizeDrag = true;
+  releaseTimeout: any = null;
+  resetTimeout: any = null;
 
-  constructor(
-    private layoutService: LayoutService,
-    private renderer: Renderer2
-  ) {}
+  constructor(private layoutService: LayoutService) {}
 
   @ViewChild('draggableWrapper') draggableWrapper!: ElementRef<HTMLElement>;
 
@@ -181,49 +179,6 @@ export class ParagraphBlockComponent implements AfterViewInit {
         }, 1000);
       }
     });
-
-    //#region formating buttons
-    const boldBtn = document.getElementById('bold-btn');
-    const italicBtn = document.getElementById('italic-btn');
-    const strikeBtn = document.getElementById('strike-btn');
-    const colorPicker = document.getElementById(
-      'color-picker'
-    ) as HTMLInputElement;
-
-    const reactivateResizeDrag = () => {
-      if (!this.enableResizeDrag) {
-        if (this.resetTimeout) clearTimeout(this.resetTimeout);
-        this.resetTimeout = setTimeout(() => {
-          this.reenableResizeDrag(wrapper);
-        }, 1500);
-      }
-    };
-
-    boldBtn?.addEventListener('click', () => {
-      document.execCommand('bold');
-      reactivateResizeDrag();
-    });
-
-    italicBtn?.addEventListener('click', () => {
-      document.execCommand('italic');
-      reactivateResizeDrag();
-    });
-
-    strikeBtn?.addEventListener('click', () => {
-      document.execCommand('strikeThrough');
-      reactivateResizeDrag();
-    });
-
-    const toggleCaseBtn = document.getElementById('toggle-case-btn');
-
-    if (toggleCaseBtn) {
-      toggleCaseBtn.addEventListener('click', () => {
-        this.toggleCase();
-        reactivateResizeDrag(); // si tu as cette fonction pour réactiver drag/resize
-      });
-    }
-    //#endregion
-
     //#endregion
   }
 
@@ -277,6 +232,16 @@ export class ParagraphBlockComponent implements AfterViewInit {
       this.hasContent = false;
     } else {
       this.hasContent = true;
+    }
+  }
+
+  onTextFormatted(command: string) {
+    // Tu peux ajouter une logique si tu veux faire quelque chose de spécifique selon la commande
+    if (!this.enableResizeDrag) {
+      if (this.resetTimeout) clearTimeout(this.resetTimeout);
+      this.resetTimeout = setTimeout(() => {
+        this.reenableResizeDrag(this.draggableWrapper.nativeElement);
+      }, 1500);
     }
   }
 }
