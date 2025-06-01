@@ -7,10 +7,11 @@ import {
   AnimationEvent,
 } from '@angular/animations';
 import { Component, EventEmitter, Output } from '@angular/core';
+import { ToolbarBlockComponent } from '../toolbar-block/toolbar-block.component';
 
 @Component({
   selector: 'app-h1-block',
-  imports: [],
+  imports: [ToolbarBlockComponent],
   templateUrl: './h1-block.component.html',
   styleUrl: './h1-block.component.scss',
   animations: [

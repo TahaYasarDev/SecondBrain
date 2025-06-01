@@ -21,10 +21,3 @@ a {
   width: 15px;
   height: 15px;
 }
-
-.editable:empty:before {
-  content: attr(data-placeholder);
-  pointer-events: none;
-  font-weight: normal;
-  margin: 0;
-}

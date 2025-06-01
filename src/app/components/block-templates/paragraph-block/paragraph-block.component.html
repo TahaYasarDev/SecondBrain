@@ -7,7 +7,7 @@
     <label class="floating-label" *ngIf="!hasContent">{{ placeHolder }}</label>
     <p
       #editableParagraph
-      class="editable-paragraph"
+      class="editable paragraph"
       contenteditable="true"
       (input)="onInput($event)"
     ></p>

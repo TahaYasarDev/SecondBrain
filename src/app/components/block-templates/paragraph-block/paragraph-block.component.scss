@@ -22,20 +22,6 @@ $primary: #8c8994;
   top: 5px;
 }
 
-.editable-paragraph {
-  width: 100%;
-  flex: 1;
-  min-height: 35px;
-  padding: 14px 0 13px;
-  color: white;
-  background: transparent;
-  border: none;
-  border-bottom: 2px solid $primary;
-  outline: none;
-  white-space: pre-wrap;
-  word-break: break-word;
-}
-
 .resize-drag {
   user-select: text; // assure que le texte est sélectionnable
 }

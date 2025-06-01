@@ -10,10 +10,11 @@ import {
   AnimationEvent,
 } from '@angular/animations';
 import { Component, EventEmitter, Output } from '@angular/core';
+import { ToolbarBlockComponent } from '../toolbar-block/toolbar-block.component';
 
 @Component({
   selector: 'app-text-area-block',
-  imports: [InsertBlockComponent],
+  imports: [InsertBlockComponent, ToolbarBlockComponent],
   templateUrl: './text-area-block.component.html',
   styleUrl: './text-area-block.component.scss',
   animations: [

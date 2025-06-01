@@ -3,12 +3,12 @@
   [@fadeIn]="isVisible ? 'visible' : 'hidden'"
   (@fadeIn.done)="onFadeDone($event)"
 >
-  <button (click)="delete()">Supprimer</button>
-
   <h2
     class="editable h2"
     contenteditable="true"
     data-placeholder="Nouveau titre"
     (input)="onInput($event)"
   ></h2>
+
+  <app-toolbar-block (deleteBalise)="delete()"></app-toolbar-block>
 </div>

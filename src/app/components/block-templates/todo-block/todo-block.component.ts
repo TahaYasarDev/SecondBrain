@@ -15,10 +15,17 @@ import {
   CdkDropList,
   moveItemInArray,
 } from '@angular/cdk/drag-drop';
+import { ToolbarBlockComponent } from '../toolbar-block/toolbar-block.component';
 
 @Component({
   selector: 'app-todo-block',
-  imports: [FormsModule, CommonModule, CdkDropList, CdkDrag],
+  imports: [
+    FormsModule,
+    CommonModule,
+    CdkDropList,
+    CdkDrag,
+    ToolbarBlockComponent,
+  ],
   templateUrl: './todo-block.component.html',
   styleUrl: './todo-block.component.scss',
   animations: [
@@ -44,6 +51,12 @@ export class TodoBlockComponent {
   isVisible = true;
 
   @Output() deleteBalise = new EventEmitter<void>();
+
+  onFadeDone(event: AnimationEvent) {
+    if (event.toState === 'hidden') {
+      this.deleteBalise.emit();
+    }
+  }
 
   delete() {
     this.isVisible = false; // déclenche l'animation 'hidden'
