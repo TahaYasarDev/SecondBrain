@@ -1,5 +1,8 @@
+// Angular
 import { Injectable } from '@angular/core';
 import interact from 'interactjs';
+
+// Service
 import { LayoutService } from './layout.service';
 
 @Injectable({

@@ -15,6 +15,7 @@ import { BaseUiBehavior } from '../../../shared/base-ui-behavior';
 
 @Component({
   selector: 'app-paragraph-block',
+  standalone: true,
   imports: [CommonModule, ToolbarBlockComponent, InsertBlockComponent],
   templateUrl: './paragraph-block.component.html',
   styleUrl: './paragraph-block.component.scss',

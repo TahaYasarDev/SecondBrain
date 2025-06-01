@@ -2,6 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-toolbar-block',
+  standalone: true,
   imports: [],
   templateUrl: './toolbar-block.component.html',
   styleUrl: './toolbar-block.component.scss',

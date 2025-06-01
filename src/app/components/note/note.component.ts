@@ -46,10 +46,6 @@ export class NoteComponent {
 
   savedComponentsData: Array<{ type: string; content: string }> = [];
 
-  //#region Méthode pour l'insertion et la suppression des nouveaux blocs
-
-  // Gestion des balises
-
   // Evènement lors du choix de la balise que l'utilisateur souhaite insérer
   handleBaliseSelected(baliseType: string) {
     this.onInsertBlock(baliseType);
@@ -101,7 +97,6 @@ export class NoteComponent {
     }
   }
 
-  // Suppression d'un composant
   removeComponent(compRef: ComponentRef<any>) {
     // Trouve l'index dans le tableau
     const index = this.componentsRefs.indexOf(compRef);
@@ -114,5 +109,4 @@ export class NoteComponent {
       this.componentsRefs.splice(index, 1);
     }
   }
-  //#endregion
 }

@@ -1,14 +1,6 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common'; // <- importer CommonModule
-import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger,
-  AnimationEvent,
-} from '@angular/animations';
 import {
   CdkDrag,
   CdkDragDrop,
@@ -17,9 +9,11 @@ import {
 } from '@angular/cdk/drag-drop';
 import { ToolbarBlockComponent } from '../toolbar-block/toolbar-block.component';
 import { fadeInAnimation } from '../../../shared/animation';
+import { BaseUiBehavior } from '../../../shared/base-ui-behavior';
 
 @Component({
   selector: 'app-todo-block',
+  standalone: true,
   imports: [
     FormsModule,
     CommonModule,
@@ -31,27 +25,11 @@ import { fadeInAnimation } from '../../../shared/animation';
   styleUrl: './todo-block.component.scss',
   animations: [fadeInAnimation],
 })
-export class TodoBlockComponent {
-  isVisible = true;
-
-  @Output() deleteBalise = new EventEmitter<void>();
-
-  onFadeDone(event: AnimationEvent) {
-    if (event.toState === 'hidden') {
-      this.deleteBalise.emit();
-    }
-  }
-
-  delete() {
-    this.isVisible = false; // déclenche l'animation 'hidden'
-  }
-
-  onInput(event: Event) {
-    const el = event.target as HTMLElement;
-    if (el.innerText.trim() === '') {
-      el.innerHTML = ''; // force le vrai "vide"
-    }
-  }
+export class TodoBlockComponent
+  extends BaseUiBehavior
+  implements AfterViewInit
+{
+  ngAfterViewInit(): void {}
 
   tasks: Task[] = [];
   newTask: string = '';

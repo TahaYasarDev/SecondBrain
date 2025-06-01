@@ -3,18 +3,20 @@
   [@fadeIn]="isVisible ? 'visible' : 'hidden'"
   (@fadeIn.done)="onFadeDone($event)"
 >
-  <div class="inputForm field">
-    <textarea
-      (input)="onInputChange($event)"
-      class="inputField"
-      placeholder="inputText"
-      id="inputArea"
-      required
-    ></textarea>
-    <label for="inputArea" id="inputLabel">
-      Écrivez, tapez « / » pour afficher les commandes…
-    </label>
-  </div>
+  <div #draggableWrapper class="draggable-wrapper draggable">
+    <div class="inputForm field">
+      <textarea
+        (input)="onInputChange($event)"
+        class="inputField"
+        placeholder="inputText"
+        id="inputArea"
+        required
+      ></textarea>
+      <label for="inputArea" id="inputLabel">
+        Écrivez, tapez « / » pour afficher les commandes…
+      </label>
+    </div>
 
-  <app-toolbar-block (deleteBalise)="delete()"></app-toolbar-block>
+    <app-toolbar-block (deleteBalise)="delete()"></app-toolbar-block>
+  </div>
 </div>

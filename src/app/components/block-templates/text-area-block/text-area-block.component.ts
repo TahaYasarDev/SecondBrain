@@ -14,6 +14,7 @@ import { DragService } from '../../../services/drag.service';
 
 @Component({
   selector: 'app-text-area-block',
+  standalone: true,
   imports: [InsertBlockComponent, ToolbarBlockComponent],
   templateUrl: './text-area-block.component.html',
   styleUrl: './text-area-block.component.scss',

@@ -13,6 +13,7 @@ import { fadeInAnimation } from '../../../shared/animation';
 
 @Component({
   selector: 'app-h4-block',
+  standalone: true,
   imports: [ToolbarBlockComponent],
   templateUrl: './h4-block.component.html',
   styleUrl: './h4-block.component.scss',
