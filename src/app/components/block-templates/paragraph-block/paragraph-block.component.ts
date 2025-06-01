@@ -1,4 +1,5 @@
 import { Component, Output, EventEmitter, AfterViewInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import {
   trigger,
   state,
@@ -17,7 +18,7 @@ import { LayoutService } from '../../../services/layout.service';
 
 @Component({
   selector: 'app-paragraph-block',
-  imports: [InsertBlockComponent],
+  imports: [CommonModule, InsertBlockComponent],
   templateUrl: './paragraph-block.component.html',
   styleUrl: './paragraph-block.component.scss',
   animations: [
@@ -48,7 +49,9 @@ export class ParagraphBlockComponent implements AfterViewInit {
 
   isVisible = true;
 
-  data: string = '<strong>TEST</strong>';
+  placeHolder: string = 'Écrivez, tapez « / » pour afficher les commandes…';
+
+  hasContent = false;
 
   constructor(private layoutService: LayoutService) {}
 
@@ -90,11 +93,9 @@ export class ParagraphBlockComponent implements AfterViewInit {
             let x = parseFloat(target.getAttribute('data-x')) || 0;
             let y = parseFloat(target.getAttribute('data-y')) || 0;
 
-            // resize the element
             target.style.width = `${event.rect.width}px`;
             target.style.height = `${event.rect.height}px`;
 
-            // move it if needed
             x += event.deltaRect.left;
             y += event.deltaRect.top;
 
@@ -110,6 +111,72 @@ export class ParagraphBlockComponent implements AfterViewInit {
           }),
         ],
       });
+
+    const draggableElement = document.querySelector(
+      '.editable-paragraph'
+    ) as HTMLElement;
+
+    let hoverTimer: any = null;
+    let lastPos = { x: 0, y: 0 };
+    let mode: 'default' | 'text' | 'grab' = 'default';
+
+    draggableElement.style.cursor = 'grab';
+
+    function setMode(newMode: typeof mode) {
+      mode = newMode;
+      switch (mode) {
+        case 'default':
+        case 'grab':
+          draggableElement.style.cursor = 'grab';
+          break;
+        case 'text':
+          draggableElement.style.cursor = 'text';
+          break;
+      }
+    }
+
+    draggableElement.addEventListener('mouseenter', (e) => {
+      lastPos = { x: e.clientX, y: e.clientY };
+      setMode('grab');
+
+      if (hoverTimer) clearTimeout(hoverTimer);
+
+      hoverTimer = setTimeout(() => {
+        if (mode === 'grab') {
+          setMode('text');
+        }
+      }, 500);
+    });
+
+    draggableElement.addEventListener('mousemove', (e) => {
+      const dx = Math.abs(e.clientX - lastPos.x);
+      const dy = Math.abs(e.clientY - lastPos.y);
+
+      if (dx + dy > 2) {
+        lastPos = { x: e.clientX, y: e.clientY };
+
+        if (mode !== 'text') {
+          if (hoverTimer) clearTimeout(hoverTimer);
+          hoverTimer = setTimeout(() => {
+            setMode('text');
+          }, 400);
+        }
+      }
+    });
+
+    draggableElement.addEventListener('mouseleave', () => {
+      if (hoverTimer) clearTimeout(hoverTimer);
+      setMode('default');
+    });
+
+    draggableElement.addEventListener('mousedown', () => {
+      if (hoverTimer) clearTimeout(hoverTimer);
+      setMode('grab');
+    });
+
+    draggableElement.addEventListener('mouseup', () => {
+      setMode('grab');
+    });
   }
 
   delete() {
@@ -126,8 +193,9 @@ export class ParagraphBlockComponent implements AfterViewInit {
     const el = event.target as HTMLElement;
     if (el.innerText.trim() === '') {
       el.innerHTML = '';
+      this.hasContent = false;
     } else {
-      this.data = el.innerText;
+      this.hasContent = true;
     }
   }
 }
