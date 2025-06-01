@@ -1,0 +1,43 @@
+<div class="toolbar-container">
+  <div id="balise-toolbar">
+    <img
+      id="bold-btn"
+      src="assets/icons/bold.png"
+      class="icon"
+      alt="bold"
+      (click)="format('bold')"
+    />
+    <img
+      id="italic-btn"
+      src="assets/icons/italic.png"
+      class="icon"
+      alt="italic"
+      (click)="format('italic')"
+    />
+    <img
+      id="strike-btn"
+      src="assets/icons/strike.png"
+      class="icon"
+      alt="strike"
+      (click)="format('strikeThrough')"
+    />
+    <img
+      id="toggle-case-btn"
+      src="assets/icons/toggle-case.png"
+      class="icon"
+      alt="toggle-case"
+      (click)="toggleCase()"
+    />
+    <img src="assets/icons/moving.png" class="icon" id="move-btn" alt="move" />
+  </div>
+
+  <div id="balise-delete">
+    <img
+      src="assets/icons/delete.png"
+      class="icon"
+      id="delete-btn"
+      alt="delete"
+      (click)="deleteBalise.emit()"
+    />
+  </div>
+</div>

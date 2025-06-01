@@ -1,54 +1,36 @@
+// Angular
+import { AfterViewInit, Component } from '@angular/core';
+
 // Component
+import { ToolbarBlockComponent } from '../toolbar-block/toolbar-block.component';
 import { InsertBlockComponent } from '../../insert-block/insert-block.component';
 
-import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger,
-  AnimationEvent,
-} from '@angular/animations';
-import { Component, EventEmitter, Output } from '@angular/core';
-import { ToolbarBlockComponent } from '../toolbar-block/toolbar-block.component';
+// Shared
+import { fadeInAnimation } from '../../../shared/animation';
+import { BaseUiBehavior } from '../../../shared/base-ui-behavior';
+
+// Service
+import { DragService } from '../../../services/drag.service';
 
 @Component({
   selector: 'app-text-area-block',
   imports: [InsertBlockComponent, ToolbarBlockComponent],
   templateUrl: './text-area-block.component.html',
   styleUrl: './text-area-block.component.scss',
-  animations: [
-    trigger('fadeIn', [
-      state('visible', style({ opacity: 1, transform: 'translateY(0)' })),
-      state('hidden', style({ opacity: 0, transform: 'translateY(-10px)' })),
-      transition('visible => hidden', animate('500ms ease-out')),
-      transition('hidden => visible', animate('500ms ease-in')),
-      transition(':enter', [
-        style({ opacity: 0, transform: 'translateY(-10px)' }),
-        animate('500ms ease-out'),
-      ]),
-      transition(':leave', [
-        animate(
-          '500ms ease-in',
-          style({ opacity: 0, transform: 'translateY(-10px)' })
-        ),
-      ]),
-    ]),
-  ],
+  animations: [fadeInAnimation],
 })
-export class TextAreaBlockComponent {
-  isVisible = true;
+export class TextAreaBlockComponent
+  extends BaseUiBehavior
+  implements AfterViewInit
+{
+  interactable: any;
 
-  @Output() deleteBalise = new EventEmitter<void>();
-
-  delete() {
-    this.isVisible = false; // déclenche l'animation 'hidden'
+  constructor(private dragService: DragService) {
+    super();
   }
 
-  onFadeDone(event: AnimationEvent) {
-    if (event.toState === 'hidden') {
-      this.deleteBalise.emit();
-    }
+  ngAfterViewInit(): void {
+    this.interactable = this.dragService.initDraggable('.draggable');
   }
 
   onInputChange(event: Event) {

@@ -1,56 +1,33 @@
-import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger,
-  AnimationEvent,
-} from '@angular/animations';
-import { Component, EventEmitter, Output } from '@angular/core';
+// Angular
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+
+// Component
 import { ToolbarBlockComponent } from '../toolbar-block/toolbar-block.component';
+
+// Service
+import { DragService } from '../../../services/drag.service';
+
+// Shared
+import { BaseUiBehavior } from '../../../shared/base-ui-behavior';
+import { fadeInAnimation } from '../../../shared/animation';
 
 @Component({
   selector: 'app-h2-block',
   imports: [ToolbarBlockComponent],
   templateUrl: './h2-block.component.html',
   styleUrl: './h2-block.component.scss',
-  animations: [
-    trigger('fadeIn', [
-      state('visible', style({ opacity: 1, transform: 'translateY(0)' })),
-      state('hidden', style({ opacity: 0, transform: 'translateY(-10px)' })),
-      transition('visible => hidden', animate('500ms ease-out')),
-      transition('hidden => visible', animate('500ms ease-in')),
-      transition(':enter', [
-        style({ opacity: 0, transform: 'translateY(-10px)' }),
-        animate('500ms ease-out'),
-      ]),
-      transition(':leave', [
-        animate(
-          '500ms ease-in',
-          style({ opacity: 0, transform: 'translateY(-10px)' })
-        ),
-      ]),
-    ]),
-  ],
+  animations: [fadeInAnimation],
 })
-export class H2BlockComponent {
-  isVisible = true;
+export class H2BlockComponent extends BaseUiBehavior implements AfterViewInit {
+  @ViewChild('draggableWrapper') draggableWrapper!: ElementRef<HTMLElement>;
 
-  @Output() deleteBalise = new EventEmitter<void>();
+  interactable: any;
 
-  delete() {
-    this.isVisible = false; // déclenche l'animation 'hidden'
+  constructor(private dragService: DragService) {
+    super();
   }
 
-  onFadeDone(event: AnimationEvent) {
-    if (event.toState === 'hidden') {
-      this.deleteBalise.emit();
-    }
-  }
-  onInput(event: Event) {
-    const el = event.target as HTMLElement;
-    if (el.innerText.trim() === '') {
-      el.innerHTML = ''; // force le vrai "vide"
-    }
+  ngAfterViewInit(): void {
+    this.interactable = this.dragService.initDraggable('.draggable');
   }
 }

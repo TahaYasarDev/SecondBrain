@@ -3,12 +3,13 @@
   [@fadeIn]="isVisible ? 'visible' : 'hidden'"
   (@fadeIn.done)="onFadeDone($event)"
 >
-  <h1
-    class="editable h1"
-    contenteditable="true"
-    data-placeholder="Nouveau titre"
-    (input)="onInput($event)"
-  ></h1>
-
-  <app-toolbar-block (deleteBalise)="delete()"></app-toolbar-block>
+  <div #draggableWrapper class="draggable-wrapper draggable">
+    <h1
+      class="editable h1"
+      contenteditable="true"
+      data-placeholder="Nouveau titre"
+      (input)="onInput($event)"
+    ></h1>
+    <app-toolbar-block (deleteBalise)="delete()"></app-toolbar-block>
+  </div>
 </div>

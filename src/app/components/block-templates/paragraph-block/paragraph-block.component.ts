@@ -1,58 +1,29 @@
-import {
-  Component,
-  Output,
-  EventEmitter,
-  AfterViewInit,
-  Renderer2,
-  ViewChild,
-  ElementRef,
-} from '@angular/core';
+// Angular
+import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  trigger,
-  state,
-  style,
-  animate,
-  transition,
-  AnimationEvent,
-} from '@angular/animations';
 
 // Component
+import { ToolbarBlockComponent } from '../toolbar-block/toolbar-block.component';
 import { InsertBlockComponent } from '../../insert-block/insert-block.component';
 
-// Librairie
-import interact from 'interactjs';
-import { LayoutService } from '../../../services/layout.service';
-import { ToolbarBlockComponent } from '../toolbar-block/toolbar-block.component';
+// Service
+import { DragService } from '../../../services/drag.service';
+
+// Shared
+import { fadeInAnimation } from '../../../shared/animation';
+import { BaseUiBehavior } from '../../../shared/base-ui-behavior';
 
 @Component({
   selector: 'app-paragraph-block',
-  imports: [CommonModule, InsertBlockComponent, ToolbarBlockComponent],
+  imports: [CommonModule, ToolbarBlockComponent, InsertBlockComponent],
   templateUrl: './paragraph-block.component.html',
   styleUrl: './paragraph-block.component.scss',
-  animations: [
-    trigger('fadeIn', [
-      state('visible', style({ opacity: 1, transform: 'translateY(0)' })),
-      state('hidden', style({ opacity: 0, transform: 'translateY(-10px)' })),
-      transition('visible => hidden', animate('500ms ease-out')),
-      transition('hidden => visible', animate('500ms ease-in')),
-      transition(':enter', [
-        style({ opacity: 0, transform: 'translateY(-10px)' }),
-        animate('500ms ease-out'),
-      ]),
-      transition(':leave', [
-        animate(
-          '500ms ease-in',
-          style({ opacity: 0, transform: 'translateY(-10px)' })
-        ),
-      ]),
-    ]),
-  ],
+  animations: [fadeInAnimation],
 })
-export class ParagraphBlockComponent implements AfterViewInit {
-  @Output() deleteBalise = new EventEmitter<void>();
-
-  isVisible = true;
+export class ParagraphBlockComponent
+  extends BaseUiBehavior
+  implements AfterViewInit
+{
   placeHolder: string = 'Écrivez, tapez « / » pour afficher les commandes…';
   hasContent = false;
 
@@ -61,38 +32,15 @@ export class ParagraphBlockComponent implements AfterViewInit {
   releaseTimeout: any = null;
   resetTimeout: any = null;
 
-  constructor(private layoutService: LayoutService) {}
+  constructor(private dragService: DragService) {
+    super();
+  }
 
   @ViewChild('draggableWrapper') draggableWrapper!: ElementRef<HTMLElement>;
 
   ngAfterViewInit(): void {
-    const sidebarWidth = this.layoutService.getSidebarWidth();
-    //#region interact
-    this.interactable = interact('.draggable ').draggable({
-      modifiers: [
-        interact.modifiers.restrictRect({
-          restriction: {
-            top: 0,
-            left: sidebarWidth,
-            right: window.innerWidth,
-            bottom: window.innerHeight,
-          },
-          endOnly: true,
-        }),
-      ],
-      listeners: {
-        move: (event) => {
-          if (!this.enableResizeDrag) return; // bloquer drag si disabled
-          const target = event.target;
-          const x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx;
-          const y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
-          target.style.transform = `translate(${x}px, ${y}px)`;
-          target.setAttribute('data-x', x.toString());
-          target.setAttribute('data-y', y.toString());
-        },
-      },
-    });
-    //#endregion
+    // drag
+    this.interactable = this.dragService.initDraggable('.draggable');
 
     //#region cursor handle
     const editableParagraph = document.querySelector(
@@ -182,56 +130,10 @@ export class ParagraphBlockComponent implements AfterViewInit {
     //#endregion
   }
 
-  toggleCase() {
-    const selection = window.getSelection();
-    if (!selection || selection.rangeCount === 0) return;
-
-    const range = selection.getRangeAt(0);
-    const selectedText = selection.toString();
-
-    if (!selectedText.trim()) return;
-
-    const hasUppercase = /[A-Z]/.test(selectedText);
-    const newText = hasUppercase
-      ? selectedText.toLowerCase()
-      : selectedText.toUpperCase();
-
-    const textNode = document.createTextNode(newText);
-
-    range.deleteContents();
-    range.insertNode(textNode);
-
-    selection.removeAllRanges();
-    const newRange = document.createRange();
-    newRange.setStartBefore(textNode);
-    newRange.setEndAfter(textNode);
-    selection.addRange(newRange);
-  }
-
   reenableResizeDrag(wrapper: HTMLElement) {
     if (!this.enableResizeDrag) {
       wrapper.classList.add('resize-drag');
       this.enableResizeDrag = true;
-    }
-  }
-
-  delete() {
-    this.isVisible = false; // déclenche l'animation 'hidden'
-  }
-
-  onFadeDone(event: AnimationEvent) {
-    if (event.toState === 'hidden') {
-      this.deleteBalise.emit();
-    }
-  }
-
-  onInput(event: Event) {
-    const el = event.target as HTMLElement;
-    if (el.innerText.trim() === '') {
-      el.innerHTML = '';
-      this.hasContent = false;
-    } else {
-      this.hasContent = true;
     }
   }
 
