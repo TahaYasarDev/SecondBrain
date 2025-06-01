@@ -70,57 +70,30 @@ export class ParagraphBlockComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     const sidebarWidth = this.layoutService.getSidebarWidth();
     //#region interact
-    this.interactable = interact('.resize-drag')
-      .draggable({
-        modifiers: [
-          interact.modifiers.restrictRect({
-            restriction: {
-              top: 0,
-              left: sidebarWidth,
-              right: window.innerWidth,
-              bottom: window.innerHeight,
-            },
-            endOnly: true,
-          }),
-        ],
-        listeners: {
-          move: (event) => {
-            if (!this.enableResizeDrag) return; // bloquer drag si disabled
-            const target = event.target;
-            const x =
-              (parseFloat(target.getAttribute('data-x')) || 0) + event.dx;
-            const y =
-              (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
-            target.style.transform = `translate(${x}px, ${y}px)`;
-            target.setAttribute('data-x', x.toString());
-            target.setAttribute('data-y', y.toString());
+    this.interactable = interact('.draggable ').draggable({
+      modifiers: [
+        interact.modifiers.restrictRect({
+          restriction: {
+            top: 0,
+            left: sidebarWidth,
+            right: window.innerWidth,
+            bottom: window.innerHeight,
           },
+          endOnly: true,
+        }),
+      ],
+      listeners: {
+        move: (event) => {
+          if (!this.enableResizeDrag) return; // bloquer drag si disabled
+          const target = event.target;
+          const x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx;
+          const y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+          target.style.transform = `translate(${x}px, ${y}px)`;
+          target.setAttribute('data-x', x.toString());
+          target.setAttribute('data-y', y.toString());
         },
-      })
-      .resizable({
-        edges: { left: true, right: true, bottom: true, top: true },
-        listeners: {
-          move: (event) => {
-            if (!this.enableResizeDrag) return; // bloquer resize si disabled
-            const target = event.target;
-            let x = parseFloat(target.getAttribute('data-x')) || 0;
-            let y = parseFloat(target.getAttribute('data-y')) || 0;
-            target.style.width = `${event.rect.width}px`;
-            target.style.height = `${event.rect.height}px`;
-            x += event.deltaRect.left;
-            y += event.deltaRect.top;
-            target.style.transform = `translate(${x}px, ${y}px)`;
-            target.setAttribute('data-x', x.toString());
-            target.setAttribute('data-y', y.toString());
-          },
-        },
-        modifiers: [
-          interact.modifiers!.restrictSize({
-            min: { width: 100, height: 50 },
-            max: { width: 500, height: 300 },
-          }),
-        ],
-      });
+      },
+    });
     //#endregion
 
     //#region cursor handle

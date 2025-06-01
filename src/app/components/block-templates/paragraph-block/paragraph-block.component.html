@@ -3,7 +3,7 @@
   [@fadeIn]="isVisible ? 'visible' : 'hidden'"
   (@fadeIn.done)="onFadeDone($event)"
 >
-  <div #draggableWrapper class="draggable-wrapper resize-drag">
+  <div #draggableWrapper class="draggable-wrapper draggable">
     <label class="floating-label" *ngIf="!hasContent">{{ placeHolder }}</label>
     <p
       #editableParagraph
