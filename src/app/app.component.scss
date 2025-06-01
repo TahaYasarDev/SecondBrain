@@ -2,6 +2,12 @@ main {
   display: flex;
 }
 
+.inputForm {
+  position: relative;
+  width: 100%;
+  margin-top: 10px;
+}
+
 app-sidebar {
   height: 100vh;
   width: 15%;
@@ -13,4 +19,10 @@ app-sidebar {
   width: 85%;
   background: rgb(25, 25, 25);
   box-shadow: rgba(255, 255, 255, 0.055) -1px 0px 0px 0px inset;
+}
+
+// css h1, h2, h3, h4
+.editable:empty:before {
+  content: attr(data-placeholder);
+  pointer-events: none;
 }

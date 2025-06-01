@@ -1,3 +1,11 @@
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+  AnimationEvent,
+} from '@angular/animations';
 import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
@@ -5,12 +13,38 @@ import { Component, EventEmitter, Output } from '@angular/core';
   imports: [],
   templateUrl: './h1-block.component.html',
   styleUrl: './h1-block.component.scss',
+  animations: [
+    trigger('fadeIn', [
+      state('visible', style({ opacity: 1, transform: 'translateY(0)' })),
+      state('hidden', style({ opacity: 0, transform: 'translateY(-10px)' })),
+      transition('visible => hidden', animate('500ms ease-out')),
+      transition('hidden => visible', animate('500ms ease-in')),
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(-10px)' }),
+        animate('500ms ease-out'),
+      ]),
+      transition(':leave', [
+        animate(
+          '500ms ease-in',
+          style({ opacity: 0, transform: 'translateY(-10px)' })
+        ),
+      ]),
+    ]),
+  ],
 })
 export class H1BlockComponent {
-  @Output() deleteH1 = new EventEmitter<void>();
+  isVisible = true;
+
+  @Output() deleteBalise = new EventEmitter<void>();
 
   delete() {
-    this.deleteH1.emit();
+    this.isVisible = false; // déclenche l'animation 'hidden'
+  }
+
+  onFadeDone(event: AnimationEvent) {
+    if (event.toState === 'hidden') {
+      this.deleteBalise.emit();
+    }
   }
 
   onInput(event: Event) {

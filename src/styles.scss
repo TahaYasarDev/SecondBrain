@@ -11,8 +11,6 @@ html {
 
 h1 {
   font-size: 30px;
-  margin: 0;
-  font-weight: initial;
 }
 
 a {
@@ -22,4 +20,11 @@ a {
 .icon {
   width: 15px;
   height: 15px;
+}
+
+.editable:empty:before {
+  content: attr(data-placeholder);
+  pointer-events: none;
+  font-weight: normal;
+  margin: 0;
 }

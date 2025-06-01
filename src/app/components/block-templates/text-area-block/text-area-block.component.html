@@ -1,4 +1,8 @@
-<div>
+<div
+  class="inputForm"
+  [@fadeIn]="isVisible ? 'visible' : 'hidden'"
+  (@fadeIn.done)="onFadeDone($event)"
+>
   <div class="inputForm field">
     <textarea
       (input)="onInputChange($event)"

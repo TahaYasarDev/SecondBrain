@@ -1,6 +1,3 @@
-// Component
-import { InsertBlockComponent } from '../../insert-block/insert-block.component';
-
 import {
   animate,
   state,
@@ -12,10 +9,10 @@ import {
 import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-text-area-block',
-  imports: [InsertBlockComponent],
-  templateUrl: './text-area-block.component.html',
-  styleUrl: './text-area-block.component.scss',
+  selector: 'app-h2-block',
+  imports: [],
+  templateUrl: './h2-block.component.html',
+  styleUrl: './h2-block.component.scss',
   animations: [
     trigger('fadeIn', [
       state('visible', style({ opacity: 1, transform: 'translateY(0)' })),
@@ -35,7 +32,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
     ]),
   ],
 })
-export class TextAreaBlockComponent {
+export class H2BlockComponent {
   isVisible = true;
 
   @Output() deleteBalise = new EventEmitter<void>();
@@ -49,16 +46,10 @@ export class TextAreaBlockComponent {
       this.deleteBalise.emit();
     }
   }
-
-  onInputChange(event: Event) {
-    const value = (event.target as HTMLTextAreaElement).value;
-    const textarea = event.target as HTMLTextAreaElement;
-
-    if (value.length > 100) {
-      textarea.style.height = 'auto';
-      textarea.style.height = textarea.scrollHeight + 'px';
-    } else {
-      textarea.style.height = '50px';
+  onInput(event: Event) {
+    const el = event.target as HTMLElement;
+    if (el.innerText.trim() === '') {
+      el.innerHTML = ''; // force le vrai "vide"
     }
   }
 }

@@ -49,7 +49,7 @@ import { LayoutService } from '../../../services/layout.service';
   ],
 })
 export class ParagraphBlockComponent implements AfterViewInit {
-  @Output() deleteParagraph = new EventEmitter<void>();
+  @Output() deleteBalise = new EventEmitter<void>();
 
   isVisible = true;
   placeHolder: string = 'Écrivez, tapez « / » pour afficher les commandes…';
@@ -266,7 +266,7 @@ export class ParagraphBlockComponent implements AfterViewInit {
 
   onFadeDone(event: AnimationEvent) {
     if (event.toState === 'hidden') {
-      this.deleteParagraph.emit();
+      this.deleteBalise.emit();
     }
   }
 

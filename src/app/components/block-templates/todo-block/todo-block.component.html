@@ -1,43 +1,49 @@
-<div>
-  <input
-    type="text"
-    placeholder="Nouvelle tâche"
-    [(ngModel)]="newTask"
-    (keyup.enter)="addTask()"
-  />
-  <button (click)="addTask()">Ajouter</button>
-</div>
+<div
+  class="inputForm"
+  [@fadeIn]="isVisible ? 'visible' : 'hidden'"
+  (@fadeIn.done)="onFadeDone($event)"
+>
+  <div>
+    <input
+      type="text"
+      placeholder="Nouvelle tâche"
+      [(ngModel)]="newTask"
+      (keyup.enter)="addTask()"
+    />
+    <button (click)="addTask()">Ajouter</button>
+  </div>
 
-<h1 class="editable-todo-h1">A faire</h1>
-<div cdkDropList (cdkDropListDropped)="drop($event)">
-  <ul>
-    <li cdkDrag *ngFor="let task of todoTasks; let i = index">
-      <input type="checkbox" [(ngModel)]="task.done" />
-      <span>{{ task.label }}</span>
-      <img
-        (click)="deleteTask(i)"
-        src="assets/icons/delete.png"
-        class="icon"
-        alt="Dashboard"
-      />
-    </li>
-    <li *ngIf="todoTasks.length === 0">Aucune tâche à faire 🎉</li>
-  </ul>
-</div>
+  <h1 class="editable-todo-h1">A faire</h1>
+  <div cdkDropList (cdkDropListDropped)="drop($event)">
+    <ul>
+      <li cdkDrag *ngFor="let task of todoTasks; let i = index">
+        <input type="checkbox" [(ngModel)]="task.done" />
+        <span>{{ task.label }}</span>
+        <img
+          (click)="deleteTask(i)"
+          src="assets/icons/delete.png"
+          class="icon"
+          alt="Dashboard"
+        />
+      </li>
+      <li *ngIf="todoTasks.length === 0">Aucune tâche à faire 🎉</li>
+    </ul>
+  </div>
 
-<h1 class="editable-todo-h1">Faites</h1>
-<div cdkDropList (cdkDropListDropped)="drop($event)">
-  <ul>
-    <li cdkDrag *ngFor="let task of doneTasks; let i = index">
-      <input type="checkbox" [(ngModel)]="task.done" />
-      <span style="text-decoration: line-through">{{ task.label }}</span>
-      <img
-        (click)="deleteTask(i)"
-        src="assets/icons/delete.png"
-        class="icon"
-        alt="Dashboard"
-      />
-    </li>
-    <li *ngIf="doneTasks.length === 0">Aucune tâche faite pour l’instant</li>
-  </ul>
+  <h1 class="editable-todo-h1">Faites</h1>
+  <div cdkDropList (cdkDropListDropped)="drop($event)">
+    <ul>
+      <li cdkDrag *ngFor="let task of doneTasks; let i = index">
+        <input type="checkbox" [(ngModel)]="task.done" />
+        <span style="text-decoration: line-through">{{ task.label }}</span>
+        <img
+          (click)="deleteTask(i)"
+          src="assets/icons/delete.png"
+          class="icon"
+          alt="Dashboard"
+        />
+      </li>
+      <li *ngIf="doneTasks.length === 0">Aucune tâche faite pour l’instant</li>
+    </ul>
+  </div>
 </div>
