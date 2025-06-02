@@ -2,6 +2,8 @@
   class="inputForm"
   [@fade]="isVisible ? 'visible' : 'hidden'"
   (@fade.done)="onFadeDone($event)"
+  (mouseenter)="onMouseEnter()"
+  (mouseleave)="onMouseLeave()"
 >
   <div #draggableWrapper class="draggable-wrapper draggable">
     <div>
@@ -11,12 +13,20 @@
         [(ngModel)]="newTask"
         (keyup.enter)="addTask()"
         appToggleDraggable
+        (focus)="onFocus()"
+        (blur)="onBlur()"
       />
       <button (click)="addTask()">Ajouter</button>
     </div>
 
     <h1 class="editable-todo-h1">A faire</h1>
-    <div cdkDropList (cdkDropListDropped)="drop($event)" appToggleDraggable>
+    <div
+      cdkDropList
+      (cdkDropListDropped)="drop($event)"
+      appToggleDraggable
+      (focus)="onFocus()"
+      (blur)="onBlur()"
+    >
       <ul>
         <li cdkDrag *ngFor="let task of todoTasks; let i = index">
           <input type="checkbox" [(ngModel)]="task.done" />
@@ -33,7 +43,13 @@
     </div>
 
     <h1 class="editable-todo-h1">Faites</h1>
-    <div cdkDropList (cdkDropListDropped)="drop($event)" appToggleDraggable>
+    <div
+      cdkDropList
+      (cdkDropListDropped)="drop($event)"
+      appToggleDraggable
+      (focus)="onFocus()"
+      (blur)="onBlur()"
+    >
       <ul>
         <li cdkDrag *ngFor="let task of doneTasks; let i = index">
           <input type="checkbox" [(ngModel)]="task.done" />

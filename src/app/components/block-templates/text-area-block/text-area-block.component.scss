@@ -12,7 +12,6 @@ $white: #fff;
   font-family: inherit;
   width: 100%;
   border: 0;
-  border-bottom: 2px solid $primary;
   outline: 0;
   color: $white;
   padding: 7px 0;
@@ -86,5 +85,5 @@ body {
 }
 
 .draggable-wrapper:focus-within .floating-label {
-  top: 5px;
+  top: 4px;
 }

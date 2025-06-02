@@ -14,8 +14,8 @@ import { ToolbarBlockComponent } from '../toolbar-block/toolbar-block.component'
 
 // Shared
 import { fadeAnimation } from '../../../shared/animation';
-import { BaseUiBehavior } from '../../../shared/base-ui-behavior';
 import { ToggleDraggableDirective } from '../../../shared/toggle-draggable.directive';
+import { BaseToolbarBehavior } from '../../../shared/base-toolbar-behavior';
 
 @Component({
   selector: 'app-todo-block',
@@ -33,7 +33,7 @@ import { ToggleDraggableDirective } from '../../../shared/toggle-draggable.direc
   animations: [fadeAnimation],
 })
 export class TodoBlockComponent
-  extends BaseUiBehavior
+  extends BaseToolbarBehavior
   implements AfterViewInit
 {
   ngAfterViewInit(): void {}

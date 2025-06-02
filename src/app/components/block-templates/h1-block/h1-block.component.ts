@@ -9,9 +9,9 @@ import { ToolbarBlockComponent } from '../toolbar-block/toolbar-block.component'
 import { DragService } from '../../../services/drag.service';
 
 // Shared
-import { BaseUiBehavior } from '../../../shared/base-ui-behavior';
 import { fadeAnimation } from '../../../shared/animation';
 import { ToggleDraggableDirective } from '../../../shared/toggle-draggable.directive';
+import { BaseToolbarBehavior } from '../../../shared/base-toolbar-behavior';
 
 @Component({
   selector: 'app-h1-block',
@@ -21,7 +21,10 @@ import { ToggleDraggableDirective } from '../../../shared/toggle-draggable.direc
   styleUrl: './h1-block.component.scss',
   animations: [fadeAnimation],
 })
-export class H1BlockComponent extends BaseUiBehavior implements AfterViewInit {
+export class H1BlockComponent
+  extends BaseToolbarBehavior
+  implements AfterViewInit
+{
   constructor(private dragService: DragService) {
     super();
   }

@@ -2,6 +2,8 @@
   class="inputForm"
   [@fade]="isVisible ? 'visible' : 'hidden'"
   (@fade.done)="onFadeDone($event)"
+  (mouseenter)="onMouseEnter()"
+  (mouseleave)="onMouseLeave()"
 >
   <div #draggableWrapper class="draggable-wrapper draggable">
     <div class="inputForm field">
@@ -14,9 +16,14 @@
         id="inputArea"
         required
         appToggleDraggable
+        (focus)="onFocus()"
+        (blur)="onBlur()"
       ></textarea>
     </div>
 
-    <app-toolbar-block (deleteBalise)="delete()"></app-toolbar-block>
+    <app-toolbar-block
+      *ngIf="showToolbar"
+      (deleteBalise)="delete()"
+    ></app-toolbar-block>
   </div>
 </div>
