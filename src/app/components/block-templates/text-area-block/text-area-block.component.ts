@@ -1,5 +1,6 @@
 // Angular
 import { AfterViewInit, Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 // Component
 import { ToolbarBlockComponent } from '../toolbar-block/toolbar-block.component';
@@ -17,6 +18,7 @@ import { ToggleDraggableDirective } from '../../../shared/toggle-draggable.direc
   selector: 'app-text-area-block',
   standalone: true,
   imports: [
+    CommonModule,
     ToggleDraggableDirective,
     InsertBlockComponent,
     ToolbarBlockComponent,
@@ -29,19 +31,19 @@ export class TextAreaBlockComponent
   extends BaseUiBehavior
   implements AfterViewInit
 {
-  interactable: any;
-
   constructor(private dragService: DragService) {
     super();
   }
 
   ngAfterViewInit(): void {
-    this.interactable = this.dragService.initDraggable('.draggable');
+    this.dragService.initDraggable('.draggable');
   }
 
   onInputChange(event: Event) {
     const value = (event.target as HTMLTextAreaElement).value;
     const textarea = event.target as HTMLTextAreaElement;
+
+    this.hasContent = value.trim().length > 0;
 
     if (value.length > 100) {
       textarea.style.height = 'auto';

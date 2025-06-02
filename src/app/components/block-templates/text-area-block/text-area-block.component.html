@@ -5,17 +5,16 @@
 >
   <div #draggableWrapper class="draggable-wrapper draggable">
     <div class="inputForm field">
+      <label [@fade]="'visible'" class="floating-label" *ngIf="!hasContent">{{
+        placeHolder
+      }}</label>
       <textarea
         (input)="onInputChange($event)"
         class="inputField"
-        placeholder="inputText"
         id="inputArea"
         required
         appToggleDraggable
       ></textarea>
-      <label for="inputArea" id="inputLabel">
-        Écrivez, tapez « / » pour afficher les commandes…
-      </label>
     </div>
 
     <app-toolbar-block (deleteBalise)="delete()"></app-toolbar-block>

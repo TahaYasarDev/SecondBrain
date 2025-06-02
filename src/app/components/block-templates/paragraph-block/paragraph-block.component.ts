@@ -31,8 +31,6 @@ export class ParagraphBlockComponent
   extends BaseUiBehavior
   implements AfterViewInit
 {
-  placeHolder: string = 'Écrivez, tapez « / » pour afficher les commandes…';
-
   constructor(private dragService: DragService) {
     super();
   }

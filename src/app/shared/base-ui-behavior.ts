@@ -5,6 +5,8 @@ import { AnimationEvent } from '@angular/animations';
 export abstract class BaseUiBehavior {
   @Output() deleteBalise = new EventEmitter<void>();
 
+  placeHolder: string = 'Écrivez, tapez « / » pour afficher les commandes…';
+
   isVisible = true;
 
   hasContent = false;
