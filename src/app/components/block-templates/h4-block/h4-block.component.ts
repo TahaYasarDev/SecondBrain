@@ -1,5 +1,6 @@
 // Angular
 import { AfterViewInit, Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 // Component
 import { ToolbarBlockComponent } from '../toolbar-block/toolbar-block.component';
@@ -9,16 +10,16 @@ import { DragService } from '../../../services/drag.service';
 
 // Shared
 import { BaseUiBehavior } from '../../../shared/base-ui-behavior';
-import { fadeInAnimation } from '../../../shared/animation';
+import { fadeAnimation } from '../../../shared/animation';
 import { ToggleDraggableDirective } from '../../../shared/toggle-draggable.directive';
 
 @Component({
   selector: 'app-h4-block',
   standalone: true,
-  imports: [ToggleDraggableDirective, ToolbarBlockComponent],
+  imports: [CommonModule, ToggleDraggableDirective, ToolbarBlockComponent],
   templateUrl: './h4-block.component.html',
   styleUrl: './h4-block.component.scss',
-  animations: [fadeInAnimation],
+  animations: [fadeAnimation],
 })
 export class H4BlockComponent extends BaseUiBehavior implements AfterViewInit {
   interactable: any;

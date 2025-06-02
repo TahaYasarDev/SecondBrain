@@ -1,0 +1,18 @@
+.editable.h3 {
+  position: relative; /* Pour que le placeholder soit positionné par rapport à ce conteneur */
+}
+
+.placeholder {
+  position: absolute;
+  top: 10px;
+  left: 2px;
+  color: #aaa;
+  pointer-events: none; /* Clicks passent à travers */
+  user-select: none; /* Empêche la sélection */
+  transition: opacity 0.3s ease;
+  opacity: 1;
+}
+
+span {
+  font-size: 21px;
+}

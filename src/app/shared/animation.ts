@@ -1,4 +1,4 @@
-// src/app/shared/animations.ts
+// Angular
 import {
   animate,
   state,
@@ -7,7 +7,7 @@ import {
   trigger,
 } from '@angular/animations';
 
-export const fadeInAnimation = trigger('fadeIn', [
+export const fadeAnimation = trigger('fade', [
   state('visible', style({ opacity: 1, transform: 'translateY(0)' })),
   state('hidden', style({ opacity: 0, transform: 'translateY(-10px)' })),
   transition('visible => hidden', animate('500ms ease-out')),

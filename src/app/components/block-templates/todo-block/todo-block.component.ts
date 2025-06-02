@@ -13,7 +13,7 @@ import {
 import { ToolbarBlockComponent } from '../toolbar-block/toolbar-block.component';
 
 // Shared
-import { fadeInAnimation } from '../../../shared/animation';
+import { fadeAnimation } from '../../../shared/animation';
 import { BaseUiBehavior } from '../../../shared/base-ui-behavior';
 import { ToggleDraggableDirective } from '../../../shared/toggle-draggable.directive';
 
@@ -30,7 +30,7 @@ import { ToggleDraggableDirective } from '../../../shared/toggle-draggable.direc
   ],
   templateUrl: './todo-block.component.html',
   styleUrl: './todo-block.component.scss',
-  animations: [fadeInAnimation],
+  animations: [fadeAnimation],
 })
 export class TodoBlockComponent
   extends BaseUiBehavior

@@ -10,7 +10,7 @@ import { InsertBlockComponent } from '../../insert-block/insert-block.component'
 import { DragService } from '../../../services/drag.service';
 
 // Shared
-import { fadeInAnimation } from '../../../shared/animation';
+import { fadeAnimation } from '../../../shared/animation';
 import { BaseUiBehavior } from '../../../shared/base-ui-behavior';
 import { ToggleDraggableDirective } from '../../../shared/toggle-draggable.directive';
 
@@ -25,19 +25,13 @@ import { ToggleDraggableDirective } from '../../../shared/toggle-draggable.direc
   ],
   templateUrl: './paragraph-block.component.html',
   styleUrl: './paragraph-block.component.scss',
-  animations: [fadeInAnimation],
+  animations: [fadeAnimation],
 })
 export class ParagraphBlockComponent
   extends BaseUiBehavior
   implements AfterViewInit
 {
   placeHolder: string = 'Écrivez, tapez « / » pour afficher les commandes…';
-  hasContent = false;
-
-  interactable: any;
-  enableResizeDrag = true;
-  releaseTimeout: any = null;
-  resetTimeout: any = null;
 
   constructor(private dragService: DragService) {
     super();
@@ -45,6 +39,6 @@ export class ParagraphBlockComponent
 
   ngAfterViewInit(): void {
     // drag
-    this.interactable = this.dragService.initDraggable('.draggable');
+    this.dragService.initDraggable('.draggable');
   }
 }

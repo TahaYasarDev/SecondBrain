@@ -7,6 +7,8 @@ export abstract class BaseUiBehavior {
 
   isVisible = true;
 
+  hasContent = false;
+
   delete() {
     this.isVisible = false;
   }
@@ -19,8 +21,12 @@ export abstract class BaseUiBehavior {
 
   onInput(event: Event) {
     const el = event.target as HTMLElement;
-    if (el.innerText.trim() === '') {
+    const text = el.innerText.trim();
+
+    if (text === '') {
       el.innerHTML = '';
     }
+
+    this.hasContent = text.length > 0;
   }
 }

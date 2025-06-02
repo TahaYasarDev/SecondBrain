@@ -1,10 +1,12 @@
 <div
   class="inputForm"
-  [@fadeIn]="isVisible ? 'visible' : 'hidden'"
-  (@fadeIn.done)="onFadeDone($event)"
+  [@fade]="isVisible ? 'visible' : 'hidden'"
+  (@fade.done)="onFadeDone($event)"
 >
   <div #draggableWrapper class="draggable-wrapper draggable">
-    <label class="floating-label" *ngIf="!hasContent">{{ placeHolder }}</label>
+    <label [@fade]="'visible'" class="floating-label" *ngIf="!hasContent">{{
+      placeHolder
+    }}</label>
     <p
       #editableParagraph
       class="editable paragraph"
