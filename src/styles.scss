@@ -39,14 +39,6 @@ a {
   height: 15px;
 }
 
-.editable:empty:before {
-  content: attr(data-placeholder);
-  pointer-events: none;
-  font-weight: normal;
-  margin: 0;
-  color: #8c8994;
-}
-
 .editable {
   width: 100%;
   flex: 1;
@@ -55,7 +47,6 @@ a {
   background: transparent;
   border: none;
   color: white;
-  border-bottom: 2px solid #8c8994;
   outline: none;
   white-space: pre-wrap;
   word-break: break-word;
