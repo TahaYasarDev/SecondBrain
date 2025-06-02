@@ -10,12 +10,13 @@
         placeholder="Nouvelle tâche"
         [(ngModel)]="newTask"
         (keyup.enter)="addTask()"
+        appToggleDraggable
       />
       <button (click)="addTask()">Ajouter</button>
     </div>
 
     <h1 class="editable-todo-h1">A faire</h1>
-    <div cdkDropList (cdkDropListDropped)="drop($event)">
+    <div cdkDropList (cdkDropListDropped)="drop($event)" appToggleDraggable>
       <ul>
         <li cdkDrag *ngFor="let task of todoTasks; let i = index">
           <input type="checkbox" [(ngModel)]="task.done" />
@@ -32,7 +33,7 @@
     </div>
 
     <h1 class="editable-todo-h1">Faites</h1>
-    <div cdkDropList (cdkDropListDropped)="drop($event)">
+    <div cdkDropList (cdkDropListDropped)="drop($event)" appToggleDraggable>
       <ul>
         <li cdkDrag *ngFor="let task of doneTasks; let i = index">
           <input type="checkbox" [(ngModel)]="task.done" />

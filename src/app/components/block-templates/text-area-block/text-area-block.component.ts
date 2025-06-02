@@ -5,17 +5,22 @@ import { AfterViewInit, Component } from '@angular/core';
 import { ToolbarBlockComponent } from '../toolbar-block/toolbar-block.component';
 import { InsertBlockComponent } from '../../insert-block/insert-block.component';
 
+// Service
+import { DragService } from '../../../services/drag.service';
+
 // Shared
 import { fadeInAnimation } from '../../../shared/animation';
 import { BaseUiBehavior } from '../../../shared/base-ui-behavior';
-
-// Service
-import { DragService } from '../../../services/drag.service';
+import { ToggleDraggableDirective } from '../../../shared/toggle-draggable.directive';
 
 @Component({
   selector: 'app-text-area-block',
   standalone: true,
-  imports: [InsertBlockComponent, ToolbarBlockComponent],
+  imports: [
+    ToggleDraggableDirective,
+    InsertBlockComponent,
+    ToolbarBlockComponent,
+  ],
   templateUrl: './text-area-block.component.html',
   styleUrl: './text-area-block.component.scss',
   animations: [fadeInAnimation],

@@ -10,11 +10,9 @@
       class="editable paragraph"
       contenteditable="true"
       (input)="onInput($event)"
+      appToggleDraggable
     ></p>
 
-    <app-toolbar-block
-      (onFormat)="onTextFormatted($event)"
-      (deleteBalise)="delete()"
-    ></app-toolbar-block>
+    <app-toolbar-block (deleteBalise)="delete()"></app-toolbar-block>
   </div>
 </div>

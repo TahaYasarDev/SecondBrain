@@ -15,11 +15,13 @@ import { ToolbarBlockComponent } from '../toolbar-block/toolbar-block.component'
 // Shared
 import { fadeInAnimation } from '../../../shared/animation';
 import { BaseUiBehavior } from '../../../shared/base-ui-behavior';
+import { ToggleDraggableDirective } from '../../../shared/toggle-draggable.directive';
 
 @Component({
   selector: 'app-todo-block',
   standalone: true,
   imports: [
+    ToggleDraggableDirective,
     FormsModule,
     CommonModule,
     CdkDropList,

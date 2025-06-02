@@ -10,14 +10,14 @@ import {
 } from '@angular/core';
 
 // Component
-import { ParagraphBlockComponent } from '../block-templates/paragraph-block/paragraph-block.component';
-import { H1BlockComponent } from '../block-templates/h1-block/h1-block.component';
 import { InsertBlockComponent } from '../insert-block/insert-block.component';
-import { TextAreaBlockComponent } from '../block-templates/text-area-block/text-area-block.component';
-import { TodoBlockComponent } from '../block-templates/todo-block/todo-block.component';
+import { H1BlockComponent } from '../block-templates/h1-block/h1-block.component';
 import { H2BlockComponent } from '../block-templates/h2-block/h2-block.component';
 import { H3BlockComponent } from '../block-templates/h3-block/h3-block.component';
 import { H4BlockComponent } from '../block-templates/h4-block/h4-block.component';
+import { ParagraphBlockComponent } from '../block-templates/paragraph-block/paragraph-block.component';
+import { TextAreaBlockComponent } from '../block-templates/text-area-block/text-area-block.component';
+import { TodoBlockComponent } from '../block-templates/todo-block/todo-block.component';
 
 @Component({
   selector: 'app-note',

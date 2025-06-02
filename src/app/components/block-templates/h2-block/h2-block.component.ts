@@ -10,11 +10,12 @@ import { DragService } from '../../../services/drag.service';
 // Shared
 import { BaseUiBehavior } from '../../../shared/base-ui-behavior';
 import { fadeInAnimation } from '../../../shared/animation';
+import { ToggleDraggableDirective } from '../../../shared/toggle-draggable.directive';
 
 @Component({
   selector: 'app-h2-block',
   standalone: true,
-  imports: [ToolbarBlockComponent],
+  imports: [ToggleDraggableDirective, ToolbarBlockComponent],
   templateUrl: './h2-block.component.html',
   styleUrl: './h2-block.component.scss',
   animations: [fadeInAnimation],
