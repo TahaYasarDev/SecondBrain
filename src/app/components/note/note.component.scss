@@ -32,3 +32,9 @@ p {
   font-size: 40px;
   color: white;
 }
+
+.template {
+  position: relative; /* Conteneur relatif */
+  width: 100%; /* ou fixe selon ta mise en page */
+  height: 100%; /* ou fixe */
+}

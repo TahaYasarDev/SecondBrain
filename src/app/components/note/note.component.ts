@@ -37,6 +37,8 @@ import { TodoBlockComponent } from '../block-templates/todo-block/todo-block.com
   styleUrl: './note.component.scss',
 })
 export class NoteComponent {
+  componentsPositions: ComponentPosition[] = [];
+
   @ViewChild('container', { read: ViewContainerRef })
   container!: ViewContainerRef;
 
@@ -82,6 +84,15 @@ export class NoteComponent {
     }
 
     const compRef = this.container.createComponent(componentType);
+
+    const defaultPos = { x: 0, y: this.componentsRefs.length * 120 };
+
+    // Applique la position au DOM du composant
+    compRef.location.nativeElement.style.position = 'absolute';
+    compRef.location.nativeElement.style.top = defaultPos.y + 'px';
+    compRef.location.nativeElement.style.left = defaultPos.x + 'px';
+    compRef.location.nativeElement.style.width = '100%';
+
     this.componentsRefs.push(compRef);
 
     // Écoute des événements de l'enfant
@@ -110,4 +121,9 @@ export class NoteComponent {
       this.componentsRefs.splice(index, 1);
     }
   }
+}
+
+interface ComponentPosition {
+  x: number;
+  y: number;
 }
