@@ -16,7 +16,6 @@ import { H2BlockComponent } from '../block-templates/h2-block/h2-block.component
 import { H3BlockComponent } from '../block-templates/h3-block/h3-block.component';
 import { H4BlockComponent } from '../block-templates/h4-block/h4-block.component';
 import { ParagraphBlockComponent } from '../block-templates/paragraph-block/paragraph-block.component';
-import { TextAreaBlockComponent } from '../block-templates/text-area-block/text-area-block.component';
 import { TodoBlockComponent } from '../block-templates/todo-block/todo-block.component';
 
 @Component({
@@ -30,7 +29,6 @@ import { TodoBlockComponent } from '../block-templates/todo-block/todo-block.com
     H3BlockComponent,
     H4BlockComponent,
     ParagraphBlockComponent,
-    TextAreaBlockComponent,
     TodoBlockComponent,
   ],
   templateUrl: './note.component.html',
@@ -72,9 +70,6 @@ export class NoteComponent {
         break;
       case 'paragraph':
         componentType = ParagraphBlockComponent;
-        break;
-      case 'text-area':
-        componentType = TextAreaBlockComponent;
         break;
       case 'todo':
         componentType = TodoBlockComponent;

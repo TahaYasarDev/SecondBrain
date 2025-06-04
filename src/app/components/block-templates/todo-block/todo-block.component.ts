@@ -1,11 +1,10 @@
 // Angular
-import { AfterViewInit, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import {
-  CdkDrag,
   CdkDragDrop,
-  CdkDropList,
+  DragDropModule,
   moveItemInArray,
 } from '@angular/cdk/drag-drop';
 
@@ -24,20 +23,15 @@ import { BaseToolbarBehavior } from '../../../shared/base-toolbar-behavior';
     ToggleDraggableDirective,
     FormsModule,
     CommonModule,
-    CdkDropList,
-    CdkDrag,
+    DragDropModule,
     ToolbarBlockComponent,
   ],
   templateUrl: './todo-block.component.html',
   styleUrl: './todo-block.component.scss',
   animations: [fadeAnimation],
 })
-export class TodoBlockComponent
-  extends BaseToolbarBehavior
-  implements AfterViewInit
-{
-  ngAfterViewInit(): void {}
-
+export class TodoBlockComponent extends BaseToolbarBehavior {
+  informations: string = 'Aucune tâche pour le moment. 🎯';
   tasks: Task[] = [];
   newTask: string = '';
 
@@ -63,6 +57,10 @@ export class TodoBlockComponent
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.tasks, event.previousIndex, event.currentIndex);
+  }
+
+  get hasTasks(): boolean {
+    return this.todoTasks.length > 0 || this.doneTasks.length > 0;
   }
 }
 

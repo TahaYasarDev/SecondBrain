@@ -13,6 +13,7 @@ export class ToolbarBlockComponent {
   @Output() deleteBalise = new EventEmitter<void>();
 
   format(command: string) {
+    console.log('Format called with:', command);
     document.execCommand(command, false);
     this.onFormat.emit(command);
   }
