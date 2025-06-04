@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TextAreaBlockComponent } from './text-area-block.component';
+import { ToolbarBlockComponent } from './toolbar-block.component';
 
-describe('TextAreaBlockComponent', () => {
-  let component: TextAreaBlockComponent;
-  let fixture: ComponentFixture<TextAreaBlockComponent>;
+describe('ToolbarBlockComponent', () => {
+  let component: ToolbarBlockComponent;
+  let fixture: ComponentFixture<ToolbarBlockComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TextAreaBlockComponent]
+      imports: [ToolbarBlockComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(TextAreaBlockComponent);
+    fixture = TestBed.createComponent(ToolbarBlockComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

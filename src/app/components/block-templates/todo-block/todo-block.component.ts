@@ -1,27 +1,37 @@
+// Angular
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common'; // <- importer CommonModule
-
+import { CommonModule } from '@angular/common';
 import {
-  CdkDrag,
   CdkDragDrop,
-  CdkDropList,
+  DragDropModule,
   moveItemInArray,
 } from '@angular/cdk/drag-drop';
+
+// Component
+import { ToolbarBlockComponent } from '../toolbar-block/toolbar-block.component';
+
+// Shared
+import { fadeAnimation } from '../../../shared/animation';
+import { ToggleDraggableDirective } from '../../../shared/toggle-draggable.directive';
+import { BaseToolbarBehavior } from '../../../shared/base-toolbar-behavior';
+
 @Component({
   selector: 'app-todo-block',
-  imports: [FormsModule, CommonModule, CdkDropList, CdkDrag],
+  standalone: true,
+  imports: [
+    ToggleDraggableDirective,
+    FormsModule,
+    CommonModule,
+    DragDropModule,
+    ToolbarBlockComponent,
+  ],
   templateUrl: './todo-block.component.html',
   styleUrl: './todo-block.component.scss',
+  animations: [fadeAnimation],
 })
-export class TodoBlockComponent {
-  onInput(event: Event) {
-    const el = event.target as HTMLElement;
-    if (el.innerText.trim() === '') {
-      el.innerHTML = ''; // force le vrai "vide"
-    }
-  }
-
+export class TodoBlockComponent extends BaseToolbarBehavior {
+  informations: string = 'Aucune tâche pour le moment. 🎯';
   tasks: Task[] = [];
   newTask: string = '';
 
@@ -47,6 +57,10 @@ export class TodoBlockComponent {
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.tasks, event.previousIndex, event.currentIndex);
+  }
+
+  get hasTasks(): boolean {
+    return this.todoTasks.length > 0 || this.doneTasks.length > 0;
   }
 }
 

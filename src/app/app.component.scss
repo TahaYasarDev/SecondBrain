@@ -2,6 +2,12 @@ main {
   display: flex;
 }
 
+.inputForm {
+  position: relative;
+  width: 100%;
+  margin-top: 10px;
+}
+
 app-sidebar {
   height: 100vh;
   width: 15%;

@@ -1,10 +1,9 @@
 // Angular
-import { Component, AfterViewInit } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 // Component
 import { ToolbarBlockComponent } from '../toolbar-block/toolbar-block.component';
-import { InsertBlockComponent } from '../../insert-block/insert-block.component';
 
 // Service
 import { DragService } from '../../../services/drag.service';
@@ -15,28 +14,24 @@ import { ToggleDraggableDirective } from '../../../shared/toggle-draggable.direc
 import { BaseToolbarBehavior } from '../../../shared/base-toolbar-behavior';
 
 @Component({
-  selector: 'app-paragraph-block',
+  selector: 'app-h4-block',
   standalone: true,
-  imports: [
-    ToggleDraggableDirective,
-    CommonModule,
-    ToolbarBlockComponent,
-    InsertBlockComponent,
-  ],
-  templateUrl: './paragraph-block.component.html',
-  styleUrl: './paragraph-block.component.scss',
+  imports: [CommonModule, ToggleDraggableDirective, ToolbarBlockComponent],
+  templateUrl: './h4-block.component.html',
+  styleUrl: './h4-block.component.scss',
   animations: [fadeAnimation],
 })
-export class ParagraphBlockComponent
+export class H4BlockComponent
   extends BaseToolbarBehavior
   implements AfterViewInit
 {
+  interactable: any;
+
   constructor(private dragService: DragService) {
     super();
   }
 
   ngAfterViewInit(): void {
-    // drag
-    this.dragService.initDraggable('.draggable');
+    this.interactable = this.dragService.initDraggable('.draggable');
   }
 }

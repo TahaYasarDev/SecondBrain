@@ -6,14 +6,14 @@
   (mouseleave)="onMouseLeave()"
 >
   <div #draggableWrapper class="draggable-wrapper draggable">
-    <h1
-      class="editable h1"
+    <h2
+      class="editable h2"
       contenteditable="true"
       (input)="onInput($event)"
       appToggleDraggable
       (focus)="onFocus()"
       (blur)="onBlur()"
-    ></h1>
+    ></h2>
     <span
       class="placeholder"
       *ngIf="!hasContent"

@@ -1,22 +1,35 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+// Angular
+import { AfterViewInit, Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+// Component
+import { ToolbarBlockComponent } from '../toolbar-block/toolbar-block.component';
+
+// Service
+import { DragService } from '../../../services/drag.service';
+
+// Shared
+import { fadeAnimation } from '../../../shared/animation';
+import { ToggleDraggableDirective } from '../../../shared/toggle-draggable.directive';
+import { BaseToolbarBehavior } from '../../../shared/base-toolbar-behavior';
 
 @Component({
   selector: 'app-h1-block',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule, ToggleDraggableDirective, ToolbarBlockComponent],
   templateUrl: './h1-block.component.html',
   styleUrl: './h1-block.component.scss',
+  animations: [fadeAnimation],
 })
-export class H1BlockComponent {
-  @Output() deleteH1 = new EventEmitter<void>();
-
-  delete() {
-    this.deleteH1.emit();
+export class H1BlockComponent
+  extends BaseToolbarBehavior
+  implements AfterViewInit
+{
+  constructor(private dragService: DragService) {
+    super();
   }
 
-  onInput(event: Event) {
-    const el = event.target as HTMLElement;
-    if (el.innerText.trim() === '') {
-      el.innerHTML = ''; // force le vrai "vide"
-    }
+  ngAfterViewInit(): void {
+    this.dragService.initDraggable('.draggable');
   }
 }

@@ -1,10 +1,10 @@
-.editable.h1 {
+.editable.h3 {
   position: relative; /* Pour que le placeholder soit positionné par rapport à ce conteneur */
 }
 
 .placeholder {
   position: absolute;
-  top: 14px;
+  top: 10px;
   left: 2px;
   color: #aaa;
   pointer-events: none; /* Clicks passent à travers */
@@ -14,5 +14,5 @@
 }
 
 span {
-  font-size: 30px;
+  font-size: 24px;
 }

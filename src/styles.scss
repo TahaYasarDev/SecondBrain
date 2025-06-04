@@ -11,8 +11,23 @@ html {
 
 h1 {
   font-size: 30px;
-  margin: 0;
-  font-weight: initial;
+  margin-bottom: 0px;
+}
+
+h2 {
+  margin-bottom: 0px;
+}
+
+h3 {
+  margin-bottom: 0px;
+}
+
+h4 {
+  margin-bottom: 0px;
+}
+
+p {
+  margin-bottom: 0px;
 }
 
 a {
@@ -22,4 +37,17 @@ a {
 .icon {
   width: 15px;
   height: 15px;
+}
+
+.editable {
+  width: 100%;
+  flex: 1;
+  min-height: 35px;
+  padding: 14px 0 13px;
+  background: transparent;
+  border: none;
+  color: white;
+  outline: none;
+  white-space: pre-wrap;
+  word-break: break-word;
 }
