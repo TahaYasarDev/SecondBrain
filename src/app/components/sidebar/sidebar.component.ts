@@ -18,4 +18,6 @@ export class SidebarComponent {
     const width = this.el.nativeElement.offsetWidth;
     this.layoutService.setSidebarWidth(width);
   }
+
+  addNote() {}
 }

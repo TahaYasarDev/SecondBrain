@@ -63,3 +63,15 @@ span {
   transition-duration: 0.5s;
   cursor: pointer;
 }
+
+.note-container {
+  display: flex;
+  justify-content: space-between; /* Écarte les éléments : un à gauche, un à droite */
+}
+
+#add-note-btn {
+  width: 18px;
+  height: 18px;
+  margin-right: 20px;
+  cursor: pointer;
+}

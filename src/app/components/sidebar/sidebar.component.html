@@ -18,10 +18,18 @@
           </a>
         </li>
         <li>
-          <a href="#">
-            <img src="assets/icons/note.png" class="icon" alt="Notes" />
-            <span>Notes</span>
-          </a>
+          <div class="note-container">
+            <a href="#">
+              <img src="assets/icons/note.png" class="icon" alt="Notes" />
+              <span>Notes</span>
+            </a>
+            <img
+              src="assets/icons/plus.png"
+              id="add-note-btn"
+              alt="add-note"
+              (click)="addNote()"
+            />
+          </div>
         </li>
         <li>
           <a href="#">

@@ -1,5 +1,6 @@
 // Angular
 import {
+  AfterViewInit,
   Component,
   ComponentRef,
   EventEmitter,
@@ -34,7 +35,7 @@ import { TodoBlockComponent } from '../block-templates/todo-block/todo-block.com
   templateUrl: './note.component.html',
   styleUrl: './note.component.scss',
 })
-export class NoteComponent {
+export class NoteComponent implements AfterViewInit {
   componentsPositions: ComponentPosition[] = [];
 
   @ViewChild('container', { read: ViewContainerRef })
@@ -46,6 +47,9 @@ export class NoteComponent {
   componentsRefs: ComponentRef<any>[] = [];
 
   savedComponentsData: Array<{ type: string; content: string }> = [];
+  ngAfterViewInit(): void {
+    this.onInsertBlock('h1');
+  }
 
   // Evènement lors du choix de la balise que l'utilisateur souhaite insérer
   handleBaliseSelected(baliseType: string) {
