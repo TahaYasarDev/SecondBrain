@@ -75,3 +75,39 @@ span {
   margin-right: 20px;
   cursor: pointer;
 }
+
+.note-list {
+  margin-bottom: 4px;
+  margin-top: -8px;
+  font-size: 12px;
+  list-style: revert !important; /* inside pour que la puce soit à l’intérieur du padding */
+}
+
+.note-list:hover {
+  text-decoration: underline;
+  text-decoration: none;
+  transition-duration: 0.5s;
+  color: white;
+}
+
+.note-list li > div {
+  display: flex;
+  justify-content: space-between; /* espace entre titre et bouton */
+  align-items: center; /* verticalement centré */
+  padding: 4px 8px; /* un peu de padding */
+  cursor: pointer;
+}
+
+.note-list li > div button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+#rename-note-btn {
+  width: 17px;
+  height: 17px;
+  margin-right: 13px;
+  cursor: pointer;
+}

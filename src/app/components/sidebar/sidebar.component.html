@@ -31,11 +31,32 @@
             />
           </div>
 
-          <div class="note-list">
-            <div *ngFor="let note of notes" (click)="selectNote(note.id)">
-              {{ note.title }}
-            </div>
-          </div>
+          <ul class="note-list">
+            <li *ngFor="let note of notes">
+              <ng-container
+                *ngIf="editingNoteId !== note.id; else editTemplate"
+              >
+                <div (click)="selectNote(note.id)">
+                  {{ note.title }}
+                  <img
+                    src="assets/icons/pen.png"
+                    id="rename-note-btn"
+                    alt="rename-note"
+                    (click)="enableEdit(note.id, $event)"
+                  />
+                </div>
+              </ng-container>
+
+              <ng-template #editTemplate>
+                <input
+                  [value]="note.title"
+                  (blur)="saveTitle(note.id, $event)"
+                  (keydown.enter)="saveTitle(note.id, $event)"
+                  autofocus
+                />
+              </ng-template>
+            </li>
+          </ul>
         </li>
         <li>
           <a href="#">

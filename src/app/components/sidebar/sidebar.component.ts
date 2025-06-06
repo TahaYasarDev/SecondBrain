@@ -21,7 +21,7 @@ export class SidebarComponent {
 
   @Output() noteSelected = new EventEmitter<string | null>();
 
-  notes: { id: string; title: string }[] = [];
+  notes: Note[] = [];
   noteCounter = 1;
 
   selectNote(id: string) {
@@ -35,4 +35,28 @@ export class SidebarComponent {
 
     this.noteSelected.emit(id);
   }
+
+  editingNoteId: string | null = null;
+
+  enableEdit(id: string, event: MouseEvent) {
+    event.stopPropagation(); // pour ne pas déclencher le selectNote
+    this.editingNoteId = id;
+  }
+
+  saveTitle(id: string, event: Event) {
+    const input = event.target as HTMLInputElement;
+    const newTitle = input.value.trim();
+
+    const note = this.notes.find((n) => n.id === id);
+    if (note && newTitle) {
+      note.title = newTitle;
+    }
+
+    this.editingNoteId = null;
+  }
+}
+
+interface Note {
+  id: string;
+  title: string;
 }
