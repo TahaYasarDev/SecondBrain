@@ -1,13 +1,13 @@
 // Angular
-import { Component, ElementRef } from '@angular/core';
-
+import { Component, ElementRef, EventEmitter, Output } from '@angular/core';
+import { CommonModule } from '@angular/common';
 // Service
 import { LayoutService } from '../../services/layout.service';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
 })
@@ -19,5 +19,20 @@ export class SidebarComponent {
     this.layoutService.setSidebarWidth(width);
   }
 
-  addNote() {}
+  @Output() noteSelected = new EventEmitter<string | null>();
+
+  notes: { id: string; title: string }[] = [];
+  noteCounter = 1;
+
+  selectNote(id: string) {
+    this.noteSelected.emit(id);
+  }
+
+  addNote() {
+    const id = crypto.randomUUID();
+    const title = `Note ${this.noteCounter++}`;
+    this.notes.push({ id, title });
+
+    this.noteSelected.emit(id);
+  }
 }

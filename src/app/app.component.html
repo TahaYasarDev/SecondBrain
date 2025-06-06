@@ -1,9 +1,9 @@
 <div class="main">
   <main>
-    <app-sidebar></app-sidebar>
+    <app-sidebar (noteSelected)="openNote($event)"></app-sidebar>
 
     <div class="view">
-      <app-note></app-note>
+      <ng-container #viewContainer></ng-container>
     </div>
   </main>
 </div>

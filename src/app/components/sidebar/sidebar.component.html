@@ -30,6 +30,12 @@
               (click)="addNote()"
             />
           </div>
+
+          <div class="note-list">
+            <div *ngFor="let note of notes" (click)="selectNote(note.id)">
+              {{ note.title }}
+            </div>
+          </div>
         </li>
         <li>
           <a href="#">

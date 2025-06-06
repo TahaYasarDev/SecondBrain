@@ -4,6 +4,7 @@ import {
   Component,
   ComponentRef,
   EventEmitter,
+  Input,
   Output,
   Type,
   ViewChild,
@@ -36,6 +37,8 @@ import { TodoBlockComponent } from '../block-templates/todo-block/todo-block.com
   styleUrl: './note.component.scss',
 })
 export class NoteComponent implements AfterViewInit {
+  @Input() noteId!: string;
+
   componentsPositions: ComponentPosition[] = [];
 
   @ViewChild('container', { read: ViewContainerRef })
