@@ -64,26 +64,30 @@ span {
   cursor: pointer;
 }
 
-.note-container {
+.note-container,
+.kanban-container {
   display: flex;
   justify-content: space-between;
 }
 
-#add-note-btn {
+#add-note-btn,
+#add-kanban-btn {
   width: 18px;
   height: 18px;
   margin-right: 20px;
   cursor: pointer;
 }
 
-.note-list {
+.note-list,
+.kanban-list {
   margin-bottom: 4px;
   margin-top: -8px;
   font-size: 12px;
   list-style: revert !important;
 }
 
-.note-list li > div {
+.note-list li > div,
+.kanban-list li > div {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -92,7 +96,8 @@ span {
   transition: background-color 0.2s ease;
 }
 
-.note-list li > div button {
+.note-list li > div button,
+.kanban-list li > div button {
   background: none;
   border: none;
   cursor: pointer;
@@ -106,22 +111,26 @@ span {
   cursor: pointer;
 }
 
-.note-item.selected {
+.note-item.selected,
+.kanban-item.selected {
   color: white;
 }
 
-.note-item:hover {
+.note-item:hover,
+.kanban-item:hover {
   color: white;
 }
 
-.note-edit {
+.note-edit,
+.kanban-edit {
   background: white;
   color: black;
   border-radius: 5px;
   font-size: 12px;
 }
 
-.note-edit:focus {
+.note-edit:focus,
+.kanban-edit:focus {
   outline: none;
   box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
 }

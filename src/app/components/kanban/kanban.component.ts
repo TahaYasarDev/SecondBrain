@@ -1,5 +1,5 @@
 // Angular
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import {
   CdkDragDrop,
   moveItemInArray,
@@ -18,6 +18,8 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './kanban.component.scss',
 })
 export class KanbanComponent {
+  @Input() kanbanId!: string;
+
   backlog: Item[] = [];
   development: Item[] = [];
   inProgress: Item[] = [];

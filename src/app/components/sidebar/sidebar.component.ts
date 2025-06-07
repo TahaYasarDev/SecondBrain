@@ -20,13 +20,11 @@ import { LayoutService } from '../../services/layout.service';
 })
 export class SidebarComponent {
   @Output() noteSelected = new EventEmitter<string | null>();
+  @Output() kanbanSelected = new EventEmitter<string | null>();
 
   @ViewChild('editInput') editInput?: ElementRef<HTMLInputElement>;
 
   shouldFocusInput = false;
-  notes: Note[] = [];
-  noteCounter = 1;
-  selectedNoteId: string | null = null;
 
   constructor(private layoutService: LayoutService, private el: ElementRef) {}
 
@@ -42,6 +40,14 @@ export class SidebarComponent {
     }
   }
 
+  // NOTE
+
+  notes: Note[] = [];
+  noteCounter = 1;
+  selectedNoteId: string | null = null;
+
+  editingNoteId: string | null = null;
+
   selectNote(id: string) {
     this.selectedNoteId = id;
 
@@ -56,16 +62,10 @@ export class SidebarComponent {
     this.noteSelected.emit(id);
   }
 
-  editingNoteId: string | null = null;
-
   enableEdit(id: string, event: MouseEvent) {
     event.stopPropagation();
     this.shouldFocusInput = true;
     this.editingNoteId = id;
-  }
-
-  exitEditMode() {
-    this.editingNoteId = null;
   }
 
   saveTitle(id: string, event: Event) {
@@ -77,6 +77,39 @@ export class SidebarComponent {
       note.title = newTitle;
     }
 
+    this.editingNoteId = null;
+  }
+
+  // KANBAN
+
+  kanbans: Note[] = [];
+  kanbanCounter = 1;
+  selectedKanbanId: string | null = null;
+
+  editingKanbanId: string | null = null;
+
+  selectKanban(id: string) {
+    this.selectedNoteId = id;
+
+    this.kanbanSelected.emit(id);
+  }
+
+  addKanban() {
+    const id = crypto.randomUUID();
+    const title = `Kanban ${this.kanbanCounter++}`;
+    this.kanbans.push({ id, title });
+
+    this.kanbanSelected.emit(id);
+  }
+
+  enableKanbanEdit(id: string, event: MouseEvent) {
+    event.stopPropagation();
+    this.shouldFocusInput = true;
+    this.editingKanbanId = id;
+  }
+
+  // ALL
+  exitEditMode() {
     this.editingNoteId = null;
   }
 }

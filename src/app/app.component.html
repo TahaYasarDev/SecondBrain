@@ -1,9 +1,12 @@
 <div class="main">
   <main>
-    <app-sidebar (noteSelected)="openNote($event)"></app-sidebar>
+    <app-sidebar
+      (noteSelected)="openNote($event)"
+      (kanbanSelected)="openKanban($event)"
+    ></app-sidebar>
 
     <div class="view">
-      <app-kanban></app-kanban>
+      <!-- <app-kanban></app-kanban> -->
       <ng-container #viewContainer></ng-container>
     </div>
   </main>
