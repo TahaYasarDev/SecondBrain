@@ -83,19 +83,13 @@ span {
   list-style: revert !important; /* inside pour que la puce soit à l’intérieur du padding */
 }
 
-.note-list:hover {
-  text-decoration: underline;
-  text-decoration: none;
-  transition-duration: 0.5s;
-  color: white;
-}
-
 .note-list li > div {
   display: flex;
   justify-content: space-between; /* espace entre titre et bouton */
   align-items: center; /* verticalement centré */
   padding: 4px 8px; /* un peu de padding */
   cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
 .note-list li > div button {
@@ -105,9 +99,41 @@ span {
   font-size: 1rem;
 }
 
-#rename-note-btn {
-  width: 17px;
-  height: 17px;
+#edit-note-btn {
+  width: 16px;
+  height: 16px;
   margin-right: 13px;
   cursor: pointer;
+}
+
+.note-item.selected {
+  color: white;
+}
+
+.note-item:hover {
+  color: white;
+}
+
+.note-edit {
+  background: white;
+  color: black;
+  border-radius: 5px;
+  font-size: 12px;
+}
+
+.note-edit:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+}
+
+.check-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 12px;
+  cursor: pointer;
+}
+
+.edit-template {
+  display: flex;
+  align-items: center;
 }

@@ -1,5 +1,11 @@
 // Angular
-import { Component, ElementRef, EventEmitter, Output } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 // Service
 import { LayoutService } from '../../services/layout.service';
@@ -20,11 +26,22 @@ export class SidebarComponent {
   }
 
   @Output() noteSelected = new EventEmitter<string | null>();
-
+  @ViewChild('editInput') editInput?: ElementRef<HTMLInputElement>;
+  private shouldFocusInput = false;
   notes: Note[] = [];
   noteCounter = 1;
+  selectedNoteId: string | null = null;
+
+  ngAfterViewChecked() {
+    if (this.shouldFocusInput && this.editInput) {
+      this.editInput.nativeElement.focus();
+      this.shouldFocusInput = false;
+    }
+  }
 
   selectNote(id: string) {
+    this.selectedNoteId = id;
+
     this.noteSelected.emit(id);
   }
 
@@ -39,8 +56,13 @@ export class SidebarComponent {
   editingNoteId: string | null = null;
 
   enableEdit(id: string, event: MouseEvent) {
-    event.stopPropagation(); // pour ne pas déclencher le selectNote
+    event.stopPropagation();
+    this.shouldFocusInput = true;
     this.editingNoteId = id;
+  }
+
+  exitEditMode() {
+    this.editingNoteId = null;
   }
 
   saveTitle(id: string, event: Event) {
