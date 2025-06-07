@@ -23,13 +23,16 @@ export class KanbanComponent {
   inProgress: Item[] = [];
   done: Item[] = [];
 
-  ngAfterViewInit(): void {
-    const editableElements = document.querySelectorAll('[contenteditable]');
-    editableElements.forEach((el) => {
-      el.setAttribute('spellcheck', 'false');
-    });
-  }
+  showPopup = false;
 
+  // === gestion popup création / édition ===
+  editingItem: Item | null = null; // null si création, sinon item édité
+  popupItem: Item = this.createEmptyItem();
+
+  // Ligne éditable (tu peux supprimer si tu gères uniquement via popup)
+  lines: string[] = ['', '', '', ''];
+
+  // Drag & drop
   drop(event: CdkDragDrop<Item[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
@@ -47,6 +50,7 @@ export class KanbanComponent {
     }
   }
 
+  // Animation (pas modifié)
   isJumping = false;
 
   startJumpAnimation() {
@@ -59,33 +63,73 @@ export class KanbanComponent {
     this.isJumping = false;
   }
 
-  showPopup = false;
-
-  lines: string[] = ['', '', '', ''];
-
-  handleClick() {
-    this.showPopup = true;
-    this.lines = ['', '', '', ''];
+  // Création d'un item vide pour la popup
+  createEmptyItem(): Item {
+    return {
+      jira: '',
+      title: '',
+      texte: '',
+      estimate: 1,
+      progress: 0,
+    };
   }
-  newTask: Item = {
-    jira: '',
-    title: '',
-    texte: '',
-    estimate: 1,
-    progress: 0,
-  };
 
-  addTask() {
-    if (this.newTask.title.trim() === '') {
+  // Ouvrir popup - si item fourni, on édite, sinon création
+  openEditPopup(item?: Item) {
+    if (item) {
+      this.editingItem = item;
+      this.popupItem = { ...item }; // clone pour ne pas modifier direct
+    } else {
+      this.editingItem = null;
+      this.popupItem = this.createEmptyItem();
+    }
+    this.showPopup = true;
+  }
+
+  // Sauvegarder popup
+  savePopup() {
+    if (!this.popupItem.title.trim()) {
       alert('Title is required');
       return;
     }
-    this.backlog.push({ ...this.newTask }); // on push une copie
-    this.showPopup = false;
+
+    if (this.editingItem) {
+      // Édition : copier les valeurs dans l’item existant
+      Object.assign(this.editingItem, this.popupItem);
+    } else {
+      // Création : ajouter dans backlog par défaut (ou autre liste)
+      this.backlog.push({ ...this.popupItem });
+    }
+    this.closePopup();
   }
 
+  // Annuler popup
+  cancelPopup() {
+    this.closePopup();
+  }
+
+  // Fermer popup, reset
+  private closePopup() {
+    this.showPopup = false;
+    this.editingItem = null;
+    this.popupItem = this.createEmptyItem();
+  }
+
+  // Anciennes méthodes, tu peux adapter ou supprimer si tu ne les utilises plus
+  handleClick() {
+    this.openEditPopup(); // ouvrir en mode création
+  }
+
+  // TrackBy pour optimiser ngFor
   trackByFn(index: number, item: Item): string {
     return item.jira;
+  }
+
+  ngAfterViewInit(): void {
+    const editableElements = document.querySelectorAll('[contenteditable]');
+    editableElements.forEach((el) => {
+      el.setAttribute('spellcheck', 'false');
+    });
   }
 }
 

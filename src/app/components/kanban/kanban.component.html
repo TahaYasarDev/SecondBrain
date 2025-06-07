@@ -18,6 +18,7 @@
         *ngFor="let item of backlog; trackBy: trackByFn"
         class="item-box"
         cdkDrag
+        (click)="openEditPopup(item)"
       >
         <p>{{ item.jira }}</p>
         <p>{{ item.title }}</p>
@@ -57,6 +58,7 @@
         *ngFor="let item of development; trackBy: trackByFn"
         class="item-box"
         cdkDrag
+        (click)="openEditPopup(item)"
       >
         <p>{{ item.jira }}</p>
         <p>{{ item.title }}</p>
@@ -83,8 +85,10 @@
         *ngFor="let item of inProgress; trackBy: trackByFn"
         class="item-box"
         cdkDrag
+        (click)="openEditPopup(item)"
       >
-        <strong>{{ item.jira }}</strong> - {{ item.title }}<br />
+        <p>{{ item.jira }}</p>
+        <p>{{ item.title }}</p>
         <small>{{ item.texte }}</small
         ><br />
         <em>Estimate: {{ item.estimate }} days</em><br />
@@ -108,8 +112,10 @@
         *ngFor="let item of done; trackBy: trackByFn"
         class="item-box"
         cdkDrag
+        (click)="openEditPopup(item)"
       >
-        <strong>{{ item.jira }}</strong> - {{ item.title }}<br />
+        <p>{{ item.jira }}</p>
+        <p>{{ item.title }}</p>
         <small>{{ item.texte }}</small
         ><br />
         <em>Estimate: {{ item.estimate }} days</em><br />
@@ -119,26 +125,25 @@
   </div>
 </div>
 
-<div class="popup-center" *ngIf="showPopup">
-  <h3>Ajouter plusieurs tâches</h3>
+<!-- Popup création / édition -->
+<div *ngIf="showPopup" class="popup-center">
+  <h3>{{ editingItem ? "Edit Task" : "Create Task" }}</h3>
 
-  <div *ngIf="showPopup">
-    <input type="text" [(ngModel)]="newTask.jira" placeholder="Jira" />
-    <input type="text" [(ngModel)]="newTask.title" placeholder="Title" />
-    <textarea [(ngModel)]="newTask.texte" placeholder="Description"></textarea>
-    <input
-      type="number"
-      [(ngModel)]="newTask.estimate"
-      placeholder="Estimate (days)"
-      min="0"
-    />
-    <input
-      type="number"
-      [(ngModel)]="newTask.progress"
-      placeholder="Progress %"
-      min="0"
-      max="100"
-    />
-    <button (click)="addTask()">Add Task</button>
-  </div>
+  <label>JIRA:</label>
+  <input [(ngModel)]="popupItem.jira" />
+
+  <label>Title:</label>
+  <input [(ngModel)]="popupItem.title" />
+
+  <label>Texte:</label>
+  <textarea [(ngModel)]="popupItem.texte"></textarea>
+
+  <label>Estimate (days):</label>
+  <input type="number" [(ngModel)]="popupItem.estimate" />
+
+  <label>Progress (%):</label>
+  <input type="number" [(ngModel)]="popupItem.progress" min="0" max="100" />
+
+  <button (click)="savePopup()">Save</button>
+  <button (click)="cancelPopup()">Cancel</button>
 </div>
