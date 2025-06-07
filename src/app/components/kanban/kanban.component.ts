@@ -53,4 +53,16 @@ export class KanbanComponent {
       );
     }
   }
+
+  isJumping = false;
+
+  startJumpAnimation() {
+    if (!this.isJumping) {
+      this.isJumping = true;
+    }
+  }
+
+  onAnimationEnd() {
+    this.isJumping = false;
+  }
 }

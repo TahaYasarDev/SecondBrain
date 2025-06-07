@@ -18,6 +18,18 @@
       <div class="item-box" cdkDrag>{{ item }}</div>
       }
     </div>
+
+    <div>
+      <img
+        id="add-task-btn"
+        src="assets/icons/add.png"
+        class="icon"
+        alt="add-task"
+        (mouseenter)="startJumpAnimation()"
+        (animationend)="onAnimationEnd()"
+        [class.jump-animation]="isJumping"
+      />
+    </div>
   </div>
 
   <div class="column">
