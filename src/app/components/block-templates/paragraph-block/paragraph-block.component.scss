@@ -9,6 +9,10 @@ $primary: #8c8994;
   flex-direction: column;
 }
 
+.draggable-wrapper:focus-within .floating-label {
+  top: 5px;
+}
+
 .floating-label {
   position: absolute;
   top: 29px;
@@ -16,12 +20,4 @@ $primary: #8c8994;
   color: $primary;
   transition: all 0.3s ease;
   pointer-events: none;
-}
-
-.draggable-wrapper:focus-within .floating-label {
-  top: 5px;
-}
-
-.resize-drag {
-  user-select: text; // assure que le texte est sélectionnable
 }

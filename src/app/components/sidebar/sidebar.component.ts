@@ -7,6 +7,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 // Service
 import { LayoutService } from '../../services/layout.service';
 
@@ -18,19 +19,21 @@ import { LayoutService } from '../../services/layout.service';
   styleUrl: './sidebar.component.scss',
 })
 export class SidebarComponent {
+  @Output() noteSelected = new EventEmitter<string | null>();
+
+  @ViewChild('editInput') editInput?: ElementRef<HTMLInputElement>;
+
+  shouldFocusInput = false;
+  notes: Note[] = [];
+  noteCounter = 1;
+  selectedNoteId: string | null = null;
+
   constructor(private layoutService: LayoutService, private el: ElementRef) {}
 
   ngAfterViewInit() {
     const width = this.el.nativeElement.offsetWidth;
     this.layoutService.setSidebarWidth(width);
   }
-
-  @Output() noteSelected = new EventEmitter<string | null>();
-  @ViewChild('editInput') editInput?: ElementRef<HTMLInputElement>;
-  private shouldFocusInput = false;
-  notes: Note[] = [];
-  noteCounter = 1;
-  selectedNoteId: string | null = null;
 
   ngAfterViewChecked() {
     if (this.shouldFocusInput && this.editInput) {

@@ -36,7 +36,6 @@ export class ParagraphBlockComponent
   }
 
   ngAfterViewInit(): void {
-    // drag
     this.dragService.initDraggable('.draggable');
   }
 }

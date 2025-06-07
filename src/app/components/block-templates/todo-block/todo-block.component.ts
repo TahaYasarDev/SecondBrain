@@ -43,6 +43,10 @@ export class TodoBlockComponent extends BaseToolbarBehavior {
     return this.tasks.filter((t) => !t.done);
   }
 
+  get hasTasks(): boolean {
+    return this.todoTasks.length > 0 || this.doneTasks.length > 0;
+  }
+
   addTask() {
     const label = this.newTask.trim();
     if (label) {
@@ -57,10 +61,6 @@ export class TodoBlockComponent extends BaseToolbarBehavior {
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.tasks, event.previousIndex, event.currentIndex);
-  }
-
-  get hasTasks(): boolean {
-    return this.todoTasks.length > 0 || this.doneTasks.length > 0;
   }
 }
 
