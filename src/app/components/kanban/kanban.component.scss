@@ -1,6 +1,7 @@
 h1 {
   text-align: center;
   margin-bottom: 20px;
+  color: white;
 }
 
 h1:focus,
@@ -12,7 +13,8 @@ h2:focus {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  gap: 20px;
+  gap: 5px;
+  position: relative;
 }
 
 .column {
@@ -27,9 +29,12 @@ h2:focus {
   height: 800px;
   background-color: rgb(32, 32, 32);
   border-radius: 5px;
+  border: solid 1px rgb(0, 0, 0);
+  box-shadow: 5px 5px 10px -4px rgba(255, 255, 255, 0.055);
 
   h2 {
     text-align: center;
+    color: white;
   }
 }
 
@@ -104,4 +109,72 @@ h2:focus {
   100% {
     transform: translateY(0);
   }
+}
+
+.popup-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  width: 300px;
+  text-align: center;
+}
+
+.popup-center .editable-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 16px 0;
+}
+
+.popup-center p {
+  border: 1px solid #ccc;
+  padding: 6px 10px;
+  border-radius: 6px;
+  min-height: 32px;
+  text-align: left;
+}
+
+.popup-center button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.popup-center button:hover {
+  background-color: #0056b3;
+}
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -60%);
+  }
+  10% {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+  90% {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -40%);
+  }
+}
+
+.item-box {
+  display: block;
+}
+.item-box p {
+  width: 100%; /* prend toute la largeur possible */
+  margin: 0 0 0.5em 0; /* marges pour espacer un peu */
 }

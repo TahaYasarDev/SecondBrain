@@ -14,9 +14,18 @@
       class="column-list"
       (cdkDropListDropped)="drop($event)"
     >
-      @for (item of backlog; track item) {
-      <div class="item-box" cdkDrag>{{ item }}</div>
-      }
+      <div
+        *ngFor="let item of backlog; trackBy: trackByFn"
+        class="item-box"
+        cdkDrag
+      >
+        <p>{{ item.jira }}</p>
+        <p>{{ item.title }}</p>
+        <small>{{ item.texte }}</small
+        ><br />
+        <em>Estimate: {{ item.estimate }} days</em><br />
+        <progress [value]="item.progress" max="100"></progress>
+      </div>
     </div>
 
     <div>
@@ -28,6 +37,7 @@
         (mouseenter)="startJumpAnimation()"
         (animationend)="onAnimationEnd()"
         [class.jump-animation]="isJumping"
+        (click)="handleClick()"
       />
     </div>
   </div>
@@ -43,9 +53,18 @@
       class="column-list"
       (cdkDropListDropped)="drop($event)"
     >
-      @for (item of development; track item) {
-      <div class="item-box" cdkDrag>{{ item }}</div>
-      }
+      <div
+        *ngFor="let item of development; trackBy: trackByFn"
+        class="item-box"
+        cdkDrag
+      >
+        <p>{{ item.jira }}</p>
+        <p>{{ item.title }}</p>
+        <small>{{ item.texte }}</small
+        ><br />
+        <em>Estimate: {{ item.estimate }} days</em><br />
+        <progress [value]="item.progress" max="100"></progress>
+      </div>
     </div>
   </div>
 
@@ -60,9 +79,17 @@
       class="column-list"
       (cdkDropListDropped)="drop($event)"
     >
-      @for (item of inProgress; track item) {
-      <div class="item-box" cdkDrag>{{ item }}</div>
-      }
+      <div
+        *ngFor="let item of inProgress; trackBy: trackByFn"
+        class="item-box"
+        cdkDrag
+      >
+        <strong>{{ item.jira }}</strong> - {{ item.title }}<br />
+        <small>{{ item.texte }}</small
+        ><br />
+        <em>Estimate: {{ item.estimate }} days</em><br />
+        <progress [value]="item.progress" max="100"></progress>
+      </div>
     </div>
   </div>
 
@@ -77,9 +104,41 @@
       class="column-list"
       (cdkDropListDropped)="drop($event)"
     >
-      @for (item of done; track item) {
-      <div class="item-box" cdkDrag>{{ item }}</div>
-      }
+      <div
+        *ngFor="let item of done; trackBy: trackByFn"
+        class="item-box"
+        cdkDrag
+      >
+        <strong>{{ item.jira }}</strong> - {{ item.title }}<br />
+        <small>{{ item.texte }}</small
+        ><br />
+        <em>Estimate: {{ item.estimate }} days</em><br />
+        <progress [value]="item.progress" max="100"></progress>
+      </div>
     </div>
+  </div>
+</div>
+
+<div class="popup-center" *ngIf="showPopup">
+  <h3>Ajouter plusieurs tâches</h3>
+
+  <div *ngIf="showPopup">
+    <input type="text" [(ngModel)]="newTask.jira" placeholder="Jira" />
+    <input type="text" [(ngModel)]="newTask.title" placeholder="Title" />
+    <textarea [(ngModel)]="newTask.texte" placeholder="Description"></textarea>
+    <input
+      type="number"
+      [(ngModel)]="newTask.estimate"
+      placeholder="Estimate (days)"
+      min="0"
+    />
+    <input
+      type="number"
+      [(ngModel)]="newTask.progress"
+      placeholder="Progress %"
+      min="0"
+      max="100"
+    />
+    <button (click)="addTask()">Add Task</button>
   </div>
 </div>
