@@ -1,0 +1,73 @@
+<div>
+  <h1>Kanban</h1>
+</div>
+
+<div class="container">
+  <div class="column">
+    <h2>Backlog</h2>
+
+    <div
+      cdkDropList
+      #backlogList="cdkDropList"
+      [cdkDropListData]="backlog"
+      [cdkDropListConnectedTo]="[developmentList]"
+      class="column-list"
+      (cdkDropListDropped)="drop($event)"
+    >
+      @for (item of backlog; track item) {
+      <div class="item-box" cdkDrag>{{ item }}</div>
+      }
+    </div>
+  </div>
+
+  <div class="column">
+    <h2>Selected for developement</h2>
+
+    <div
+      cdkDropList
+      #developmentList="cdkDropList"
+      [cdkDropListData]="development"
+      [cdkDropListConnectedTo]="[backlogList, inProgressList]"
+      class="column-list"
+      (cdkDropListDropped)="drop($event)"
+    >
+      @for (item of development; track item) {
+      <div class="item-box" cdkDrag>{{ item }}</div>
+      }
+    </div>
+  </div>
+
+  <div class="column">
+    <h2>In Progress</h2>
+
+    <div
+      cdkDropList
+      #inProgressList="cdkDropList"
+      [cdkDropListData]="inProgress"
+      [cdkDropListConnectedTo]="[doneList, developmentList]"
+      class="column-list"
+      (cdkDropListDropped)="drop($event)"
+    >
+      @for (item of inProgress; track item) {
+      <div class="item-box" cdkDrag>{{ item }}</div>
+      }
+    </div>
+  </div>
+
+  <div class="column">
+    <h2>Done</h2>
+
+    <div
+      cdkDropList
+      #doneList="cdkDropList"
+      [cdkDropListData]="done"
+      [cdkDropListConnectedTo]="[inProgressList]"
+      class="column-list"
+      (cdkDropListDropped)="drop($event)"
+    >
+      @for (item of done; track item) {
+      <div class="item-box" cdkDrag>{{ item }}</div>
+      }
+    </div>
+  </div>
+</div>

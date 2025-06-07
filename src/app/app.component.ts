@@ -9,10 +9,11 @@ import { RouterOutlet } from '@angular/router';
 // Component
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { NoteComponent } from './components/note/note.component';
+import { KanbanComponent } from './components/kanban/kanban.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, SidebarComponent, NoteComponent],
+  imports: [RouterOutlet, SidebarComponent, NoteComponent, KanbanComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
