@@ -30,6 +30,13 @@ export class KanbanComponent {
 
   done = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
 
+  ngAfterViewInit(): void {
+    const editableElements = document.querySelectorAll('[contenteditable]');
+    editableElements.forEach((el) => {
+      el.setAttribute('spellcheck', 'false');
+    });
+  }
+
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
