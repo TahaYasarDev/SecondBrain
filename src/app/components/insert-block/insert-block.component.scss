@@ -28,10 +28,9 @@
   user-select: none;
 }
 
-/* Liste déroulante cachée */
 .dropdown ul {
-  display: none; /* caché par défaut */
-  position: absolute; /* hors du flux */
+  display: none;
+  position: absolute;
   top: 103%;
   left: -6px;
   background: #222;
@@ -44,12 +43,10 @@
   text-align: center;
 }
 
-/* Affichage au survol du container */
 .dropdown:hover ul {
   display: block;
 }
 
-/* Chaque item de la liste */
 .dropdown li {
   padding: 10px 15px;
   color: white;
@@ -59,12 +56,10 @@
   transition: background-color 0.3s ease;
 }
 
-/* Pas de bordure sur le premier élément */
 .dropdown li:first-child {
   border-top: none;
 }
 
-/* Effet hover sur les items */
 .dropdown li:hover {
   background-color: #444;
 }

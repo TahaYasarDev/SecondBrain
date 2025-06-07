@@ -21,7 +21,6 @@ p {
   pointer-events: none;
 }
 
-/* Style pour le p titre */
 #title {
   width: 100%;
   max-width: 400px;
@@ -34,7 +33,7 @@ p {
 }
 
 .template {
-  position: relative; /* Conteneur relatif */
-  width: 100%; /* ou fixe selon ta mise en page */
-  height: 100%; /* ou fixe */
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
