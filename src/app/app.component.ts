@@ -21,11 +21,9 @@ export class AppComponent {
 
   @ViewChild('viewContainer', { read: ViewContainerRef, static: true })
   viewContainer!: ViewContainerRef;
-
   noteInstances: Map<string, ComponentRef<NoteComponent>> = new Map();
 
   openNote(noteId: string | null = null) {
-    // Cacher tous les composants sauf celui sélectionné
     this.noteInstances.forEach((ref, id) => {
       const viewIndex = this.viewContainer.indexOf(ref.hostView);
       if (viewIndex !== -1) {
@@ -33,7 +31,6 @@ export class AppComponent {
       }
     });
 
-    // Si déjà existant, on le remet
     if (noteId && this.noteInstances.has(noteId)) {
       const existingRef = this.noteInstances.get(noteId)!;
       this.viewContainer.insert(existingRef.hostView);
