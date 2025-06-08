@@ -7,152 +7,46 @@
   </div>
 
   <div class="container">
-    <div class="column">
-      <h2 contenteditable="true">Backlog</h2>
+    <!-- Colonnes dynamiques -->
+    <div class="column" *ngFor="let column of columns; let i = index">
+      <h2 contenteditable="true" (blur)="renameColumn($event, i)">
+        {{ column.title }}
+      </h2>
 
       <div
         cdkDropList
-        #backlogList="cdkDropList"
-        [cdkDropListData]="backlog"
-        [cdkDropListConnectedTo]="[developmentList]"
+        [cdkDropListData]="column.items"
+        [cdkDropListConnectedTo]="getConnectedDropLists(i)"
         class="column-list"
         (cdkDropListDropped)="drop($event)"
+        id="cdk-drop-list-{{ i }}"
       >
         <div
-          *ngFor="let item of backlog; trackBy: trackByFn"
+          *ngFor="let item of column.items; trackBy: trackByFn"
           class="item-box"
           cdkDrag
-          (click)="openEditPopup(item)"
+          (dblclick)="openEditPopup(item)"
         >
           <p data-role="item-title">{{ item.title }}</p>
           <p data-role="item-texte">{{ item.texte }}</p>
-          <br />
-          <em data-role="item-estimate">Estimate: {{ item.estimate }} days</em
-          ><br />
+          <em data-role="item-estimate">Estimate: {{ item.estimate }} days</em>
           <progress
             data-role="item-progress"
             [value]="item.progress"
             max="100"
           ></progress>
-
           <p data-role="item-jira">{{ item.jira }}</p>
         </div>
-      </div>
 
-      <div>
-        <img
-          id="add-task-btn"
-          src="assets/icons/add.png"
-          class="icon"
-          alt="add-task"
-          (mouseenter)="startJumpAnimation()"
-          (animationend)="onAnimationEnd()"
-          [class.jump-animation]="isJumping"
-          (click)="handleClick()"
-        />
-      </div>
-    </div>
-
-    <div class="column">
-      <h2 contenteditable="true">Selected for developement</h2>
-
-      <div
-        cdkDropList
-        #developmentList="cdkDropList"
-        [cdkDropListData]="development"
-        [cdkDropListConnectedTo]="[backlogList, inProgressList]"
-        class="column-list"
-        id="developmentList"
-        (cdkDropListDropped)="drop($event)"
-      >
-        <div
-          *ngFor="let item of development; trackBy: trackByFn"
-          class="item-box"
-          cdkDrag
-          (click)="openEditPopup(item)"
-        >
-          <p data-role="item-title">{{ item.title }}</p>
-          <p data-role="item-texte">{{ item.texte }}</p>
-          <br />
-          <em data-role="item-estimate">Estimate: {{ item.estimate }} days</em
-          ><br />
-          <progress
-            data-role="item-progress"
-            [value]="item.progress"
-            max="100"
-          ></progress>
-
-          <p data-role="item-jira">{{ item.jira }}</p>
+        <div *ngIf="i === 0" class="add-item-btn" (click)="openEditPopup()">
+          + Add task
         </div>
       </div>
     </div>
 
-    <div class="column">
-      <h2 contenteditable="true">In Progress</h2>
-
-      <div
-        cdkDropList
-        #inProgressList="cdkDropList"
-        [cdkDropListData]="inProgress"
-        [cdkDropListConnectedTo]="[doneList, developmentList]"
-        class="column-list"
-        id="inProgressList"
-        (cdkDropListDropped)="drop($event)"
-      >
-        <div
-          *ngFor="let item of inProgress; trackBy: trackByFn"
-          class="item-box"
-          cdkDrag
-          (click)="openEditPopup(item)"
-        >
-          <p data-role="item-title">{{ item.title }}</p>
-          <p data-role="item-texte">{{ item.texte }}</p>
-          <br />
-          <em data-role="item-estimate">Estimate: {{ item.estimate }} days</em
-          ><br />
-          <progress
-            data-role="item-progress"
-            [value]="item.progress"
-            max="100"
-          ></progress>
-
-          <p data-role="item-jira">{{ item.jira }}</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="column">
-      <h2 contenteditable="true">Done</h2>
-
-      <div
-        cdkDropList
-        #doneList="cdkDropList"
-        [cdkDropListData]="done"
-        [cdkDropListConnectedTo]="[inProgressList]"
-        class="column-list"
-        id="doneList"
-        (cdkDropListDropped)="drop($event)"
-      >
-        <div
-          *ngFor="let item of done; trackBy: trackByFn"
-          class="item-box"
-          cdkDrag
-          (click)="openEditPopup(item)"
-        >
-          <p data-role="item-title">{{ item.title }}</p>
-          <p data-role="item-texte">{{ item.texte }}</p>
-          <br />
-          <em data-role="item-estimate">Estimate: {{ item.estimate }} days</em
-          ><br />
-          <progress
-            data-role="item-progress"
-            [value]="item.progress"
-            max="100"
-          ></progress>
-
-          <p data-role="item-jira">{{ item.jira }}</p>
-        </div>
-      </div>
+    <!-- Bouton + pour ajouter une colonne -->
+    <div class="column add-column-btn" (click)="addColumn()">
+      <h2 style="cursor: pointer">+ Add column</h2>
     </div>
   </div>
 

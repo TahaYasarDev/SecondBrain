@@ -56,7 +56,6 @@ export class KanbanComponent extends BaseUiBehavior {
       );
     }
   }
-
   // Animation (pas modifié)
   isJumping = false;
 
@@ -105,7 +104,7 @@ export class KanbanComponent extends BaseUiBehavior {
       Object.assign(this.editingItem, this.popupItem);
     } else {
       // Création : ajouter dans backlog par défaut (ou autre liste)
-      this.backlog.push({ ...this.popupItem });
+      this.columns[0].items.push({ ...this.popupItem });
     }
     this.closePopup();
   }
@@ -170,6 +169,33 @@ export class KanbanComponent extends BaseUiBehavior {
         this.progressError = false;
       }
     }
+  }
+
+  columns = [
+    { title: 'Backlog', items: this.backlog },
+    { title: 'Selected for Development', items: this.development },
+    { title: 'In Progress', items: this.inProgress },
+    { title: 'Done', items: this.done },
+  ];
+
+  addColumn() {
+    this.columns.push({
+      title: 'New Column',
+      items: [],
+    });
+  }
+
+  renameColumn(event: FocusEvent, index: number) {
+    const newName = (event.target as HTMLElement).innerText.trim();
+    if (newName) this.columns[index].title = newName;
+  }
+
+  getConnectedDropLists(index: number): string[] {
+    const connected = [];
+    if (index > 0) connected.push(`cdk-drop-list-${index - 1}`); // colonne précédente
+    if (index < this.columns.length - 1)
+      connected.push(`cdk-drop-list-${index + 1}`); // colonne suivante
+    return connected;
   }
 }
 
