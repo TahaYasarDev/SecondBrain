@@ -7,47 +7,61 @@
   </div>
 
   <div class="container">
-    <!-- Colonnes dynamiques -->
-    <div class="column" *ngFor="let column of columns; let i = index">
-      <h2 contenteditable="true" (blur)="renameColumn($event, i)">
-        {{ column.title }}
-      </h2>
-
-      <div
-        cdkDropList
-        [cdkDropListData]="column.items"
-        [cdkDropListConnectedTo]="getConnectedDropLists(i)"
-        class="column-list"
-        (cdkDropListDropped)="drop($event)"
-        id="cdk-drop-list-{{ i }}"
-      >
+    <div class="columns-wrapper">
+      <!-- Colonnes dynamiques -->
+      <div class="column" *ngFor="let column of columns; let i = index">
         <div
-          *ngFor="let item of column.items; trackBy: trackByFn"
-          class="item-box"
-          cdkDrag
-          (dblclick)="openEditPopup(item)"
+          class="column-header"
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+          "
         >
-          <p data-role="item-title">{{ item.title }}</p>
-          <p data-role="item-texte">{{ item.texte }}</p>
-          <em data-role="item-estimate">Estimate: {{ item.estimate }} days</em>
-          <progress
-            data-role="item-progress"
-            [value]="item.progress"
-            max="100"
-          ></progress>
-          <p data-role="item-jira">{{ item.jira }}</p>
+          <h2 contenteditable="true" (blur)="renameColumn($event, i)">
+            {{ column.title }}
+          </h2>
+          <button (click)="deleteColumn(i)" title="Supprimer cette colonne">
+            🗑️
+          </button>
         </div>
 
-        <div *ngIf="i === 0" class="add-item-btn" (click)="openEditPopup()">
-          + Add task
+        <div
+          cdkDropList
+          [cdkDropListData]="column.items"
+          [cdkDropListConnectedTo]="getConnectedDropLists(i)"
+          class="column-list"
+          (cdkDropListDropped)="drop($event)"
+          id="cdk-drop-list-{{ i }}"
+        >
+          <div
+            *ngFor="let item of column.items; trackBy: trackByFn"
+            class="item-box"
+            cdkDrag
+            (dblclick)="openEditPopup(item)"
+          >
+            <p data-role="item-title">{{ item.title }}</p>
+            <p data-role="item-texte">{{ item.texte }}</p>
+            <em data-role="item-estimate"
+              >Estimate: {{ item.estimate }} days</em
+            >
+            <progress
+              data-role="item-progress"
+              [value]="item.progress"
+              max="100"
+            ></progress>
+            <p data-role="item-jira">{{ item.jira }}</p>
+          </div>
+
+          <div *ngIf="i === 0" class="add-item-btn" (click)="openEditPopup()">
+            + Add task
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Bouton + pour ajouter une colonne -->
-    <div class="column add-column-btn" (click)="addColumn()">
-      <h2 style="cursor: pointer">+ Add column</h2>
-    </div>
+    <!-- Bouton + à droite de toutes les colonnes -->
+    <div class="add-column-btn" (click)="addColumn()" title="Add Column">+</div>
   </div>
 
   <!-- Popup création / édition -->

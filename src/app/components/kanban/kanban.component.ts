@@ -197,6 +197,31 @@ export class KanbanComponent extends BaseUiBehavior {
       connected.push(`cdk-drop-list-${index + 1}`); // colonne suivante
     return connected;
   }
+
+  deleteColumn(index: number) {
+    const confirmed = confirm(
+      `Supprimer la colonne "${this.columns[index].title}" ?`
+    );
+    if (!confirmed) return;
+
+    // Récupérer la colonne à supprimer
+    const removedColumn = this.columns[index];
+
+    // Déplacer les tickets vers la colonne précédente si possible, sinon vers la suivante
+    if (removedColumn.items.length > 0) {
+      if (index > 0) {
+        // Ajouter les tickets dans la colonne précédente
+        this.columns[index - 1].items.push(...removedColumn.items);
+      } else if (this.columns.length > 1) {
+        // Sinon ajouter dans la colonne suivante (si pas la seule colonne)
+        this.columns[index + 1].items.push(...removedColumn.items);
+      }
+      // Sinon il n’y a pas d’autre colonne, donc les tickets seront supprimés avec la colonne
+    }
+
+    // Supprimer la colonne
+    this.columns.splice(index, 1);
+  }
 }
 
 interface Item {
