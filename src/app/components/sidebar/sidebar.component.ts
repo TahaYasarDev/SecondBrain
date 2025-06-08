@@ -82,14 +82,14 @@ export class SidebarComponent {
 
   // KANBAN
 
-  kanbans: Note[] = [];
+  kanbans: Kanban[] = [];
   kanbanCounter = 1;
   selectedKanbanId: string | null = null;
 
   editingKanbanId: string | null = null;
 
   selectKanban(id: string) {
-    this.selectedNoteId = id;
+    this.selectedKanbanId = id;
 
     this.kanbanSelected.emit(id);
   }
@@ -108,13 +108,25 @@ export class SidebarComponent {
     this.editingKanbanId = id;
   }
 
-  // ALL
-  exitEditMode() {
-    this.editingNoteId = null;
+  saveKanbanTitle(id: string, event: Event) {
+    const input = event.target as HTMLInputElement;
+    const newTitle = input.value.trim();
+
+    const kanban = this.kanbans.find((n) => n.id === id);
+    if (kanban && newTitle) {
+      kanban.title = newTitle;
+    }
+
+    this.editingKanbanId = null;
   }
 }
 
 interface Note {
+  id: string;
+  title: string;
+}
+
+interface Kanban {
   id: string;
   title: string;
 }

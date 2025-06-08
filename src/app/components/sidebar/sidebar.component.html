@@ -112,8 +112,8 @@
                     #editInput
                     class="kanban-edit"
                     [value]="kanban.title"
-                    (blur)="saveTitle(kanban.id, $event)"
-                    (keydown.enter)="saveTitle(kanban.id, $event)"
+                    (blur)="saveKanbanTitle(kanban.id, $event)"
+                    (keydown.enter)="saveKanbanTitle(kanban.id, $event)"
                   />
 
                   <img
