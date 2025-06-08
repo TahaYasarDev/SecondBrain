@@ -25,21 +25,39 @@ import { BaseUiBehavior } from '../../shared/base-ui-behavior';
 export class KanbanComponent extends BaseUiBehavior {
   @Input() kanbanId!: string;
 
+  // Columns
   backlog: Item[] = [];
   development: Item[] = [];
   inProgress: Item[] = [];
   done: Item[] = [];
 
+  columns = [
+    { title: 'Backlog', items: this.backlog },
+    { title: 'Selected for Development', items: this.development },
+    { title: 'In Progress', items: this.inProgress },
+    { title: 'Done', items: this.done },
+  ];
+
+  // Popup
   showPopup = false;
-
-  // === gestion popup création / édition ===
-  editingItem: Item | null = null; // null si création, sinon item édité
   popupItem: Item = this.createEmptyItem();
+  editingItem: Item | null = null;
 
-  // Ligne éditable (tu peux supprimer si tu gères uniquement via popup)
-  lines: string[] = ['', '', '', ''];
+  // Animation
+  isJumping = false;
+  isJumpingColumn = false;
 
-  // Drag & drop
+  // Error message
+  estimateError = false;
+  progressError = false;
+
+  ngAfterViewInit(): void {
+    const editableElements = document.querySelectorAll('[contenteditable]');
+    editableElements.forEach((el) => {
+      el.setAttribute('spellcheck', 'false');
+    });
+  }
+
   drop(event: CdkDragDrop<Item[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
@@ -56,9 +74,8 @@ export class KanbanComponent extends BaseUiBehavior {
       );
     }
   }
-  // Animation (pas modifié)
-  isJumping = false;
-  isJumpingColumn = false;
+
+  //#region  Animation
 
   startJumpAnimation() {
     if (!this.isJumping) {
@@ -76,7 +93,11 @@ export class KanbanComponent extends BaseUiBehavior {
     this.isJumping = false;
     this.isJumpingColumn = false;
   }
-  // Création d'un item vide pour la popup
+
+  //#endregion
+
+  //#region Popup
+
   createEmptyItem(): Item {
     return {
       jira: '',
@@ -87,7 +108,6 @@ export class KanbanComponent extends BaseUiBehavior {
     };
   }
 
-  // Ouvrir popup - si item fourni, on édite, sinon création
   openEditPopup(item?: Item) {
     if (item) {
       this.editingItem = item;
@@ -99,7 +119,6 @@ export class KanbanComponent extends BaseUiBehavior {
     this.showPopup = true;
   }
 
-  // Sauvegarder popup
   savePopup() {
     if (!this.popupItem.title.trim()) {
       alert('Title is required');
@@ -107,83 +126,26 @@ export class KanbanComponent extends BaseUiBehavior {
     }
 
     if (this.editingItem) {
-      // Édition : copier les valeurs dans l’item existant
       Object.assign(this.editingItem, this.popupItem);
     } else {
-      // Création : ajouter dans backlog par défaut (ou autre liste)
       this.columns[0].items.push({ ...this.popupItem });
     }
     this.closePopup();
   }
 
-  // Annuler popup
   cancelPopup() {
     this.closePopup();
   }
 
-  // Fermer popup, reset
   private closePopup() {
     this.showPopup = false;
     this.editingItem = null;
     this.popupItem = this.createEmptyItem();
   }
 
-  // Anciennes méthodes, tu peux adapter ou supprimer si tu ne les utilises plus
-  handleClick() {
-    this.openEditPopup(); // ouvrir en mode création
-  }
+  //#endregion
 
-  // TrackBy pour optimiser ngFor
-  trackByFn(index: number, item: Item): string {
-    return item.jira;
-  }
-
-  ngAfterViewInit(): void {
-    const editableElements = document.querySelectorAll('[contenteditable]');
-    editableElements.forEach((el) => {
-      el.setAttribute('spellcheck', 'false');
-    });
-  }
-
-  estimateError = false;
-  progressError = false;
-
-  allowOnlyNumbers(event: KeyboardEvent, field: 'estimate' | 'progress') {
-    const allowedKeys = [
-      'Backspace',
-      'ArrowLeft',
-      'ArrowRight',
-      'Tab',
-      'Delete',
-      ',', // Ajout de la virgule ici
-    ];
-
-    // Regex modifiée : chiffre ou virgule
-    if (!allowedKeys.includes(event.key) && !/^[\d,]$/.test(event.key)) {
-      event.preventDefault();
-
-      // Activer l'erreur correspondante
-      if (field === 'estimate') {
-        this.estimateError = true;
-      } else if (field === 'progress') {
-        this.progressError = true;
-      }
-    } else {
-      // Pas d'erreur si la touche est valide
-      if (field === 'estimate') {
-        this.estimateError = false;
-      } else if (field === 'progress') {
-        this.progressError = false;
-      }
-    }
-  }
-
-  columns = [
-    { title: 'Backlog', items: this.backlog },
-    { title: 'Selected for Development', items: this.development },
-    { title: 'In Progress', items: this.inProgress },
-    { title: 'Done', items: this.done },
-  ];
+  //#region Handle columns
 
   addColumn() {
     this.columns.push({
@@ -199,9 +161,9 @@ export class KanbanComponent extends BaseUiBehavior {
 
   getConnectedDropLists(index: number): string[] {
     const connected = [];
-    if (index > 0) connected.push(`cdk-drop-list-${index - 1}`); // colonne précédente
+    if (index > 0) connected.push(`cdk-drop-list-${index - 1}`);
     if (index < this.columns.length - 1)
-      connected.push(`cdk-drop-list-${index + 1}`); // colonne suivante
+      connected.push(`cdk-drop-list-${index + 1}`);
     return connected;
   }
 
@@ -211,23 +173,49 @@ export class KanbanComponent extends BaseUiBehavior {
     );
     if (!confirmed) return;
 
-    // Récupérer la colonne à supprimer
     const removedColumn = this.columns[index];
 
-    // Déplacer les tickets vers la colonne précédente si possible, sinon vers la suivante
     if (removedColumn.items.length > 0) {
       if (index > 0) {
-        // Ajouter les tickets dans la colonne précédente
         this.columns[index - 1].items.push(...removedColumn.items);
       } else if (this.columns.length > 1) {
-        // Sinon ajouter dans la colonne suivante (si pas la seule colonne)
         this.columns[index + 1].items.push(...removedColumn.items);
       }
-      // Sinon il n’y a pas d’autre colonne, donc les tickets seront supprimés avec la colonne
     }
 
-    // Supprimer la colonne
     this.columns.splice(index, 1);
+  }
+
+  //#endregion
+
+  trackByFn(index: number, item: Item): string {
+    return item.jira;
+  }
+
+  allowOnlyNumbers(event: KeyboardEvent, field: 'estimate' | 'progress') {
+    const allowedKeys = [
+      'Backspace',
+      'ArrowLeft',
+      'ArrowRight',
+      'Tab',
+      'Delete',
+      ',', // Autoriser la virgule
+    ];
+
+    if (!allowedKeys.includes(event.key) && !/^[\d,]$/.test(event.key)) {
+      event.preventDefault();
+      if (field === 'estimate') {
+        this.estimateError = true;
+      } else {
+        this.progressError = true;
+      }
+    } else {
+      if (field === 'estimate') {
+        this.estimateError = false;
+      } else {
+        this.progressError = false;
+      }
+    }
   }
 }
 

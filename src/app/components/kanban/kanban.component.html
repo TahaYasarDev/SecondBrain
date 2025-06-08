@@ -14,16 +14,16 @@
         class="column"
         *ngFor="let column of columns; let i = index"
       >
+        <img
+          src="assets/icons/delete-column.png"
+          class="delete-column-btn"
+          alt="delete-column"
+          (click)="deleteColumn(i)"
+        />
         <div class="column-header">
           <h2 contenteditable="true" (blur)="renameColumn($event, i)">
             {{ column.title }}
           </h2>
-          <img
-            src="assets/icons/delete-column.png"
-            class="delete-column-btn"
-            alt="delete-column"
-            (click)="deleteColumn(i)"
-          />
         </div>
 
         <div
