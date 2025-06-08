@@ -87,6 +87,10 @@ span {
   margin-bottom: 5px;
 }
 
+li:last-child {
+  margin-bottom: 10px;
+}
+
 #edit-note-btn,
 #edit-kanban-btn {
   width: 16px;
