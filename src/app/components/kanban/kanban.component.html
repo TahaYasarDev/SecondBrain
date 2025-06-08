@@ -24,12 +24,17 @@
           cdkDrag
           (click)="openEditPopup(item)"
         >
-          <p>{{ item.jira }}</p>
-          <p>{{ item.title }}</p>
-          <small>{{ item.texte }}</small
-          ><br />
-          <em>Estimate: {{ item.estimate }} days</em><br />
-          <progress [value]="item.progress" max="100"></progress>
+          <p id="item-title">Title {{ item.title }}</p>
+          <p id="item-texte">{{ item.texte }}</p>
+          <br />
+          <em id="item-estimate">Estimate: {{ item.estimate }} days</em><br />
+          <progress
+            id="item-progress"
+            [value]="item.progress"
+            max="100"
+          ></progress>
+
+          <p id="item-jira">{{ item.jira }}</p>
         </div>
       </div>
 
