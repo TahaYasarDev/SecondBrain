@@ -50,6 +50,7 @@ export class SidebarComponent {
 
   selectNote(id: string) {
     this.selectedNoteId = id;
+    this.selectedKanbanId = null;
 
     this.noteSelected.emit(id);
   }
@@ -58,6 +59,10 @@ export class SidebarComponent {
     const id = crypto.randomUUID();
     const title = `Note ${this.noteCounter++}`;
     this.notes.push({ id, title });
+
+    // Sélection immédiate
+    this.selectedNoteId = id;
+    this.selectedKanbanId = null;
 
     this.noteSelected.emit(id);
   }
@@ -90,6 +95,7 @@ export class SidebarComponent {
 
   selectKanban(id: string) {
     this.selectedKanbanId = id;
+    this.selectedNoteId = null;
 
     this.kanbanSelected.emit(id);
   }
@@ -98,6 +104,10 @@ export class SidebarComponent {
     const id = crypto.randomUUID();
     const title = `Kanban ${this.kanbanCounter++}`;
     this.kanbans.push({ id, title });
+
+    // Sélection immédiate
+    this.selectedKanbanId = id;
+    this.selectedNoteId = null;
 
     this.kanbanSelected.emit(id);
   }
