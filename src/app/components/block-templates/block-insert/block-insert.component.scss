@@ -1,0 +1,110 @@
+/* Reset de base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Container dropdown */
+.dropdown {
+  position: absolute;
+  top: 40%;
+  left: 53%;
+  width: 35px;
+  font-family: Arial, sans-serif;
+}
+
+/* Bouton + */
+.dropdown span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #53527d;
+  color: white;
+  border-radius: 30px;
+  width: 45px;
+  height: 45px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.dropdown ul {
+  display: none;
+  position: absolute;
+  top: 103%;
+  left: -6px;
+  background: #222;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  width: 60px;
+  padding: 5px 0;
+  list-style: none;
+  text-align: center;
+}
+
+.dropdown:hover ul {
+  display: block;
+}
+
+.dropdown li {
+  padding: 10px 15px;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  border-top: 1px solid #444;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown li:first-child {
+  border-top: none;
+}
+
+.dropdown li:hover {
+  background-color: #444;
+}
+
+.dropdown span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #53527d;
+  color: white;
+  border-radius: 30px;
+  width: 45px;
+  height: 45px;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.5s ease;
+}
+
+#block-insert-icon {
+  position: absolute;
+  top: -40px;
+
+  width: 30px;
+  height: 30px;
+
+  transform: rotate(180deg);
+  animation: glowIcon 2.5s infinite ease-in-out;
+
+  transition: opacity 1s ease;
+  opacity: 1;
+}
+
+@keyframes glowIcon {
+  0% {
+    transform: rotate(180deg) translateY(0);
+  }
+  50% {
+    transform: rotate(180deg) translateY(10px); /* descend doucement */
+  }
+  100% {
+    transform: rotate(180deg) translateY(0); /* remonte doucement */
+  }
+}
+
+.dropdown:hover #block-insert-icon {
+  animation-play-state: paused;
+  opacity: 0;
+}

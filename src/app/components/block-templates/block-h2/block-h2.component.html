@@ -1,0 +1,29 @@
+<div
+  class="inputForm"
+  [@fade]="isVisible ? 'visible' : 'hidden'"
+  (@fade.done)="onFadeDone($event)"
+  (mouseenter)="onMouseEnter()"
+  (mouseleave)="onMouseLeave()"
+>
+  <div #draggableWrapper class="draggable-wrapper draggable">
+    <h2
+      class="editable h2"
+      contenteditable="true"
+      (input)="onInput($event)"
+      appToggleDraggable
+      (focus)="onFocus()"
+      (blur)="onBlur()"
+    ></h2>
+    <span
+      class="placeholder"
+      *ngIf="!hasContent"
+      [@fade]="!hasContent ? 'visible' : 'hidden'"
+    >
+      Nouveau titre
+    </span>
+    <app-block-toolbar
+      *ngIf="showToolbar"
+      (deleteBalise)="delete()"
+    ></app-block-toolbar>
+  </div>
+</div>
