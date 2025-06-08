@@ -58,6 +58,7 @@ export class KanbanComponent extends BaseUiBehavior {
   }
   // Animation (pas modifié)
   isJumping = false;
+  isJumpingColumn = false;
 
   startJumpAnimation() {
     if (!this.isJumping) {
@@ -65,8 +66,15 @@ export class KanbanComponent extends BaseUiBehavior {
     }
   }
 
+  startJumpAnimationColumn() {
+    if (!this.isJumpingColumn) {
+      this.isJumpingColumn = true;
+    }
+  }
+
   onAnimationEnd() {
     this.isJumping = false;
+    this.isJumpingColumn = false;
   }
   // Création d'un item vide pour la popup
   createEmptyItem(): Item {

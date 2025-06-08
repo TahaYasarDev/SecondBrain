@@ -10,20 +10,16 @@
     <div class="columns-wrapper">
       <!-- Colonnes dynamiques -->
       <div class="column" *ngFor="let column of columns; let i = index">
-        <div
-          class="column-header"
-          style="
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-          "
-        >
+        <div class="column-header">
           <h2 contenteditable="true" (blur)="renameColumn($event, i)">
             {{ column.title }}
           </h2>
-          <button (click)="deleteColumn(i)" title="Supprimer cette colonne">
-            🗑️
-          </button>
+          <img
+            src="assets/icons/delete-column.png"
+            class="delete-column-btn"
+            alt="delete-column"
+            (click)="deleteColumn(i)"
+          />
         </div>
 
         <div
@@ -69,7 +65,17 @@
     </div>
 
     <!-- Bouton + à droite de toutes les colonnes -->
-    <div class="add-column-btn" (click)="addColumn()" title="Add Column">+</div>
+    <div class="add-column-btn">
+      <img
+        src="assets/icons/add-column.png"
+        id="add-column-btn"
+        alt="add-column-btn"
+        (mouseenter)="startJumpAnimationColumn()"
+        (animationend)="onAnimationEnd()"
+        [class.jump-animation]="isJumpingColumn"
+        (click)="addColumn()"
+      />
+    </div>
   </div>
 
   <!-- Popup création / édition -->
