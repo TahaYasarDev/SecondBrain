@@ -33,7 +33,7 @@ export class KanbanComponent extends BaseUiBehavior {
 
   columns = [
     { title: 'Backlog', items: this.backlog },
-    { title: 'Selected for Development', items: this.development },
+    { title: 'Development', items: this.development },
     { title: 'In Progress', items: this.inProgress },
     { title: 'Done', items: this.done },
   ];
@@ -143,6 +143,13 @@ export class KanbanComponent extends BaseUiBehavior {
     this.popupItem = this.createEmptyItem();
   }
 
+  deleteTask(columnIndex: number, itemIndex: number) {
+    const task = this.columns[columnIndex].items[itemIndex];
+    const confirmed = confirm(`Supprimer la tâche "${task.title}" ?`);
+    if (confirmed) {
+      this.columns[columnIndex].items.splice(itemIndex, 1);
+    }
+  }
   //#endregion
 
   //#region Handle columns

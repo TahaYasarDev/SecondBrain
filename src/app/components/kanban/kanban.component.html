@@ -35,12 +35,22 @@
           id="cdk-drop-list-{{ i }}"
         >
           <div
-            *ngFor="let item of column.items; trackBy: trackByFn"
+            *ngFor="let item of column.items; let j = index; trackBy: trackByFn"
             class="item-box"
             cdkDrag
             (dblclick)="openEditPopup(item)"
           >
-            <p data-role="item-title">{{ item.title }}</p>
+            <p data-role="item-title">
+              {{ item.title }}
+
+              <!-- Icône de suppression de la tâche -->
+              <img
+                src="assets/icons/delete.png"
+                alt="delete-task"
+                class="delete-task-btn"
+                (click)="deleteTask(i, j)"
+              />
+            </p>
             <p data-role="item-texte">{{ item.texte }}</p>
             <em data-role="item-estimate"
               >Estimate: {{ item.estimate }} days</em
