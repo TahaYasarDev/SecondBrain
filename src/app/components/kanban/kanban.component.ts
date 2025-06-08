@@ -68,7 +68,6 @@ export class KanbanComponent extends BaseUiBehavior {
   onAnimationEnd() {
     this.isJumping = false;
   }
-
   // Création d'un item vide pour la popup
   createEmptyItem(): Item {
     return {

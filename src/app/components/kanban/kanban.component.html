@@ -53,8 +53,16 @@
             <p data-role="item-jira">{{ item.jira }}</p>
           </div>
 
-          <div *ngIf="i === 0" class="add-item-btn" (click)="openEditPopup()">
-            + Add task
+          <div class="add-item-btn" *ngIf="i === 0">
+            <img
+              src="assets/icons/add.png"
+              id="add-item-btn"
+              alt="add-item-btn"
+              (mouseenter)="startJumpAnimation()"
+              (animationend)="onAnimationEnd()"
+              [class.jump-animation]="isJumping"
+              (click)="openEditPopup()"
+            />
           </div>
         </div>
       </div>

@@ -68,14 +68,15 @@ h2:focus {
   margin-bottom: 10px;
 }
 
-#add-task-btn {
+#add-item-btn {
   margin-top: 10px;
   width: 25px;
   height: 25px;
 }
 
-#add-task-btn:hover {
+#add-item-btn:hover {
   cursor: pointer;
+  animation: jump 1s forwards;
 }
 
 .jump-animation {
@@ -261,4 +262,8 @@ h2:focus {
 #inProgressList,
 #doneList {
   height: 100%;
+}
+
+.add-item-btn {
+  text-align: center;
 }
