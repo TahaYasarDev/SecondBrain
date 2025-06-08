@@ -62,6 +62,7 @@
         [cdkDropListData]="development"
         [cdkDropListConnectedTo]="[backlogList, inProgressList]"
         class="column-list"
+        id="developmentList"
         (cdkDropListDropped)="drop($event)"
       >
         <div
@@ -95,6 +96,7 @@
         [cdkDropListData]="inProgress"
         [cdkDropListConnectedTo]="[doneList, developmentList]"
         class="column-list"
+        id="inProgressList"
         (cdkDropListDropped)="drop($event)"
       >
         <div
@@ -128,6 +130,7 @@
         [cdkDropListData]="done"
         [cdkDropListConnectedTo]="[inProgressList]"
         class="column-list"
+        id="doneList"
         (cdkDropListDropped)="drop($event)"
       >
         <div
