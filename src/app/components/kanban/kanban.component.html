@@ -1,149 +1,187 @@
-<div>
-  <h1 contenteditable="true">Kanban</h1>
-</div>
+<div
+  [@fade]="isVisible ? 'visible' : 'hidden'"
+  (@fade.done)="onFadeDone($event)"
+>
+  <div>
+    <h1 contenteditable="true">Kanban</h1>
+  </div>
 
-<div class="container">
-  <div class="column">
-    <h2 contenteditable="true">Backlog</h2>
+  <div class="container">
+    <div class="column">
+      <h2 contenteditable="true">Backlog</h2>
 
-    <div
-      cdkDropList
-      #backlogList="cdkDropList"
-      [cdkDropListData]="backlog"
-      [cdkDropListConnectedTo]="[developmentList]"
-      class="column-list"
-      (cdkDropListDropped)="drop($event)"
-    >
       <div
-        *ngFor="let item of backlog; trackBy: trackByFn"
-        class="item-box"
-        cdkDrag
-        (click)="openEditPopup(item)"
+        cdkDropList
+        #backlogList="cdkDropList"
+        [cdkDropListData]="backlog"
+        [cdkDropListConnectedTo]="[developmentList]"
+        class="column-list"
+        (cdkDropListDropped)="drop($event)"
       >
-        <p>{{ item.jira }}</p>
-        <p>{{ item.title }}</p>
-        <small>{{ item.texte }}</small
-        ><br />
-        <em>Estimate: {{ item.estimate }} days</em><br />
-        <progress [value]="item.progress" max="100"></progress>
+        <div
+          *ngFor="let item of backlog; trackBy: trackByFn"
+          class="item-box"
+          cdkDrag
+          (click)="openEditPopup(item)"
+        >
+          <p>{{ item.jira }}</p>
+          <p>{{ item.title }}</p>
+          <small>{{ item.texte }}</small
+          ><br />
+          <em>Estimate: {{ item.estimate }} days</em><br />
+          <progress [value]="item.progress" max="100"></progress>
+        </div>
+      </div>
+
+      <div>
+        <img
+          id="add-task-btn"
+          src="assets/icons/add.png"
+          class="icon"
+          alt="add-task"
+          (mouseenter)="startJumpAnimation()"
+          (animationend)="onAnimationEnd()"
+          [class.jump-animation]="isJumping"
+          (click)="handleClick()"
+        />
       </div>
     </div>
 
-    <div>
-      <img
-        id="add-task-btn"
-        src="assets/icons/add.png"
-        class="icon"
-        alt="add-task"
-        (mouseenter)="startJumpAnimation()"
-        (animationend)="onAnimationEnd()"
-        [class.jump-animation]="isJumping"
-        (click)="handleClick()"
+    <div class="column">
+      <h2 contenteditable="true">Selected for developement</h2>
+
+      <div
+        cdkDropList
+        #developmentList="cdkDropList"
+        [cdkDropListData]="development"
+        [cdkDropListConnectedTo]="[backlogList, inProgressList]"
+        class="column-list"
+        (cdkDropListDropped)="drop($event)"
+      >
+        <div
+          *ngFor="let item of development; trackBy: trackByFn"
+          class="item-box"
+          cdkDrag
+          (click)="openEditPopup(item)"
+        >
+          <p>{{ item.jira }}</p>
+          <p>{{ item.title }}</p>
+          <small>{{ item.texte }}</small
+          ><br />
+          <em>Estimate: {{ item.estimate }} days</em><br />
+          <progress [value]="item.progress" max="100"></progress>
+        </div>
+      </div>
+    </div>
+
+    <div class="column">
+      <h2 contenteditable="true">In Progress</h2>
+
+      <div
+        cdkDropList
+        #inProgressList="cdkDropList"
+        [cdkDropListData]="inProgress"
+        [cdkDropListConnectedTo]="[doneList, developmentList]"
+        class="column-list"
+        (cdkDropListDropped)="drop($event)"
+      >
+        <div
+          *ngFor="let item of inProgress; trackBy: trackByFn"
+          class="item-box"
+          cdkDrag
+          (click)="openEditPopup(item)"
+        >
+          <p>{{ item.jira }}</p>
+          <p>{{ item.title }}</p>
+          <small>{{ item.texte }}</small
+          ><br />
+          <em>Estimate: {{ item.estimate }} days</em><br />
+          <progress [value]="item.progress" max="100"></progress>
+        </div>
+      </div>
+    </div>
+
+    <div class="column">
+      <h2 contenteditable="true">Done</h2>
+
+      <div
+        cdkDropList
+        #doneList="cdkDropList"
+        [cdkDropListData]="done"
+        [cdkDropListConnectedTo]="[inProgressList]"
+        class="column-list"
+        (cdkDropListDropped)="drop($event)"
+      >
+        <div
+          *ngFor="let item of done; trackBy: trackByFn"
+          class="item-box"
+          cdkDrag
+          (click)="openEditPopup(item)"
+        >
+          <p>{{ item.jira }}</p>
+          <p>{{ item.title }}</p>
+          <small>{{ item.texte }}</small
+          ><br />
+          <em>Estimate: {{ item.estimate }} days</em><br />
+          <progress [value]="item.progress" max="100"></progress>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Popup création / édition -->
+  <div *ngIf="showPopup" class="popup-center">
+    <h3 id="popup-title">{{ editingItem ? "Edit Task" : "Create Task" }}</h3>
+
+    <div class="form-row">
+      <label>JIRA:</label>
+      <input [(ngModel)]="popupItem.jira" placeholder="ABCD-12345" />
+    </div>
+
+    <div class="form-row">
+      <label>Title:</label>
+      <input [(ngModel)]="popupItem.title" placeholder="Side project" />
+    </div>
+
+    <div class="form-row">
+      <label>Texte:</label>
+      <textarea
+        [(ngModel)]="popupItem.texte"
+        placeholder="Create a kanban component with 4 columns."
+      ></textarea>
+    </div>
+
+    <div class="form-row">
+      <label>Estimate (days):</label>
+      <input
+        type="number"
+        [(ngModel)]="popupItem.estimate"
+        (keypress)="allowOnlyNumbers($event, 'estimate')"
+        placeholder="0,5"
       />
+      <p class="error-message" *ngIf="estimateError">
+        Seuls les chiffres sont autorisés.
+      </p>
+    </div>
+
+    <div class="form-row">
+      <label>Progress (%):</label>
+      <input
+        type="number"
+        [(ngModel)]="popupItem.progress"
+        min="0"
+        max="100"
+        (keypress)="allowOnlyNumbers($event, 'progress')"
+        placeholder="0,5"
+      />
+      <p class="error-message" *ngIf="progressError">
+        Seuls les chiffres sont autorisés.
+      </p>
+    </div>
+
+    <div class="form-actions">
+      <button (click)="savePopup()">Save</button>
+      <button (click)="cancelPopup()">Cancel</button>
     </div>
   </div>
-
-  <div class="column">
-    <h2 contenteditable="true">Selected for developement</h2>
-
-    <div
-      cdkDropList
-      #developmentList="cdkDropList"
-      [cdkDropListData]="development"
-      [cdkDropListConnectedTo]="[backlogList, inProgressList]"
-      class="column-list"
-      (cdkDropListDropped)="drop($event)"
-    >
-      <div
-        *ngFor="let item of development; trackBy: trackByFn"
-        class="item-box"
-        cdkDrag
-        (click)="openEditPopup(item)"
-      >
-        <p>{{ item.jira }}</p>
-        <p>{{ item.title }}</p>
-        <small>{{ item.texte }}</small
-        ><br />
-        <em>Estimate: {{ item.estimate }} days</em><br />
-        <progress [value]="item.progress" max="100"></progress>
-      </div>
-    </div>
-  </div>
-
-  <div class="column">
-    <h2 contenteditable="true">In Progress</h2>
-
-    <div
-      cdkDropList
-      #inProgressList="cdkDropList"
-      [cdkDropListData]="inProgress"
-      [cdkDropListConnectedTo]="[doneList, developmentList]"
-      class="column-list"
-      (cdkDropListDropped)="drop($event)"
-    >
-      <div
-        *ngFor="let item of inProgress; trackBy: trackByFn"
-        class="item-box"
-        cdkDrag
-        (click)="openEditPopup(item)"
-      >
-        <p>{{ item.jira }}</p>
-        <p>{{ item.title }}</p>
-        <small>{{ item.texte }}</small
-        ><br />
-        <em>Estimate: {{ item.estimate }} days</em><br />
-        <progress [value]="item.progress" max="100"></progress>
-      </div>
-    </div>
-  </div>
-
-  <div class="column">
-    <h2 contenteditable="true">Done</h2>
-
-    <div
-      cdkDropList
-      #doneList="cdkDropList"
-      [cdkDropListData]="done"
-      [cdkDropListConnectedTo]="[inProgressList]"
-      class="column-list"
-      (cdkDropListDropped)="drop($event)"
-    >
-      <div
-        *ngFor="let item of done; trackBy: trackByFn"
-        class="item-box"
-        cdkDrag
-        (click)="openEditPopup(item)"
-      >
-        <p>{{ item.jira }}</p>
-        <p>{{ item.title }}</p>
-        <small>{{ item.texte }}</small
-        ><br />
-        <em>Estimate: {{ item.estimate }} days</em><br />
-        <progress [value]="item.progress" max="100"></progress>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Popup création / édition -->
-<div *ngIf="showPopup" class="popup-center">
-  <h3>{{ editingItem ? "Edit Task" : "Create Task" }}</h3>
-
-  <label>JIRA:</label>
-  <input [(ngModel)]="popupItem.jira" />
-
-  <label>Title:</label>
-  <input [(ngModel)]="popupItem.title" />
-
-  <label>Texte:</label>
-  <textarea [(ngModel)]="popupItem.texte"></textarea>
-
-  <label>Estimate (days):</label>
-  <input type="number" [(ngModel)]="popupItem.estimate" />
-
-  <label>Progress (%):</label>
-  <input type="number" [(ngModel)]="popupItem.progress" min="0" max="100" />
-
-  <button (click)="savePopup()">Save</button>
-  <button (click)="cancelPopup()">Cancel</button>
 </div>

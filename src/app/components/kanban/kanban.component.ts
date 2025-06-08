@@ -10,14 +10,19 @@ import {
 import { NgIf, NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
+// Shared
+import { fadeAnimation } from '../../shared/animation';
+import { BaseUiBehavior } from '../../shared/base-ui-behavior';
+
 @Component({
   selector: 'app-kanban',
   standalone: true,
   imports: [CdkDropList, CdkDrag, NgIf, NgFor, FormsModule],
   templateUrl: './kanban.component.html',
   styleUrl: './kanban.component.scss',
+  animations: [fadeAnimation],
 })
-export class KanbanComponent {
+export class KanbanComponent extends BaseUiBehavior {
   @Input() kanbanId!: string;
 
   backlog: Item[] = [];
@@ -71,8 +76,8 @@ export class KanbanComponent {
       jira: '',
       title: '',
       texte: '',
-      estimate: 1,
-      progress: 0,
+      estimate: null,
+      progress: null,
     };
   }
 
@@ -133,12 +138,45 @@ export class KanbanComponent {
       el.setAttribute('spellcheck', 'false');
     });
   }
+
+  estimateError = false;
+  progressError = false;
+
+  allowOnlyNumbers(event: KeyboardEvent, field: 'estimate' | 'progress') {
+    const allowedKeys = [
+      'Backspace',
+      'ArrowLeft',
+      'ArrowRight',
+      'Tab',
+      'Delete',
+      ',', // Ajout de la virgule ici
+    ];
+
+    // Regex modifiée : chiffre ou virgule
+    if (!allowedKeys.includes(event.key) && !/^[\d,]$/.test(event.key)) {
+      event.preventDefault();
+
+      // Activer l'erreur correspondante
+      if (field === 'estimate') {
+        this.estimateError = true;
+      } else if (field === 'progress') {
+        this.progressError = true;
+      }
+    } else {
+      // Pas d'erreur si la touche est valide
+      if (field === 'estimate') {
+        this.estimateError = false;
+      } else if (field === 'progress') {
+        this.progressError = false;
+      }
+    }
+  }
 }
 
 interface Item {
   jira: string;
   title: string;
   texte: string;
-  estimate: number;
-  progress: number;
+  estimate?: number | null;
+  progress?: number | null;
 }
