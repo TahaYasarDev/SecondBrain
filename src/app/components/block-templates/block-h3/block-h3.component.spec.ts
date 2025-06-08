@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { H3BlockComponent } from './block-h3.component';
+import { BlockH3Component } from './block-h3.component';
 
-describe('H3BlockComponent', () => {
-  let component: H3BlockComponent;
-  let fixture: ComponentFixture<H3BlockComponent>;
+describe('BlockH3Component', () => {
+  let component: BlockH3Component;
+  let fixture: ComponentFixture<BlockH3Component>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [H3BlockComponent],
+      imports: [BlockH3Component],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(H3BlockComponent);
+    fixture = TestBed.createComponent(BlockH3Component);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

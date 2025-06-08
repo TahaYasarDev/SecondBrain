@@ -11,7 +11,7 @@ import { DragService } from '../../../services/drag.service';
   templateUrl: './block-insert.component.html',
   styleUrl: './block-insert.component.scss',
 })
-export class InsertBlockComponent implements AfterViewInit {
+export class BlockInsertComponent implements AfterViewInit {
   @Output() baliseSelected = new EventEmitter<string>();
 
   constructor(private dragService: DragService) {}

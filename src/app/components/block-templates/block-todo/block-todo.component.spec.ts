@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TodoBlockComponent } from './block-todo.component';
+import { BlockTodoComponent } from './block-todo.component';
 
-describe('TodoBlockComponent', () => {
-  let component: TodoBlockComponent;
-  let fixture: ComponentFixture<TodoBlockComponent>;
+describe('BlockTodoComponent', () => {
+  let component: BlockTodoComponent;
+  let fixture: ComponentFixture<BlockTodoComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TodoBlockComponent],
+      imports: [BlockTodoComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(TodoBlockComponent);
+    fixture = TestBed.createComponent(BlockTodoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

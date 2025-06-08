@@ -12,26 +12,26 @@ import {
 } from '@angular/core';
 
 // Component
-import { InsertBlockComponent } from '../block-templates/block-insert/block-insert.component';
-import { H1BlockComponent } from '../block-templates/block-h1/block-h1.component';
-import { H2BlockComponent } from '../block-templates/block-h2/block-h2.component';
-import { H3BlockComponent } from '../block-templates/block-h3/block-h3.component';
-import { H4BlockComponent } from '../block-templates/block-h4/block-h4.component';
-import { TodoBlockComponent } from '../block-templates/block-todo/block-todo.component';
-import { ParagraphBlockComponent } from '../block-templates/block-paragraph/block-paragraph.component';
+import { BlockInsertComponent } from '../block-templates/block-insert/block-insert.component';
+import { BlockH1Component } from '../block-templates/block-h1/block-h1.component';
+import { BlockH2Component } from '../block-templates/block-h2/block-h2.component';
+import { BlockH3Component } from '../block-templates/block-h3/block-h3.component';
+import { BlockH4Component } from '../block-templates/block-h4/block-h4.component';
+import { BlockTodoComponent } from '../block-templates/block-todo/block-todo.component';
+import { BlockParagraphComponent } from '../block-templates/block-paragraph/block-paragraph.component';
 
 @Component({
   selector: 'app-note',
   standalone: true,
   imports: [
-    InsertBlockComponent,
-    H1BlockComponent,
-    H1BlockComponent,
-    H2BlockComponent,
-    H3BlockComponent,
-    H4BlockComponent,
-    ParagraphBlockComponent,
-    TodoBlockComponent,
+    BlockInsertComponent,
+    BlockH1Component,
+    BlockH1Component,
+    BlockH2Component,
+    BlockH3Component,
+    BlockH4Component,
+    BlockParagraphComponent,
+    BlockTodoComponent,
   ],
   templateUrl: './note.component.html',
   styleUrl: './note.component.scss',
@@ -64,22 +64,22 @@ export class NoteComponent implements AfterViewInit {
 
     switch (type) {
       case 'h1':
-        componentType = H1BlockComponent;
+        componentType = BlockH1Component;
         break;
       case 'h2':
-        componentType = H2BlockComponent;
+        componentType = BlockH2Component;
         break;
       case 'h3':
-        componentType = H3BlockComponent;
+        componentType = BlockH3Component;
         break;
       case 'h4':
-        componentType = H4BlockComponent;
+        componentType = BlockH4Component;
         break;
       case 'paragraph':
-        componentType = ParagraphBlockComponent;
+        componentType = BlockParagraphComponent;
         break;
       case 'todo':
-        componentType = TodoBlockComponent;
+        componentType = BlockTodoComponent;
         break;
       default:
         return;

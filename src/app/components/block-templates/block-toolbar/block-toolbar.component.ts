@@ -8,7 +8,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
   templateUrl: './block-toolbar.component.html',
   styleUrl: './block-toolbar.component.scss',
 })
-export class ToolbarBlockComponent {
+export class BlockToolbarComponent {
   @Output() onFormat = new EventEmitter<string>();
   @Output() deleteBalise = new EventEmitter<void>();
 

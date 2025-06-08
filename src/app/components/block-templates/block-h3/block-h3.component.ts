@@ -3,7 +3,7 @@ import { AfterViewInit, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 // Component
-import { ToolbarBlockComponent } from '../block-toolbar/block-toolbar.component';
+import { BlockToolbarComponent } from '../block-toolbar/block-toolbar.component';
 
 // Service
 import { DragService } from '../../../services/drag.service';
@@ -16,12 +16,12 @@ import { BaseToolbarBehavior } from '../../../shared/base-toolbar-behavior';
 @Component({
   selector: 'app-block-h3',
   standalone: true,
-  imports: [CommonModule, ToggleDraggableDirective, ToolbarBlockComponent],
+  imports: [CommonModule, ToggleDraggableDirective, BlockToolbarComponent],
   templateUrl: './block-h3.component.html',
   styleUrl: './block-h3.component.scss',
   animations: [fadeAnimation],
 })
-export class H3BlockComponent
+export class BlockH3Component
   extends BaseToolbarBehavior
   implements AfterViewInit
 {

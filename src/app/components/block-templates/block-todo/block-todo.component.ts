@@ -9,7 +9,7 @@ import {
 } from '@angular/cdk/drag-drop';
 
 // Component
-import { ToolbarBlockComponent } from '../block-toolbar/block-toolbar.component';
+import { BlockToolbarComponent } from '../block-toolbar/block-toolbar.component';
 
 // Shared
 import { fadeAnimation } from '../../../shared/animation';
@@ -24,13 +24,13 @@ import { BaseToolbarBehavior } from '../../../shared/base-toolbar-behavior';
     FormsModule,
     CommonModule,
     DragDropModule,
-    ToolbarBlockComponent,
+    BlockToolbarComponent,
   ],
   templateUrl: './block-todo.component.html',
   styleUrl: './block-todo.component.scss',
   animations: [fadeAnimation],
 })
-export class TodoBlockComponent extends BaseToolbarBehavior {
+export class BlockTodoComponent extends BaseToolbarBehavior {
   informations: string = 'Aucune tâche pour le moment. 🎯';
   tasks: Task[] = [];
   newTask: string = '';
@@ -55,8 +55,11 @@ export class TodoBlockComponent extends BaseToolbarBehavior {
     }
   }
 
-  deleteTask(i: number) {
-    this.tasks.splice(i, 1);
+  deleteTask(task: Task) {
+    const index = this.tasks.indexOf(task);
+    if (index > -1) {
+      this.tasks.splice(index, 1);
+    }
   }
 
   drop(event: CdkDragDrop<string[]>) {

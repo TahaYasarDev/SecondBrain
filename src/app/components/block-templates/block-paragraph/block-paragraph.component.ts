@@ -3,8 +3,8 @@ import { Component, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 // Component
-import { ToolbarBlockComponent } from '../block-toolbar/block-toolbar.component';
-import { InsertBlockComponent } from '../block-insert/block-insert.component';
+import { BlockToolbarComponent } from '../block-toolbar/block-toolbar.component';
+import { BlockInsertComponent } from '../block-insert/block-insert.component';
 
 // Service
 import { DragService } from '../../../services/drag.service';
@@ -20,14 +20,14 @@ import { BaseToolbarBehavior } from '../../../shared/base-toolbar-behavior';
   imports: [
     ToggleDraggableDirective,
     CommonModule,
-    ToolbarBlockComponent,
-    InsertBlockComponent,
+    BlockToolbarComponent,
+    BlockInsertComponent,
   ],
   templateUrl: './block-paragraph.component.html',
   styleUrl: './block-paragraph.component.scss',
   animations: [fadeAnimation],
 })
-export class ParagraphBlockComponent
+export class BlockParagraphComponent
   extends BaseToolbarBehavior
   implements AfterViewInit
 {

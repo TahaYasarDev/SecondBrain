@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ToolbarBlockComponent } from './block-toolbar.component';
+import { BlockToolbarComponent } from './block-toolbar.component';
 
-describe('ToolbarBlockComponent', () => {
-  let component: ToolbarBlockComponent;
-  let fixture: ComponentFixture<ToolbarBlockComponent>;
+describe('BlockToolbarComponent', () => {
+  let component: BlockToolbarComponent;
+  let fixture: ComponentFixture<BlockToolbarComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ToolbarBlockComponent],
+      imports: [BlockToolbarComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ToolbarBlockComponent);
+    fixture = TestBed.createComponent(BlockToolbarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

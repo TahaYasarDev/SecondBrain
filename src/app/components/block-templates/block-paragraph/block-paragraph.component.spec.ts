@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ParagraphBlockComponent } from './block-paragraph.component';
+import { BlockParagraphComponent } from './block-paragraph.component';
 
-describe('ParagraphBlockComponent', () => {
-  let component: ParagraphBlockComponent;
-  let fixture: ComponentFixture<ParagraphBlockComponent>;
+describe('BlockParagraphComponent', () => {
+  let component: BlockParagraphComponent;
+  let fixture: ComponentFixture<BlockParagraphComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ParagraphBlockComponent],
+      imports: [BlockParagraphComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ParagraphBlockComponent);
+    fixture = TestBed.createComponent(BlockParagraphComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

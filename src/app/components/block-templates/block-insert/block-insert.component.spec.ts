@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { InsertBlockComponent } from './block-insert.component';
+import { BlockInsertComponent } from './block-insert.component';
 
-describe('InsertBlockComponent', () => {
-  let component: InsertBlockComponent;
-  let fixture: ComponentFixture<InsertBlockComponent>;
+describe('BlockInsertComponent', () => {
+  let component: BlockInsertComponent;
+  let fixture: ComponentFixture<BlockInsertComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [InsertBlockComponent],
+      imports: [BlockInsertComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(InsertBlockComponent);
+    fixture = TestBed.createComponent(BlockInsertComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

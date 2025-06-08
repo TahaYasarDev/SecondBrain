@@ -1,5 +1,5 @@
 <div
-  class="inputForm"
+  class="editable-container"
   *ngIf="isVisible"
   [@fade]
   (@fade.done)="onFadeDone($event)"
@@ -54,7 +54,7 @@
               <input type="checkbox" [(ngModel)]="task.done" />
               <span>{{ task.label }}</span>
               <img
-                (click)="deleteTask(i)"
+                (click)="deleteTask(task)"
                 src="assets/icons/delete.png"
                 class="icon"
                 alt="Dashboard"
@@ -87,7 +87,7 @@
                 task.label
               }}</span>
               <img
-                (click)="deleteTask(i)"
+                (click)="deleteTask(task)"
                 src="assets/icons/delete.png"
                 class="icon"
                 alt="Dashboard"

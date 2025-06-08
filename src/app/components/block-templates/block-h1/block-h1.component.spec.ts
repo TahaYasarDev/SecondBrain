@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { H1BlockComponent } from './block-h1.component';
+import { BlockH1Component } from './block-h1.component';
 
-describe('H1BlockComponent', () => {
-  let component: H1BlockComponent;
-  let fixture: ComponentFixture<H1BlockComponent>;
+describe('BlockH1Component', () => {
+  let component: BlockH1Component;
+  let fixture: ComponentFixture<BlockH1Component>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [H1BlockComponent],
+      imports: [BlockH1Component],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(H1BlockComponent);
+    fixture = TestBed.createComponent(BlockH1Component);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

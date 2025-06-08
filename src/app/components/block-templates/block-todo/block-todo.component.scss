@@ -1,9 +1,3 @@
-.editable-todo-h1:empty:before {
-  content: attr(data-placeholder);
-  color: #aaa;
-  pointer-events: none;
-}
-
 span {
   width: 100%;
 }
@@ -11,26 +5,32 @@ span {
 img {
   width: 20px;
   height: 20px;
+  cursor: pointer;
 }
 
-/* List */
+.editable-todo-h1:empty:before {
+  content: attr(data-placeholder);
+  color: #aaa;
+  pointer-events: none;
+}
+
 ul {
-  counter-reset: index;
   padding: 0;
   max-width: 300px;
 }
 
-/* List element */
 li {
-  counter-increment: index;
   display: flex;
   align-items: center;
   padding: 12px 0;
   box-sizing: border-box;
   width: 355px;
+
+  input {
+    margin-right: 15px;
+  }
 }
 
-/* Element counter */
 li::before {
   font-size: 1.5rem;
   text-align: right;
@@ -40,7 +40,6 @@ li::before {
   align-self: flex-start;
 }
 
-/* Element separation */
 li + li {
   border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
@@ -48,11 +47,11 @@ li + li {
 .new-task {
   display: flex;
   align-items: center;
+}
 
-  #delete-btn {
-    margin-left: 15px;
-    cursor: pointer;
-  }
+#delete-btn {
+  margin-left: 15px;
+  cursor: pointer;
 }
 
 #new-task-input {
