@@ -9,7 +9,11 @@
   <div class="container">
     <div class="columns-wrapper">
       <!-- Colonnes dynamiques -->
-      <div class="column" *ngFor="let column of columns; let i = index">
+      <div
+        [@fade]="isVisible ? 'visible' : 'hidden'"
+        class="column"
+        *ngFor="let column of columns; let i = index"
+      >
         <div class="column-header">
           <h2 contenteditable="true" (blur)="renameColumn($event, i)">
             {{ column.title }}
@@ -79,7 +83,11 @@
   </div>
 
   <!-- Popup création / édition -->
-  <div *ngIf="showPopup" class="popup-center">
+  <div
+    [@fade]="isVisible ? 'visible' : 'hidden'"
+    *ngIf="showPopup"
+    class="popup-center"
+  >
     <h3 id="popup-title">{{ editingItem ? "Edit Task" : "Create Task" }}</h3>
 
     <div class="form-row">
