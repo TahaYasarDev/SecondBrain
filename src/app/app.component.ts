@@ -27,7 +27,16 @@ export class AppComponent {
   kanbanInstances: Map<string, ComponentRef<KanbanComponent>> = new Map();
 
   openNote(noteId: string | null = null) {
-    this.noteInstances.forEach((ref, id) => {
+    // On détache toutes les notes
+    this.noteInstances.forEach((ref) => {
+      const viewIndex = this.viewContainer.indexOf(ref.hostView);
+      if (viewIndex !== -1) {
+        this.viewContainer.detach(viewIndex);
+      }
+    });
+
+    // On détache aussi tous les kanbans
+    this.kanbanInstances.forEach((ref) => {
       const viewIndex = this.viewContainer.indexOf(ref.hostView);
       if (viewIndex !== -1) {
         this.viewContainer.detach(viewIndex);
@@ -41,12 +50,22 @@ export class AppComponent {
       const newId = noteId ?? crypto.randomUUID();
       const noteRef = this.viewContainer.createComponent(NoteComponent);
       noteRef.instance.noteId = newId;
+      this.viewContainer.insert(noteRef.hostView); // Ne pas oublier de l'insérer
       this.noteInstances.set(newId, noteRef);
     }
   }
 
   openKanban(kanbanId: string | null = null) {
-    this.kanbanInstances.forEach((ref, id) => {
+    // On détache toutes les notes
+    this.noteInstances.forEach((ref) => {
+      const viewIndex = this.viewContainer.indexOf(ref.hostView);
+      if (viewIndex !== -1) {
+        this.viewContainer.detach(viewIndex);
+      }
+    });
+
+    // On détache aussi tous les kanbans
+    this.kanbanInstances.forEach((ref) => {
       const viewIndex = this.viewContainer.indexOf(ref.hostView);
       if (viewIndex !== -1) {
         this.viewContainer.detach(viewIndex);
@@ -60,6 +79,7 @@ export class AppComponent {
       const newId = kanbanId ?? crypto.randomUUID();
       const kanbanRef = this.viewContainer.createComponent(KanbanComponent);
       kanbanRef.instance.kanbanId = newId;
+      this.viewContainer.insert(kanbanRef.hostView); // Ne pas oublier de l'insérer
       this.kanbanInstances.set(newId, kanbanRef);
     }
   }
