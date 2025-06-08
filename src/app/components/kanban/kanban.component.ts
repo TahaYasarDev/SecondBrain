@@ -111,7 +111,7 @@ export class KanbanComponent extends BaseUiBehavior {
   openEditPopup(item?: Item) {
     if (item) {
       this.editingItem = item;
-      this.popupItem = { ...item }; // clone pour ne pas modifier direct
+      this.popupItem = { ...item }; // clone to avoid modifying directly
     } else {
       this.editingItem = null;
       this.popupItem = this.createEmptyItem();
@@ -199,6 +199,7 @@ export class KanbanComponent extends BaseUiBehavior {
     return item.jira;
   }
 
+  // Form verification
   allowOnlyNumbers(event: KeyboardEvent, field: 'estimate' | 'progress') {
     const allowedKeys = [
       'Backspace',
@@ -206,7 +207,7 @@ export class KanbanComponent extends BaseUiBehavior {
       'ArrowRight',
       'Tab',
       'Delete',
-      ',', // Autoriser la virgule
+      ',',
     ];
 
     if (!allowedKeys.includes(event.key) && !/^[\d,]$/.test(event.key)) {

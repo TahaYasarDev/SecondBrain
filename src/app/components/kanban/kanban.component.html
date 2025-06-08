@@ -8,7 +8,6 @@
 
   <div class="container">
     <div class="columns-wrapper">
-      <!-- Colonnes dynamiques -->
       <div
         [@fade]="isVisible ? 'visible' : 'hidden'"
         class="column"
@@ -43,7 +42,6 @@
             <p data-role="item-title">
               {{ item.title }}
 
-              <!-- Icône de suppression de la tâche -->
               <img
                 src="assets/icons/delete.png"
                 alt="delete-task"
@@ -78,7 +76,6 @@
       </div>
     </div>
 
-    <!-- Bouton + à droite de toutes les colonnes -->
     <div class="add-column-btn">
       <img
         src="assets/icons/add-column.png"
@@ -92,7 +89,6 @@
     </div>
   </div>
 
-  <!-- Popup création / édition -->
   <div
     [@fade]="isVisible ? 'visible' : 'hidden'"
     *ngIf="showPopup"

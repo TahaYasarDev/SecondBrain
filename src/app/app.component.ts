@@ -27,7 +27,7 @@ export class AppComponent {
   kanbanInstances: Map<string, ComponentRef<KanbanComponent>> = new Map();
 
   openNote(noteId: string | null = null) {
-    // On détache toutes les notes
+    // Detach all the notes
     this.noteInstances.forEach((ref) => {
       const viewIndex = this.viewContainer.indexOf(ref.hostView);
       if (viewIndex !== -1) {
@@ -35,7 +35,7 @@ export class AppComponent {
       }
     });
 
-    // On détache aussi tous les kanbans
+    // Also detach all the kanbans
     this.kanbanInstances.forEach((ref) => {
       const viewIndex = this.viewContainer.indexOf(ref.hostView);
       if (viewIndex !== -1) {
@@ -50,13 +50,13 @@ export class AppComponent {
       const newId = noteId ?? crypto.randomUUID();
       const noteRef = this.viewContainer.createComponent(NoteComponent);
       noteRef.instance.noteId = newId;
-      this.viewContainer.insert(noteRef.hostView); // Ne pas oublier de l'insérer
+      this.viewContainer.insert(noteRef.hostView); // Insert the component
       this.noteInstances.set(newId, noteRef);
     }
   }
 
   openKanban(kanbanId: string | null = null) {
-    // On détache toutes les notes
+    // Detach all the notes
     this.noteInstances.forEach((ref) => {
       const viewIndex = this.viewContainer.indexOf(ref.hostView);
       if (viewIndex !== -1) {
@@ -64,7 +64,7 @@ export class AppComponent {
       }
     });
 
-    // On détache aussi tous les kanbans
+    // Also detach all the kanbans
     this.kanbanInstances.forEach((ref) => {
       const viewIndex = this.viewContainer.indexOf(ref.hostView);
       if (viewIndex !== -1) {
@@ -79,7 +79,7 @@ export class AppComponent {
       const newId = kanbanId ?? crypto.randomUUID();
       const kanbanRef = this.viewContainer.createComponent(KanbanComponent);
       kanbanRef.instance.kanbanId = newId;
-      this.viewContainer.insert(kanbanRef.hostView); // Ne pas oublier de l'insérer
+      this.viewContainer.insert(kanbanRef.hostView); // Insert the component
       this.kanbanInstances.set(newId, kanbanRef);
     }
   }

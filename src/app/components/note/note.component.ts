@@ -46,7 +46,7 @@ export class NoteComponent implements AfterViewInit {
 
   @Output() baliseSelected = new EventEmitter<string>();
 
-  // Stocke toutes les références des composants créés
+  // Store all references of the created components
   componentsRefs: ComponentRef<any>[] = [];
 
   savedComponentsData: Array<{ type: string; content: string }> = [];
@@ -54,7 +54,6 @@ export class NoteComponent implements AfterViewInit {
     this.onInsertBlock('h1');
   }
 
-  // Evènement lors du choix de la balise que l'utilisateur souhaite insérer
   handleBaliseSelected(baliseType: string) {
     this.onInsertBlock(baliseType);
   }
@@ -89,7 +88,7 @@ export class NoteComponent implements AfterViewInit {
 
     const defaultPos = { x: 0, y: this.componentsRefs.length * 120 };
 
-    // Applique la position au DOM du composant
+    // Applies the position to the component's DOM
     compRef.location.nativeElement.style.position = 'absolute';
     compRef.location.nativeElement.style.top = defaultPos.y + 'px';
     compRef.location.nativeElement.style.left = defaultPos.x + 'px';
@@ -97,7 +96,7 @@ export class NoteComponent implements AfterViewInit {
 
     this.componentsRefs.push(compRef);
 
-    // Écoute des événements de l'enfant
+    // Listens to the child's events
     if (compRef.instance.deleteBalise) {
       compRef.instance.deleteBalise.subscribe(() =>
         this.removeComponent(compRef)
@@ -112,14 +111,10 @@ export class NoteComponent implements AfterViewInit {
   }
 
   removeComponent(compRef: ComponentRef<any>) {
-    // Trouve l'index dans le tableau
     const index = this.componentsRefs.indexOf(compRef);
 
     if (index !== -1) {
-      // Supprime le composant de l’affichage
       compRef.destroy();
-
-      // Retire la référence du tableau
       this.componentsRefs.splice(index, 1);
     }
   }

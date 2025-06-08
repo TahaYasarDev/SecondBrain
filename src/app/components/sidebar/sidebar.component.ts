@@ -60,7 +60,6 @@ export class SidebarComponent {
     const title = `Note ${this.noteCounter++}`;
     this.notes.push({ id, title });
 
-    // Sélection immédiate
     this.selectedNoteId = id;
     this.selectedKanbanId = null;
 
@@ -105,7 +104,6 @@ export class SidebarComponent {
     const title = `Kanban ${this.kanbanCounter++}`;
     this.kanbans.push({ id, title });
 
-    // Sélection immédiate
     this.selectedKanbanId = id;
     this.selectedNoteId = null;
 

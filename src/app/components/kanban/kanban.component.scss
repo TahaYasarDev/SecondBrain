@@ -20,10 +20,6 @@ h2:focus {
   outline: none;
 }
 
-/* ---------------------- */
-/* === LAYOUT WRAPPERS === */
-/* ---------------------- */
-
 .container {
   display: flex;
   justify-content: center;
@@ -37,10 +33,6 @@ h2:focus {
   max-width: 90%;
   width: auto;
 }
-
-/* ---------------------- */
-/* === COLUMNS === */
-/* ---------------------- */
 
 .column {
   position: relative;
@@ -66,10 +58,6 @@ h2:focus {
   margin-top: 0;
   color: white;
 }
-
-/* ---------------------- */
-/* === COLUMN ITEMS === */
-/* ---------------------- */
 
 .column-list {
   margin-top: 20px;
@@ -127,10 +115,6 @@ h2:focus {
 [data-role="item-jira"] {
   text-align: right;
 }
-
-/* ---------------------- */
-/* === POPUP MODAL === */
-/* ---------------------- */
 
 .popup-center {
   position: absolute;
@@ -215,10 +199,6 @@ h2:focus {
   background-color: rgb(32, 32, 32);
 }
 
-/* ---------------------- */
-/* === BUTTONS === */
-/* ---------------------- */
-
 #add-item-btn,
 #add-column-btn,
 #delete-column-btn {
@@ -262,8 +242,8 @@ h2:focus {
 }
 
 [data-role="item-title"] {
-  position: relative; /* conteneur relatif */
-  padding-right: 30px; /* espace pour que le texte ne soit pas caché sous l'icône */
+  position: relative;
+  padding-right: 30px;
 }
 
 .delete-task-btn {
@@ -288,10 +268,6 @@ h2:focus {
 .jump-animation {
   animation: jump 0.8s forwards;
 }
-
-/* ---------------------- */
-/* === ANIMATIONS === */
-/* ---------------------- */
 
 @keyframes jump {
   0% {
@@ -324,10 +300,6 @@ h2:focus {
   }
 }
 
-/* ---------------------- */
-/* === DRAG & DROP === */
-/* ---------------------- */
-
 .cdk-drag-placeholder {
   opacity: 0;
 }
@@ -339,10 +311,6 @@ h2:focus {
 .cdk-drop-list {
   height: 100%;
 }
-
-/* ---------------------- */
-/* === MESSAGES === */
-/* ---------------------- */
 
 .error-message {
   color: red;
