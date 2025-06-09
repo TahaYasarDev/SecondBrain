@@ -21,8 +21,6 @@ import { BlockTodoComponent } from '../block-templates/block-todo/block-todo.com
 import { BlockParagraphComponent } from '../block-templates/block-paragraph/block-paragraph.component';
 
 // Shared
-import { BaseUiBehavior } from '../../shared/base-ui-behavior';
-import { fadeAnimation } from '../../shared/animation';
 
 @Component({
   selector: 'app-note',
@@ -39,9 +37,8 @@ import { fadeAnimation } from '../../shared/animation';
   ],
   templateUrl: './note.component.html',
   styleUrl: './note.component.scss',
-  animations: [fadeAnimation],
 })
-export class NoteComponent extends BaseUiBehavior implements AfterViewInit {
+export class NoteComponent implements AfterViewInit {
   @Input() noteId!: string;
 
   componentsPositions: ComponentPosition[] = [];

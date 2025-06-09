@@ -41,20 +41,22 @@
                   [class.selected]="selectedNoteId === note.id"
                   (click)="selectNote(note.id)"
                 >
-                  {{ note.title }}
-                  <img
-                    src="assets/icons/pen.png"
-                    id="edit-note-btn"
-                    alt="edit-note"
-                    (click)="enableEdit(note.id, $event)"
-                  />
+                  <span class="note-title">{{ note.title }}</span>
+                  <div class="note-icons">
+                    <img
+                      src="assets/icons/delete.png"
+                      id="delete-note-btn"
+                      alt="delete-note"
+                      (click)="deleteNote(note.id, $event)"
+                    />
 
-                  <img
-                    src="assets/icons/delete.png"
-                    id="delete-note-btn"
-                    alt="delete-note"
-                    (click)="deleteNote(note.id, $event)"
-                  />
+                    <img
+                      src="assets/icons/pen.png"
+                      id="edit-note-btn"
+                      alt="edit-note"
+                      (click)="enableEdit(note.id, $event)"
+                    />
+                  </div>
                 </div>
               </ng-container>
 
@@ -103,20 +105,21 @@
                   [class.selected]="selectedKanbanId === kanban.id"
                   (click)="selectKanban(kanban.id)"
                 >
-                  {{ kanban.title }}
-                  <img
-                    src="assets/icons/pen.png"
-                    id="edit-kanban-btn"
-                    alt="edit-kanban"
-                    (click)="enableKanbanEdit(kanban.id, $event)"
-                  />
-
-                  <img
-                    src="assets/icons/delete.png"
-                    id="delete-kanban-btn"
-                    alt="delete-kanban"
-                    (click)="deleteKanban(kanban.id, $event)"
-                  />
+                  <span class="kanban-title">{{ kanban.title }}</span>
+                  <div class="kanban-icons">
+                    <img
+                      src="assets/icons/delete.png"
+                      id="delete-kanban-btn"
+                      alt="delete-kanban"
+                      (click)="deleteKanban(kanban.id, $event)"
+                    />
+                    <img
+                      src="assets/icons/pen.png"
+                      id="edit-kanban-btn"
+                      alt="edit-kanban"
+                      (click)="enableKanbanEdit(kanban.id, $event)"
+                    />
+                  </div>
                 </div>
               </ng-container>
 

@@ -34,7 +34,6 @@ export class AppComponent {
     if (noteId && this.noteInstances.has(noteId)) {
       const existingRef = this.noteInstances.get(noteId)!;
       this.viewContainer.insert(existingRef.hostView);
-      existingRef.instance.show();
     } else {
       const newId = noteId ?? crypto.randomUUID();
       const noteRef = this.viewContainer.createComponent(NoteComponent);

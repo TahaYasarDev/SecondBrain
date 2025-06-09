@@ -99,6 +99,14 @@ li:last-child {
   cursor: pointer;
 }
 
+#delete-note-btn,
+#delete-kanban-btn {
+  width: 16px;
+  height: 16px;
+  margin-right: 13px;
+  cursor: pointer;
+}
+
 .note-item.selected,
 .kanban-item.selected {
   color: white;
