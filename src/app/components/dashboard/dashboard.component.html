@@ -1,0 +1,8 @@
+<div
+  [@fade]="isVisible ? 'visible' : 'hidden'"
+  (@fade.done)="onFadeDone($event)"
+>
+  <div>
+    <h1 contenteditable="true">Dashboard</h1>
+  </div>
+</div>

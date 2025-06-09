@@ -10,10 +10,17 @@ import { RouterOutlet } from '@angular/router';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { NoteComponent } from './components/note/note.component';
 import { KanbanComponent } from './components/kanban/kanban.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, SidebarComponent, NoteComponent, KanbanComponent],
+  imports: [
+    RouterOutlet,
+    SidebarComponent,
+    NoteComponent,
+    KanbanComponent,
+    DashboardComponent,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
