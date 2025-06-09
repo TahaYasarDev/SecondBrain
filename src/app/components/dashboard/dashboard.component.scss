@@ -1,0 +1,31 @@
+.dashboard-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 45% 45%;
+  row-gap: 2%;
+  column-gap: 2%;
+  width: 100%;
+  max-width: 1400px;
+}
+
+.dashboard-box {
+  background-color: rgb(32, 32, 32);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  height: 350px; // ajuste selon tes besoins
+  display: block;
+  padding: 5px;
+  width: auto;
+  height: auto;
+}
+
+h2 {
+  text-align: center;
+  color: white;
+}
