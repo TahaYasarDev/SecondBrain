@@ -94,12 +94,12 @@ export class SidebarComponent {
   }
 
   deleteNote(noteId: string, event: MouseEvent) {
-    event.stopPropagation(); // évite que le clic sélectionne le kanban
+    event.stopPropagation();
 
     const index = this.notes.findIndex((k) => k.id === noteId);
     this.notes = this.notes.filter((k) => k.id !== noteId);
 
-    // Si le kanban supprimé était sélectionné, on reset la sélection
+    // note selection
     if (this.selectedNoteId === noteId) {
       const previous = this.notes[index - 1];
       const next = this.notes[index];
@@ -164,12 +164,12 @@ export class SidebarComponent {
   }
 
   deleteKanban(kanbanId: string, event: MouseEvent) {
-    event.stopPropagation(); // évite que le clic sélectionne le kanban
+    event.stopPropagation();
 
     const index = this.kanbans.findIndex((k) => k.id === kanbanId);
     this.kanbans = this.kanbans.filter((k) => k.id !== kanbanId);
 
-    // Si le kanban supprimé était sélectionné, on reset la sélection
+    // kanban selection
     if (this.selectedKanbanId === kanbanId) {
       const previous = this.kanbans[index - 1];
       const next = this.kanbans[index];
