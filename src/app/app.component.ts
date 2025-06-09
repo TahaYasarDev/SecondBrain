@@ -26,22 +26,10 @@ export class AppComponent {
   noteInstances: Map<string, ComponentRef<NoteComponent>> = new Map();
   kanbanInstances: Map<string, ComponentRef<KanbanComponent>> = new Map();
 
+  // NOTE
   openNote(noteId: string | null = null) {
-    // Detach all the notes
-    this.noteInstances.forEach((ref) => {
-      const viewIndex = this.viewContainer.indexOf(ref.hostView);
-      if (viewIndex !== -1) {
-        this.viewContainer.detach(viewIndex);
-      }
-    });
-
-    // Also detach all the kanbans
-    this.kanbanInstances.forEach((ref) => {
-      const viewIndex = this.viewContainer.indexOf(ref.hostView);
-      if (viewIndex !== -1) {
-        this.viewContainer.detach(viewIndex);
-      }
-    });
+    this.detachAll(this.noteInstances);
+    this.detachAll(this.kanbanInstances);
 
     if (noteId && this.noteInstances.has(noteId)) {
       const existingRef = this.noteInstances.get(noteId)!;
@@ -50,27 +38,22 @@ export class AppComponent {
       const newId = noteId ?? crypto.randomUUID();
       const noteRef = this.viewContainer.createComponent(NoteComponent);
       noteRef.instance.noteId = newId;
-      this.viewContainer.insert(noteRef.hostView); // Insert the component
       this.noteInstances.set(newId, noteRef);
     }
   }
 
-  openKanban(kanbanId: string | null = null) {
-    // Detach all the notes
-    this.noteInstances.forEach((ref) => {
-      const viewIndex = this.viewContainer.indexOf(ref.hostView);
-      if (viewIndex !== -1) {
-        this.viewContainer.detach(viewIndex);
-      }
-    });
+  handleNoteDeletion(noteId: string) {
+    const ref = this.noteInstances.get(noteId);
+    if (ref) {
+      ref.destroy(); // libère les ressources
+      this.noteInstances.delete(noteId);
+    }
+  }
 
-    // Also detach all the kanbans
-    this.kanbanInstances.forEach((ref) => {
-      const viewIndex = this.viewContainer.indexOf(ref.hostView);
-      if (viewIndex !== -1) {
-        this.viewContainer.detach(viewIndex);
-      }
-    });
+  // KANBAN
+  openKanban(kanbanId: string | null = null) {
+    this.detachAll(this.noteInstances);
+    this.detachAll(this.kanbanInstances);
 
     if (kanbanId && this.kanbanInstances.has(kanbanId)) {
       const existingRef = this.kanbanInstances.get(kanbanId)!;
@@ -79,8 +62,35 @@ export class AppComponent {
       const newId = kanbanId ?? crypto.randomUUID();
       const kanbanRef = this.viewContainer.createComponent(KanbanComponent);
       kanbanRef.instance.kanbanId = newId;
-      this.viewContainer.insert(kanbanRef.hostView); // Insert the component
       this.kanbanInstances.set(newId, kanbanRef);
     }
+  }
+
+  handleDeleteSelectedKanban(event: {
+    deletedId: string;
+    newSelectedId: string | null;
+  }) {
+    const { deletedId, newSelectedId } = event;
+
+    // delete kanban
+    const ref = this.kanbanInstances.get(deletedId);
+    if (ref) {
+      ref.destroy();
+      this.kanbanInstances.delete(deletedId);
+    }
+
+    // if there is a kanban selected after deletion, we display it
+    if (newSelectedId) {
+      this.openKanban(newSelectedId);
+    }
+  }
+
+  detachAll(instances: Map<string, ComponentRef<any>>) {
+    instances.forEach((ref) => {
+      const index = this.viewContainer.indexOf(ref.hostView);
+      if (index !== -1) {
+        this.viewContainer.detach(index);
+      }
+    });
   }
 }

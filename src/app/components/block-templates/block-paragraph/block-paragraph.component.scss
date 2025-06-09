@@ -1,4 +1,6 @@
-$primary: #8c8994;
+:root {
+  --primary: #8c8994;
+}
 
 .draggable-wrapper {
   position: relative;
@@ -17,7 +19,7 @@ $primary: #8c8994;
   position: absolute;
   top: 29px;
   left: 0;
-  color: $primary;
+  color: var(--primary);
   transition: all 0.3s ease;
   pointer-events: none;
 }

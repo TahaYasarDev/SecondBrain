@@ -3,7 +3,11 @@
     <app-sidebar
       (noteSelected)="openNote($event)"
       (kanbanSelected)="openKanban($event)"
-    ></app-sidebar>
+      (deleteSelectedNote)="handleNoteDeletion($event)"
+      (deleteSelectedKanban)="handleDeleteSelectedKanban($event)"
+    >
+      ></app-sidebar
+    >
 
     <div class="view">
       <ng-container #viewContainer></ng-container>

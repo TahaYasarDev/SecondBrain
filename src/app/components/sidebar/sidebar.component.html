@@ -103,6 +103,13 @@
                     alt="edit-kanban"
                     (click)="enableKanbanEdit(kanban.id, $event)"
                   />
+
+                  <img
+                    src="assets/icons/delete.png"
+                    id="delete-kanban-btn"
+                    alt="delete-kanban"
+                    (click)="deleteKanban(kanban.id, $event)"
+                  />
                 </div>
               </ng-container>
 
