@@ -21,7 +21,7 @@
           <div class="note-container">
             <a href="#">
               <img src="assets/icons/note.png" class="icon" alt="Notes" />
-              <span>Notes</span>
+              <span (click)="addNote()">Notes</span>
             </a>
             <img
               src="assets/icons/plus.png"
@@ -41,13 +41,22 @@
                   [class.selected]="selectedNoteId === note.id"
                   (click)="selectNote(note.id)"
                 >
-                  {{ note.title }}
-                  <img
-                    src="assets/icons/pen.png"
-                    id="edit-note-btn"
-                    alt="edit-note"
-                    (click)="enableEdit(note.id, $event)"
-                  />
+                  <span class="note-title">{{ note.title }}</span>
+                  <div class="note-icons">
+                    <img
+                      src="assets/icons/delete.png"
+                      id="delete-note-btn"
+                      alt="delete-note"
+                      (click)="deleteNote(note.id, $event)"
+                    />
+
+                    <img
+                      src="assets/icons/pen.png"
+                      id="edit-note-btn"
+                      alt="edit-note"
+                      (click)="enableEdit(note.id, $event)"
+                    />
+                  </div>
                 </div>
               </ng-container>
 
@@ -73,10 +82,67 @@
           </ul>
         </li>
         <li>
-          <a href="#">
-            <img src="assets/icons/dashboard.png" class="icon" alt="Kanban" />
-            <span>Kanban</span>
-          </a>
+          <div class="kanban-container">
+            <a href="#">
+              <img src="assets/icons/dashboard.png" class="icon" alt="Kanban" />
+              <span (click)="addKanban()">Kanban</span>
+            </a>
+            <img
+              src="assets/icons/plus.png"
+              id="add-kanban-btn"
+              alt="add-kanban"
+              (click)="addKanban()"
+            />
+          </div>
+
+          <ul class="kanban-list">
+            <li *ngFor="let kanban of kanbans">
+              <ng-container
+                *ngIf="editingKanbanId !== kanban.id; else editTemplate"
+              >
+                <div
+                  class="kanban-item"
+                  [class.selected]="selectedKanbanId === kanban.id"
+                  (click)="selectKanban(kanban.id)"
+                >
+                  <span class="kanban-title">{{ kanban.title }}</span>
+                  <div class="kanban-icons">
+                    <img
+                      src="assets/icons/delete.png"
+                      id="delete-kanban-btn"
+                      alt="delete-kanban"
+                      (click)="deleteKanban(kanban.id, $event)"
+                    />
+                    <img
+                      src="assets/icons/pen.png"
+                      id="edit-kanban-btn"
+                      alt="edit-kanban"
+                      (click)="enableKanbanEdit(kanban.id, $event)"
+                    />
+                  </div>
+                </div>
+              </ng-container>
+
+              <ng-template #editTemplate>
+                <div class="edit-template">
+                  <input
+                    #editInput
+                    class="kanban-edit"
+                    [value]="kanban.title"
+                    (blur)="saveKanbanTitle(kanban.id, $event)"
+                    (keydown.enter)="saveKanbanTitle(kanban.id, $event)"
+                  />
+
+                  <img
+                    class="check-icon"
+                    src="assets/icons/check.png"
+                    alt="edit-valid"
+                    (click)="editingKanbanId = null"
+                  />
+                </div>
+              </ng-template>
+            </li>
+          </ul>
         </li>
         <li>
           <a href="#">

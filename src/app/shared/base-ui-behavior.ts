@@ -12,6 +12,15 @@ export abstract class BaseUiBehavior {
 
   hasContent = false;
 
+  // Temporarily set isVisible to false, then back to true
+  // This triggers Angular's animation to play again when the component becomes visible
+  show() {
+    this.isVisible = false;
+    setTimeout(() => {
+      this.isVisible = true;
+    });
+  }
+
   delete() {
     this.isVisible = false;
   }

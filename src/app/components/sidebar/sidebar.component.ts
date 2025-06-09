@@ -20,13 +20,20 @@ import { LayoutService } from '../../services/layout.service';
 })
 export class SidebarComponent {
   @Output() noteSelected = new EventEmitter<string | null>();
+  @Output() kanbanSelected = new EventEmitter<string | null>();
+
+  @Output() deleteSelectedNote = new EventEmitter<{
+    deletedId: string;
+    newSelectedId: string | null;
+  }>();
+  @Output() deleteSelectedKanban = new EventEmitter<{
+    deletedId: string;
+    newSelectedId: string | null;
+  }>();
 
   @ViewChild('editInput') editInput?: ElementRef<HTMLInputElement>;
 
   shouldFocusInput = false;
-  notes: Note[] = [];
-  noteCounter = 1;
-  selectedNoteId: string | null = null;
 
   constructor(private layoutService: LayoutService, private el: ElementRef) {}
 
@@ -42,8 +49,17 @@ export class SidebarComponent {
     }
   }
 
+  // NOTE
+
+  notes: Note[] = [];
+  noteCounter = 1;
+  selectedNoteId: string | null = null;
+
+  editingNoteId: string | null = null;
+
   selectNote(id: string) {
     this.selectedNoteId = id;
+    this.selectedKanbanId = null;
 
     this.noteSelected.emit(id);
   }
@@ -53,19 +69,16 @@ export class SidebarComponent {
     const title = `Note ${this.noteCounter++}`;
     this.notes.push({ id, title });
 
+    this.selectedNoteId = id;
+    this.selectedKanbanId = null;
+
     this.noteSelected.emit(id);
   }
-
-  editingNoteId: string | null = null;
 
   enableEdit(id: string, event: MouseEvent) {
     event.stopPropagation();
     this.shouldFocusInput = true;
     this.editingNoteId = id;
-  }
-
-  exitEditMode() {
-    this.editingNoteId = null;
   }
 
   saveTitle(id: string, event: Event) {
@@ -79,9 +92,110 @@ export class SidebarComponent {
 
     this.editingNoteId = null;
   }
+
+  deleteNote(noteId: string, event: MouseEvent) {
+    event.stopPropagation();
+
+    const index = this.notes.findIndex((k) => k.id === noteId);
+    this.notes = this.notes.filter((k) => k.id !== noteId);
+
+    // note selection
+    if (this.selectedNoteId === noteId) {
+      const previous = this.notes[index - 1];
+      const next = this.notes[index];
+
+      if (previous) {
+        this.selectedNoteId = previous.id;
+      } else if (next) {
+        this.selectedNoteId = next.id;
+      } else {
+        this.selectedNoteId = null;
+      }
+    }
+
+    this.deleteSelectedNote.emit({
+      deletedId: noteId,
+      newSelectedId: this.selectedNoteId,
+    });
+  }
+
+  // KANBAN
+
+  kanbans: Kanban[] = [];
+  kanbanCounter = 1;
+  selectedKanbanId: string | null = null;
+
+  editingKanbanId: string | null = null;
+
+  selectKanban(id: string) {
+    this.selectedKanbanId = id;
+    this.selectedNoteId = null;
+
+    this.kanbanSelected.emit(id);
+  }
+
+  addKanban() {
+    const id = crypto.randomUUID();
+    const title = `Kanban ${this.kanbanCounter++}`;
+    this.kanbans.push({ id, title });
+
+    this.selectedKanbanId = id;
+    this.selectedNoteId = null;
+
+    this.kanbanSelected.emit(id);
+  }
+
+  enableKanbanEdit(id: string, event: MouseEvent) {
+    event.stopPropagation();
+    this.shouldFocusInput = true;
+    this.editingKanbanId = id;
+  }
+
+  saveKanbanTitle(id: string, event: Event) {
+    const input = event.target as HTMLInputElement;
+    const newTitle = input.value.trim();
+
+    const kanban = this.kanbans.find((n) => n.id === id);
+    if (kanban && newTitle) {
+      kanban.title = newTitle;
+    }
+
+    this.editingKanbanId = null;
+  }
+
+  deleteKanban(kanbanId: string, event: MouseEvent) {
+    event.stopPropagation();
+
+    const index = this.kanbans.findIndex((k) => k.id === kanbanId);
+    this.kanbans = this.kanbans.filter((k) => k.id !== kanbanId);
+
+    // kanban selection
+    if (this.selectedKanbanId === kanbanId) {
+      const previous = this.kanbans[index - 1];
+      const next = this.kanbans[index];
+
+      if (previous) {
+        this.selectedKanbanId = previous.id;
+      } else if (next) {
+        this.selectedKanbanId = next.id;
+      } else {
+        this.selectedKanbanId = null;
+      }
+    }
+
+    this.deleteSelectedKanban.emit({
+      deletedId: kanbanId,
+      newSelectedId: this.selectedKanbanId,
+    });
+  }
 }
 
 interface Note {
+  id: string;
+  title: string;
+}
+
+interface Kanban {
   id: string;
   title: string;
 }

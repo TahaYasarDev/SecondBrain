@@ -1,0 +1,84 @@
+span {
+  width: 100%;
+}
+
+img {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.editable-todo-h1:empty:before {
+  content: attr(data-placeholder);
+  color: #aaa;
+  pointer-events: none;
+}
+
+ul {
+  padding: 0;
+  max-width: 300px;
+}
+
+li {
+  display: flex;
+  align-items: center;
+  padding: 12px 0;
+  box-sizing: border-box;
+  width: 355px;
+
+  input {
+    margin-right: 15px;
+  }
+}
+
+li::before {
+  font-size: 1.5rem;
+  text-align: right;
+  font-weight: bold;
+  min-width: 50px;
+  padding-right: 12px;
+  align-self: flex-start;
+}
+
+li + li {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.new-task {
+  display: flex;
+  align-items: center;
+}
+
+#delete-btn {
+  margin-left: 15px;
+  cursor: pointer;
+}
+
+#new-task-input {
+  background: transparent;
+  color: white;
+  border: none;
+  font-size: 15px;
+  outline: none;
+  width: 250px;
+}
+
+#new-task-button {
+  background-color: #53527d;
+  border: 2px solid #3f3b5c;
+  color: white;
+  width: 65px;
+  height: 30px;
+  border-radius: 5px;
+  transition: all 0.3s ease-in-out;
+}
+
+#new-task-button:hover {
+  cursor: pointer;
+  background-color: #252540;
+  color: rgb(207, 204, 204);
+}
+
+#new-task-information {
+  margin-top: 30px;
+}

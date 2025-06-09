@@ -1,0 +1,104 @@
+<div
+  class="editable-container"
+  *ngIf="isVisible"
+  [@fade]
+  (@fade.done)="onFadeDone($event)"
+>
+  <div #draggableWrapper class="draggable-wrapper draggable">
+    <div>
+      <div class="new-task">
+        <input
+          id="new-task-input"
+          type="text"
+          placeholder="Nouvelle tâche"
+          [(ngModel)]="newTask"
+          (keyup.enter)="addTask()"
+          appToggleDraggable
+          (focus)="onFocus()"
+          (blur)="onBlur()"
+        />
+        <button id="new-task-button" (click)="addTask()">Ajouter</button>
+
+        <img
+          src="assets/icons/delete.png"
+          class="icon"
+          id="delete-btn"
+          alt="delete"
+          (click)="delete()"
+        />
+      </div>
+      <p
+        [@fade]="!hasContent ? 'visible' : 'hidden'"
+        id="new-task-information"
+        *ngIf="!hasTasks"
+      >
+        {{ informations }}
+      </p>
+    </div>
+    <ng-container *ngIf="hasTasks">
+      <div [@fade]="!hasContent ? 'visible' : 'hidden'">
+        <h1 class="editable-todo-h1">A faire</h1>
+        <div
+          cdkDropList
+          (cdkDropListDropped)="drop($event)"
+          appToggleDraggable
+          (focus)="onFocus()"
+          (blur)="onBlur()"
+        >
+          <ul>
+            <li
+              [@fade]="!hasContent ? 'visible' : 'hidden'"
+              cdkDrag
+              *ngFor="let task of todoTasks; let i = index"
+            >
+              <input type="checkbox" [(ngModel)]="task.done" />
+              <span>{{ task.label }}</span>
+              <img
+                (click)="deleteTask(task)"
+                src="assets/icons/delete.png"
+                class="icon"
+                alt="Dashboard"
+              />
+            </li>
+            <li *ngIf="todoTasks.length === 0">Aucune tâche à faire 🎉</li>
+          </ul>
+        </div>
+      </div>
+      <div
+        *ngIf="doneTasks.length > 0"
+        [@fade]="!hasContent ? 'visible' : 'hidden'"
+      >
+        <h1 class="editable-todo-h1">Faites</h1>
+        <div
+          cdkDropList
+          (cdkDropListDropped)="drop($event)"
+          appToggleDraggable
+          (focus)="onFocus()"
+          (blur)="onBlur()"
+        >
+          <ul>
+            <li
+              [@fade]="!hasContent ? 'visible' : 'hidden'"
+              cdkDrag
+              *ngFor="let task of doneTasks; let i = index"
+            >
+              <input type="checkbox" [(ngModel)]="task.done" />
+              <span style="text-decoration: line-through">{{
+                task.label
+              }}</span>
+              <img
+                (click)="deleteTask(task)"
+                src="assets/icons/delete.png"
+                class="icon"
+                alt="Dashboard"
+              />
+            </li>
+            <li *ngIf="doneTasks.length === 0">
+              Aucune tâche faite pour l’instant
+            </li>
+          </ul>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>
