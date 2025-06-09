@@ -48,6 +48,13 @@
                     alt="edit-note"
                     (click)="enableEdit(note.id, $event)"
                   />
+
+                  <img
+                    src="assets/icons/delete.png"
+                    id="delete-note-btn"
+                    alt="delete-note"
+                    (click)="deleteNote(note.id, $event)"
+                  />
                 </div>
               </ng-container>
 

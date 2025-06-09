@@ -34,6 +34,7 @@ export class AppComponent {
     if (noteId && this.noteInstances.has(noteId)) {
       const existingRef = this.noteInstances.get(noteId)!;
       this.viewContainer.insert(existingRef.hostView);
+      existingRef.instance.show();
     } else {
       const newId = noteId ?? crypto.randomUUID();
       const noteRef = this.viewContainer.createComponent(NoteComponent);
@@ -42,11 +43,22 @@ export class AppComponent {
     }
   }
 
-  handleNoteDeletion(noteId: string) {
-    const ref = this.noteInstances.get(noteId);
+  handleDeleteSelectedNote(event: {
+    deletedId: string;
+    newSelectedId: string | null;
+  }) {
+    const { deletedId, newSelectedId } = event;
+
+    // delete note
+    const ref = this.noteInstances.get(deletedId);
     if (ref) {
-      ref.destroy(); // libère les ressources
-      this.noteInstances.delete(noteId);
+      ref.destroy();
+      this.noteInstances.delete(deletedId);
+    }
+
+    // if there is a note selected after deletion, we display it
+    if (newSelectedId) {
+      this.openNote(newSelectedId);
     }
   }
 
@@ -58,6 +70,7 @@ export class AppComponent {
     if (kanbanId && this.kanbanInstances.has(kanbanId)) {
       const existingRef = this.kanbanInstances.get(kanbanId)!;
       this.viewContainer.insert(existingRef.hostView);
+      existingRef.instance.show();
     } else {
       const newId = kanbanId ?? crypto.randomUUID();
       const kanbanRef = this.viewContainer.createComponent(KanbanComponent);

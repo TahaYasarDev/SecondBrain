@@ -20,6 +20,10 @@ import { BlockH4Component } from '../block-templates/block-h4/block-h4.component
 import { BlockTodoComponent } from '../block-templates/block-todo/block-todo.component';
 import { BlockParagraphComponent } from '../block-templates/block-paragraph/block-paragraph.component';
 
+// Shared
+import { BaseUiBehavior } from '../../shared/base-ui-behavior';
+import { fadeAnimation } from '../../shared/animation';
+
 @Component({
   selector: 'app-note',
   standalone: true,
@@ -35,8 +39,9 @@ import { BlockParagraphComponent } from '../block-templates/block-paragraph/bloc
   ],
   templateUrl: './note.component.html',
   styleUrl: './note.component.scss',
+  animations: [fadeAnimation],
 })
-export class NoteComponent implements AfterViewInit {
+export class NoteComponent extends BaseUiBehavior implements AfterViewInit {
   @Input() noteId!: string;
 
   componentsPositions: ComponentPosition[] = [];

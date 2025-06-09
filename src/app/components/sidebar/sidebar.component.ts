@@ -22,7 +22,10 @@ export class SidebarComponent {
   @Output() noteSelected = new EventEmitter<string | null>();
   @Output() kanbanSelected = new EventEmitter<string | null>();
 
-  @Output() deleteSelectedNote = new EventEmitter<string>();
+  @Output() deleteSelectedNote = new EventEmitter<{
+    deletedId: string;
+    newSelectedId: string | null;
+  }>();
   @Output() deleteSelectedKanban = new EventEmitter<{
     deletedId: string;
     newSelectedId: string | null;
@@ -90,8 +93,30 @@ export class SidebarComponent {
     this.editingNoteId = null;
   }
 
-  onDeleteNote(noteId: string) {
-    this.deleteSelectedNote.emit(noteId);
+  deleteNote(noteId: string, event: MouseEvent) {
+    event.stopPropagation(); // évite que le clic sélectionne le kanban
+
+    this.notes = this.notes.filter((k) => k.id !== noteId);
+
+    // Si le kanban supprimé était sélectionné, on reset la sélection
+    if (this.selectedNoteId === noteId) {
+      const index = this.notes.findIndex((k) => k.id === noteId);
+      const previous = this.notes[index - 1];
+      const next = this.notes[index + 1];
+
+      if (previous) {
+        this.selectedNoteId = previous.id;
+      } else if (next) {
+        this.selectedNoteId = next.id;
+      } else {
+        this.selectedNoteId = null;
+      }
+    }
+
+    this.deleteSelectedNote.emit({
+      deletedId: noteId,
+      newSelectedId: this.selectedNoteId,
+    });
   }
 
   // KANBAN
