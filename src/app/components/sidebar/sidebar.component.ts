@@ -96,13 +96,13 @@ export class SidebarComponent {
   deleteNote(noteId: string, event: MouseEvent) {
     event.stopPropagation(); // évite que le clic sélectionne le kanban
 
+    const index = this.notes.findIndex((k) => k.id === noteId);
     this.notes = this.notes.filter((k) => k.id !== noteId);
 
     // Si le kanban supprimé était sélectionné, on reset la sélection
     if (this.selectedNoteId === noteId) {
-      const index = this.notes.findIndex((k) => k.id === noteId);
       const previous = this.notes[index - 1];
-      const next = this.notes[index + 1];
+      const next = this.notes[index];
 
       if (previous) {
         this.selectedNoteId = previous.id;
@@ -166,13 +166,13 @@ export class SidebarComponent {
   deleteKanban(kanbanId: string, event: MouseEvent) {
     event.stopPropagation(); // évite que le clic sélectionne le kanban
 
+    const index = this.kanbans.findIndex((k) => k.id === kanbanId);
     this.kanbans = this.kanbans.filter((k) => k.id !== kanbanId);
 
     // Si le kanban supprimé était sélectionné, on reset la sélection
     if (this.selectedKanbanId === kanbanId) {
-      const index = this.kanbans.findIndex((k) => k.id === kanbanId);
       const previous = this.kanbans[index - 1];
-      const next = this.kanbans[index + 1];
+      const next = this.kanbans[index];
 
       if (previous) {
         this.selectedKanbanId = previous.id;
