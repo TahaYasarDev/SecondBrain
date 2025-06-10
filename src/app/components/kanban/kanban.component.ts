@@ -49,6 +49,7 @@ export class KanbanComponent extends BaseUiBehavior {
 
   // Error message
   estimateError = false;
+  timeSpentError = false;
   progressError = false;
 
   ngAfterViewInit(): void {
@@ -200,7 +201,10 @@ export class KanbanComponent extends BaseUiBehavior {
   }
 
   // Form verification
-  allowOnlyNumbers(event: KeyboardEvent, field: 'estimate' | 'progress') {
+  allowOnlyNumbers(
+    event: KeyboardEvent,
+    field: 'estimate' | 'timeSpent' | 'progress'
+  ) {
     const allowedKeys = [
       'Backspace',
       'ArrowLeft',
@@ -214,12 +218,16 @@ export class KanbanComponent extends BaseUiBehavior {
       event.preventDefault();
       if (field === 'estimate') {
         this.estimateError = true;
+      } else if (field === 'timeSpent') {
+        this.timeSpentError = true;
       } else {
         this.progressError = true;
       }
     } else {
       if (field === 'estimate') {
         this.estimateError = false;
+      } else if (field === 'timeSpent') {
+        this.timeSpentError = false;
       } else {
         this.progressError = false;
       }
@@ -232,5 +240,6 @@ interface Item {
   title: string;
   texte: string;
   estimate?: number | null;
+  timeSpent?: number | null;
   progress?: number | null;
 }

@@ -53,6 +53,11 @@
             <em data-role="item-estimate"
               >Estimate: {{ item.estimate }} days</em
             >
+            <br />
+            <em data-role="item-timeSpent"
+              >Time spent: {{ item.timeSpent }} days</em
+            >
+            <br />
             <progress
               data-role="item-progress"
               [value]="item.progress"
@@ -123,6 +128,19 @@
         placeholder="0,5"
       />
       <p class="error-message" *ngIf="estimateError">
+        Seuls les chiffres sont autorisés.
+      </p>
+    </div>
+
+    <div class="form-row">
+      <label>Time Spent (days):</label>
+      <input
+        type="number"
+        [(ngModel)]="popupItem.timeSpent"
+        (keypress)="allowOnlyNumbers($event, 'timeSpent')"
+        placeholder="0,5"
+      />
+      <p class="error-message" *ngIf="timeSpentError">
         Seuls les chiffres sont autorisés.
       </p>
     </div>

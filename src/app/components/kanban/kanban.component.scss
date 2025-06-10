@@ -103,16 +103,19 @@ h2:focus {
 }
 
 [data-role="item-estimate"],
+[data-role="item-timeSpent"],
 [data-role="item-progress"],
 [data-role="item-jira"] {
-  padding: 5px;
+  padding: 10px;
+  padding-bottom: 0px;
 }
 
 [data-role="item-progress"] {
-  margin-left: 5px;
+  margin-left: 10px;
 }
 
 [data-role="item-jira"] {
+  padding-top: 0;
   text-align: right;
 }
 
