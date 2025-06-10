@@ -32,11 +32,25 @@ export class AppComponent {
 
   noteInstances: Map<string, ComponentRef<NoteComponent>> = new Map();
   kanbanInstances: Map<string, ComponentRef<KanbanComponent>> = new Map();
+  dashboardRef: ComponentRef<DashboardComponent> | null = null;
+
+  // DASHBOARD
+  openDashboard() {
+    this.detachAll(this.noteInstances);
+    this.detachAll(this.kanbanInstances);
+
+    // if already present, do not recreate
+    if (!this.dashboardRef) {
+      this.dashboardRef =
+        this.viewContainer.createComponent(DashboardComponent);
+    }
+  }
 
   // NOTE
   openNote(noteId: string | null = null) {
     this.detachAll(this.noteInstances);
     this.detachAll(this.kanbanInstances);
+    this.destroyDashboard();
 
     if (noteId && this.noteInstances.has(noteId)) {
       const existingRef = this.noteInstances.get(noteId)!;
@@ -72,6 +86,7 @@ export class AppComponent {
   openKanban(kanbanId: string | null = null) {
     this.detachAll(this.noteInstances);
     this.detachAll(this.kanbanInstances);
+    this.destroyDashboard();
 
     if (kanbanId && this.kanbanInstances.has(kanbanId)) {
       const existingRef = this.kanbanInstances.get(kanbanId)!;
@@ -111,5 +126,12 @@ export class AppComponent {
         this.viewContainer.detach(index);
       }
     });
+  }
+
+  destroyDashboard() {
+    if (this.dashboardRef) {
+      this.dashboardRef.destroy();
+      this.dashboardRef = null;
+    }
   }
 }

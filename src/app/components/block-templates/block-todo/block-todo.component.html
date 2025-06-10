@@ -1,7 +1,6 @@
 <div
   class="editable-container"
-  *ngIf="isVisible"
-  [@fade]
+  [@fade]="isVisible ? 'visible' : 'hidden'"
   (@fade.done)="onFadeDone($event)"
 >
   <div #draggableWrapper class="draggable-wrapper draggable">
@@ -51,7 +50,11 @@
               cdkDrag
               *ngFor="let task of todoTasks; let i = index"
             >
-              <input type="checkbox" [(ngModel)]="task.done" />
+              <input
+                type="checkbox"
+                [(ngModel)]="task.done"
+                (change)="updateTaskCounts()"
+              />
               <span>{{ task.label }}</span>
               <img
                 (click)="deleteTask(task)"
@@ -82,7 +85,11 @@
               cdkDrag
               *ngFor="let task of doneTasks; let i = index"
             >
-              <input type="checkbox" [(ngModel)]="task.done" />
+              <input
+                type="checkbox"
+                [(ngModel)]="task.done"
+                (change)="updateTaskCounts()"
+              />
               <span style="text-decoration: line-through">{{
                 task.label
               }}</span>

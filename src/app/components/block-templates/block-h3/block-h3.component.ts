@@ -7,6 +7,7 @@ import { BlockToolbarComponent } from '../block-toolbar/block-toolbar.component'
 
 // Service
 import { DragService } from '../../../services/drag.service';
+import { CountService } from '../../../services/count.service';
 
 // Shared
 import { fadeAnimation } from '../../../shared/animation';
@@ -27,11 +28,22 @@ export class BlockH3Component
 {
   interactable: any;
 
-  constructor(private dragService: DragService) {
+  constructor(
+    private dragService: DragService,
+    private countService: CountService
+  ) {
     super();
   }
 
   ngAfterViewInit(): void {
     this.interactable = this.dragService.initDraggable('.draggable');
+  }
+
+  ngOnInit() {
+    this.countService.incrementTag('H3');
+  }
+
+  ngOnDestroy() {
+    this.countService.decrementTag('H3');
   }
 }

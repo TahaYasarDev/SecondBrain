@@ -5,11 +5,11 @@
       (kanbanSelected)="openKanban($event)"
       (deleteSelectedNote)="handleDeleteSelectedNote($event)"
       (deleteSelectedKanban)="handleDeleteSelectedKanban($event)"
+      (dashboardSelected)="openDashboard()"
     >
     </app-sidebar>
 
     <div class="view">
-      <app-dashboard></app-dashboard>
       <ng-container #viewContainer></ng-container>
     </div>
   </main>

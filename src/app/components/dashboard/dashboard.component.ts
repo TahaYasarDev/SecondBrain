@@ -1,5 +1,5 @@
 // Angular
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgApexchartsModule } from 'ng-apexcharts';
 
 // Shared
@@ -13,6 +13,7 @@ import {
   ApexPlotOptions,
   ApexStroke,
 } from 'ng-apexcharts';
+import { CountService } from '../../services/count.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -22,118 +23,18 @@ import {
   styleUrl: './dashboard.component.scss',
   animations: [fadeAnimation],
 })
-export class DashboardComponent extends BaseUiBehavior {
+export class DashboardComponent extends BaseUiBehavior implements OnInit {
   public overviewChart: Partial<OverviewOptions>;
   public overviewCircleChart: Partial<OverviewCircleOptions>;
   public overviewColumnChart: Partial<OverviewColumnChartOptions>;
   public overviewPyramideChart: Partial<OverviewPyramideChartOptions>;
 
-  constructor() {
+  constructor(private countService: CountService) {
     super();
 
-    this.overviewChart = {
-      series: [
-        {
-          name: 'serie1',
-          data: [44, 55, 41, 64, 22, 43, 21],
-        },
-      ],
-      chart: {
-        type: 'bar',
-        height: 430,
-      },
-      plotOptions: {
-        bar: {
-          horizontal: true,
-          dataLabels: {
-            position: 'top',
-          },
-          colors: {
-            ranges: [
-              { from: 0, to: 20, color: '#ffb3c6' },
-              { from: 21, to: 40, color: '#f48fb1' },
-              { from: 41, to: 60, color: '#e1bee7' },
-              { from: 61, to: 80, color: '#ce93d8' },
-              { from: 81, to: 100, color: '#ab47bc' },
-            ],
-          },
-        },
-      },
-      dataLabels: {
-        enabled: true,
-        offsetX: -6,
-        style: {
-          fontSize: '12px',
-          colors: ['#fff'],
-        },
-      },
-      stroke: {
-        show: true,
-        width: 1,
-        colors: ['#fff'],
-      },
-      xaxis: {
-        categories: ['h1', 'h2', 'h3', 'h4', 'T'],
-        labels: {
-          style: {
-            colors: ['#fff'],
-          },
-        },
-      },
-      yaxis: {
-        labels: {
-          style: {
-            colors: ['#fff'],
-          },
-        },
-      },
-    };
+    this.overviewChart = {};
 
-    this.overviewCircleChart = {
-      series: [760, 67], // Valeurs réelles
-      chart: {
-        type: 'donut',
-        height: 390,
-        offsetX: 5, // ← décale le graphique vers la droite
-      },
-      labels: ['To do tasks', 'Done tasks'],
-      colors: ['#f48fb1', '#ab47bc'], // Rose → Mauve
-      plotOptions: {
-        pie: {
-          donut: {
-            size: '40%',
-            labels: {
-              show: true,
-              total: {
-                show: true,
-                label: 'Total',
-                formatter: function (opts) {
-                  const total = opts.series.reduce(
-                    (a: number, b: number) => a + b,
-                    0
-                  );
-                  return total + ' tasks';
-                },
-              },
-            },
-          },
-        },
-      },
-      legend: {
-        show: true,
-        position: 'bottom',
-        horizontalAlign: 'center',
-        fontSize: '16px',
-        labels: {
-          useSeriesColors: true,
-        },
-        formatter: function (seriesName, opts) {
-          return `${seriesName}: ${
-            opts.w.globals.series[opts.seriesIndex]
-          } tasks`;
-        },
-      },
-    };
+    this.overviewCircleChart = {};
 
     this.overviewColumnChart = {
       series: [
@@ -324,6 +225,113 @@ export class DashboardComponent extends BaseUiBehavior {
       },
       legend: {
         show: false,
+      },
+    };
+  }
+
+  ngOnInit() {
+    const tags = this.countService.getAllTags();
+    const tasks = this.countService.getAllTasks();
+
+    this.overviewChart = {
+      series: [
+        {
+          name: 'Tag',
+          data: [tags.H1, tags.H2, tags.H3, tags.H4, tags.paragraph],
+        },
+      ],
+      chart: {
+        type: 'bar',
+        height: 430,
+      },
+      plotOptions: {
+        bar: {
+          horizontal: true,
+          dataLabels: {
+            position: 'top',
+          },
+          colors: {
+            ranges: [
+              { from: 0, to: 20, color: '#ffb3c6' },
+              { from: 21, to: 40, color: '#f48fb1' },
+              { from: 41, to: 60, color: '#e1bee7' },
+              { from: 61, to: 80, color: '#ce93d8' },
+              { from: 81, to: 100, color: '#ab47bc' },
+            ],
+          },
+        },
+      },
+      dataLabels: {
+        enabled: true,
+        offsetX: -6,
+        style: {
+          fontSize: '12px',
+          colors: ['#fff'],
+        },
+      },
+      stroke: {
+        show: true,
+        width: 1,
+        colors: ['#fff'],
+      },
+      xaxis: {
+        categories: ['h1', 'h2', 'h3', 'h4', 'T'],
+        labels: {
+          style: {
+            colors: ['#fff'],
+          },
+        },
+      },
+      yaxis: {
+        labels: {
+          style: {
+            colors: ['#fff'],
+          },
+        },
+      },
+    };
+
+    this.overviewCircleChart = {
+      series: [tasks.taskTodo, tasks.taskDone],
+      chart: {
+        type: 'donut',
+        height: 390,
+        offsetX: 5,
+      },
+      labels: ['Tasks to do', 'Completed tasks'],
+      colors: ['#f48fb1', '#ab47bc'],
+      plotOptions: {
+        pie: {
+          donut: {
+            size: '40%',
+            labels: {
+              show: true,
+              total: {
+                show: true,
+                label: 'Total',
+                formatter: function (opts) {
+                  const total = opts.series.reduce(
+                    (a: number, b: number) => a + b,
+                    0
+                  );
+                  return total + ' tasks';
+                },
+              },
+            },
+          },
+        },
+      },
+      legend: {
+        show: true,
+        position: 'bottom',
+        horizontalAlign: 'center',
+        fontSize: '16px',
+        labels: {
+          useSeriesColors: true,
+        },
+        formatter: function (seriesName, opts) {
+          return `${seriesName}: ${opts.w.globals.series[opts.seriesIndex]}`;
+        },
       },
     };
   }

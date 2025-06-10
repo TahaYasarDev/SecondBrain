@@ -8,6 +8,7 @@ import { BlockInsertComponent } from '../block-insert/block-insert.component';
 
 // Service
 import { DragService } from '../../../services/drag.service';
+import { CountService } from '../../../services/count.service';
 
 // Shared
 import { fadeAnimation } from '../../../shared/animation';
@@ -31,11 +32,22 @@ export class BlockParagraphComponent
   extends BaseToolbarBehavior
   implements AfterViewInit
 {
-  constructor(private dragService: DragService) {
+  constructor(
+    private dragService: DragService,
+    private countService: CountService
+  ) {
     super();
   }
 
   ngAfterViewInit(): void {
     this.dragService.initDraggable('.draggable');
+  }
+
+  ngOnInit() {
+    this.countService.incrementTag('paragraph');
+  }
+
+  ngOnDestroy() {
+    this.countService.decrementTag('paragraph');
   }
 }
