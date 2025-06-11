@@ -21,6 +21,7 @@ import { LayoutService } from '../../services/layout.service';
 export class SidebarComponent {
   @Output() noteSelected = new EventEmitter<string | null>();
   @Output() kanbanSelected = new EventEmitter<string | null>();
+  @Output() dashboardSelected = new EventEmitter<void>();
 
   @Output() deleteSelectedNote = new EventEmitter<{
     deletedId: string;

@@ -1,0 +1,66 @@
+<div
+  [@fade]="isVisible ? 'visible' : 'hidden'"
+  (@fade.done)="onFadeDone($event)"
+>
+  <div class="dashboard-container">
+    <div class="dashboard-grid">
+      <div class="dashboard-box">
+        <h2 style="margin-bottom: 15px">Notes Overview</h2>
+
+        <apx-chart
+          id="overview-chart"
+          [series]="overviewChart.series!"
+          [chart]="overviewChart.chart!"
+          [dataLabels]="overviewChart.dataLabels!"
+          [plotOptions]="overviewChart.plotOptions!"
+          [xaxis]="overviewChart.xaxis!"
+          [yaxis]="overviewChart.yaxis!"
+          [stroke]="overviewChart.stroke!"
+        ></apx-chart>
+      </div>
+
+      <div class="dashboard-box">
+        <h2 style="margin-bottom: 15px">Tasks Overview</h2>
+
+        <apx-chart
+          id="overview-circle-chart"
+          [series]="overviewCircleChart.series!"
+          [chart]="overviewCircleChart.chart!"
+          [plotOptions]="overviewCircleChart.plotOptions!"
+          [labels]="overviewCircleChart.labels!"
+          [legend]="overviewCircleChart.legend!"
+          [colors]="overviewCircleChart.colors!"
+        ></apx-chart>
+      </div>
+
+      <div class="dashboard-box">
+        <h2 style="margin-bottom: 15px">Kanban's Items Overview</h2>
+
+        <apx-chart
+          [series]="overviewColumnChart.series!"
+          [chart]="overviewColumnChart.chart!"
+          [legend]="overviewColumnChart.legend!"
+          [dataLabels]="overviewColumnChart.dataLabels!"
+          [colors]="overviewColumnChart.colors!"
+          [xaxis]="overviewColumnChart.xaxis!"
+          [yaxis]="overviewColumnChart.yaxis!"
+          [plotOptions]="overviewColumnChart.plotOptions!"
+        ></apx-chart>
+      </div>
+
+      <div class="dashboard-box">
+        <h2 style="margin-bottom: 15px">Jira Progression Overview</h2>
+
+        <apx-chart
+          [series]="overviewPyramideChart.series!"
+          [chart]="overviewPyramideChart.chart!"
+          [dataLabels]="overviewPyramideChart.dataLabels!"
+          [plotOptions]="overviewPyramideChart.plotOptions!"
+          [xaxis]="overviewPyramideChart.xaxis!"
+          [colors]="overviewPyramideChart.colors!"
+          [legend]="overviewPyramideChart.legend!"
+        ></apx-chart>
+      </div>
+    </div>
+  </div>
+</div>

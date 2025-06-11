@@ -10,10 +10,17 @@ import { RouterOutlet } from '@angular/router';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { NoteComponent } from './components/note/note.component';
 import { KanbanComponent } from './components/kanban/kanban.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, SidebarComponent, NoteComponent, KanbanComponent],
+  imports: [
+    RouterOutlet,
+    SidebarComponent,
+    NoteComponent,
+    KanbanComponent,
+    DashboardComponent,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
@@ -25,11 +32,25 @@ export class AppComponent {
 
   noteInstances: Map<string, ComponentRef<NoteComponent>> = new Map();
   kanbanInstances: Map<string, ComponentRef<KanbanComponent>> = new Map();
+  dashboardRef: ComponentRef<DashboardComponent> | null = null;
+
+  // DASHBOARD
+  openDashboard() {
+    this.detachAll(this.noteInstances);
+    this.detachAll(this.kanbanInstances);
+
+    // if already present, do not recreate
+    if (!this.dashboardRef) {
+      this.dashboardRef =
+        this.viewContainer.createComponent(DashboardComponent);
+    }
+  }
 
   // NOTE
   openNote(noteId: string | null = null) {
     this.detachAll(this.noteInstances);
     this.detachAll(this.kanbanInstances);
+    this.destroyDashboard();
 
     if (noteId && this.noteInstances.has(noteId)) {
       const existingRef = this.noteInstances.get(noteId)!;
@@ -65,6 +86,7 @@ export class AppComponent {
   openKanban(kanbanId: string | null = null) {
     this.detachAll(this.noteInstances);
     this.detachAll(this.kanbanInstances);
+    this.destroyDashboard();
 
     if (kanbanId && this.kanbanInstances.has(kanbanId)) {
       const existingRef = this.kanbanInstances.get(kanbanId)!;
@@ -104,5 +126,12 @@ export class AppComponent {
         this.viewContainer.detach(index);
       }
     });
+  }
+
+  destroyDashboard() {
+    if (this.dashboardRef) {
+      this.dashboardRef.destroy();
+      this.dashboardRef = null;
+    }
   }
 }

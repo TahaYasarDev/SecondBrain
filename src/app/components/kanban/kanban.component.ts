@@ -10,6 +10,12 @@ import {
 import { NgIf, NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
+// Service
+import { CountService } from '../../services/count.service';
+
+// Model
+import { Ticket } from '../../models/ticket.model';
+
 // Shared
 import { fadeAnimation } from '../../shared/animation';
 import { BaseUiBehavior } from '../../shared/base-ui-behavior';
@@ -26,10 +32,10 @@ export class KanbanComponent extends BaseUiBehavior {
   @Input() kanbanId!: string;
 
   // Columns
-  backlog: Item[] = [];
-  development: Item[] = [];
-  inProgress: Item[] = [];
-  done: Item[] = [];
+  backlog: Ticket[] = [];
+  development: Ticket[] = [];
+  inProgress: Ticket[] = [];
+  done: Ticket[] = [];
 
   columns = [
     { title: 'Backlog', items: this.backlog },
@@ -40,8 +46,8 @@ export class KanbanComponent extends BaseUiBehavior {
 
   // Popup
   showPopup = false;
-  popupItem: Item = this.createEmptyItem();
-  editingItem: Item | null = null;
+  popupItem: Ticket = this.createEmptyItem();
+  editingItem: Ticket | null = null;
 
   // Animation
   isJumping = false;
@@ -49,7 +55,12 @@ export class KanbanComponent extends BaseUiBehavior {
 
   // Error message
   estimateError = false;
+  timeSpentError = false;
   progressError = false;
+
+  constructor(private countService: CountService) {
+    super();
+  }
 
   ngAfterViewInit(): void {
     const editableElements = document.querySelectorAll('[contenteditable]');
@@ -58,7 +69,11 @@ export class KanbanComponent extends BaseUiBehavior {
     });
   }
 
-  drop(event: CdkDragDrop<Item[]>) {
+  ngOnDestroy(): void {
+    this.countService.deleteKanban(this.kanbanId);
+  }
+
+  drop(event: CdkDragDrop<Ticket[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
@@ -98,7 +113,7 @@ export class KanbanComponent extends BaseUiBehavior {
 
   //#region Popup
 
-  createEmptyItem(): Item {
+  createEmptyItem(): Ticket {
     return {
       jira: '',
       title: '',
@@ -108,10 +123,10 @@ export class KanbanComponent extends BaseUiBehavior {
     };
   }
 
-  openEditPopup(item?: Item) {
-    if (item) {
-      this.editingItem = item;
-      this.popupItem = { ...item }; // clone to avoid modifying directly
+  openEditPopup(ticket?: Ticket) {
+    if (ticket) {
+      this.editingItem = ticket;
+      this.popupItem = { ...ticket }; // clone to avoid modifying directly
     } else {
       this.editingItem = null;
       this.popupItem = this.createEmptyItem();
@@ -130,6 +145,8 @@ export class KanbanComponent extends BaseUiBehavior {
     } else {
       this.columns[0].items.push({ ...this.popupItem });
     }
+
+    this.updateItemsInCountService();
     this.closePopup();
   }
 
@@ -149,7 +166,14 @@ export class KanbanComponent extends BaseUiBehavior {
     if (confirmed) {
       this.columns[columnIndex].items.splice(itemIndex, 1);
     }
+    this.updateItemsInCountService();
   }
+
+  updateItemsInCountService() {
+    const allItems = this.columns.flatMap((col) => col.items);
+    this.countService.updateKanbanItems(this.kanbanId, allItems);
+  }
+
   //#endregion
 
   //#region Handle columns
@@ -195,12 +219,15 @@ export class KanbanComponent extends BaseUiBehavior {
 
   //#endregion
 
-  trackByFn(index: number, item: Item): string {
-    return item.jira;
+  trackByFn(index: number, ticket: Ticket): string {
+    return ticket.jira;
   }
 
   // Form verification
-  allowOnlyNumbers(event: KeyboardEvent, field: 'estimate' | 'progress') {
+  allowOnlyNumbers(
+    event: KeyboardEvent,
+    field: 'estimate' | 'timeSpent' | 'progress'
+  ) {
     const allowedKeys = [
       'Backspace',
       'ArrowLeft',
@@ -214,23 +241,19 @@ export class KanbanComponent extends BaseUiBehavior {
       event.preventDefault();
       if (field === 'estimate') {
         this.estimateError = true;
+      } else if (field === 'timeSpent') {
+        this.timeSpentError = true;
       } else {
         this.progressError = true;
       }
     } else {
       if (field === 'estimate') {
         this.estimateError = false;
+      } else if (field === 'timeSpent') {
+        this.timeSpentError = false;
       } else {
         this.progressError = false;
       }
     }
   }
-}
-
-interface Item {
-  jira: string;
-  title: string;
-  texte: string;
-  estimate?: number | null;
-  progress?: number | null;
 }

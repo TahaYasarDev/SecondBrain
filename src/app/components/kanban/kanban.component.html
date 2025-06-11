@@ -34,13 +34,17 @@
           id="cdk-drop-list-{{ i }}"
         >
           <div
-            *ngFor="let item of column.items; let j = index; trackBy: trackByFn"
-            class="item-box"
+            *ngFor="
+              let ticket of column.items;
+              let j = index;
+              trackBy: trackByFn
+            "
+            class="ticket-box"
             cdkDrag
-            (dblclick)="openEditPopup(item)"
+            (dblclick)="openEditPopup(ticket)"
           >
-            <p data-role="item-title">
-              {{ item.title }}
+            <p data-role="ticket-title">
+              {{ ticket.title }}
 
               <img
                 src="assets/icons/delete.png"
@@ -49,23 +53,28 @@
                 (click)="deleteTask(i, j)"
               />
             </p>
-            <p data-role="item-texte">{{ item.texte }}</p>
-            <em data-role="item-estimate"
-              >Estimate: {{ item.estimate }} days</em
+            <p data-role="ticket-texte">{{ ticket.texte }}</p>
+            <em data-role="ticket-estimate"
+              >Estimate: {{ ticket.estimate }} days</em
             >
+            <br />
+            <em data-role="ticket-timeSpent"
+              >Time spent: {{ ticket.timeSpent }} days</em
+            >
+            <br />
             <progress
-              data-role="item-progress"
-              [value]="item.progress"
+              data-role="ticket-progress"
+              [value]="ticket.progress"
               max="100"
             ></progress>
-            <p data-role="item-jira">{{ item.jira }}</p>
+            <p data-role="ticket-jira">{{ ticket.jira }}</p>
           </div>
 
-          <div class="add-item-btn" *ngIf="i === 0">
+          <div class="add-ticket-btn" *ngIf="i === 0">
             <img
               src="assets/icons/add.png"
-              id="add-item-btn"
-              alt="add-item-btn"
+              id="add-ticket-btn"
+              alt="add-ticket-btn"
               (mouseenter)="startJumpAnimation()"
               (animationend)="onAnimationEnd()"
               [class.jump-animation]="isJumping"
@@ -123,6 +132,19 @@
         placeholder="0,5"
       />
       <p class="error-message" *ngIf="estimateError">
+        Seuls les chiffres sont autorisés.
+      </p>
+    </div>
+
+    <div class="form-row">
+      <label>Time Spent (days):</label>
+      <input
+        type="number"
+        [(ngModel)]="popupItem.timeSpent"
+        (keypress)="allowOnlyNumbers($event, 'timeSpent')"
+        placeholder="0,5"
+      />
+      <p class="error-message" *ngIf="timeSpentError">
         Seuls les chiffres sont autorisés.
       </p>
     </div>
