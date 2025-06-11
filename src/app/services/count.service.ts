@@ -1,12 +1,17 @@
 // Angular
 import { Injectable } from '@angular/core';
 
+// Model
+import { Ticket } from '../models/ticket.model';
+
 @Injectable({
   providedIn: 'root',
 })
 export class CountService {
   private componentTasks: { [key: string]: { todo: number; done: number } } =
     {};
+
+  private componentKanban: { [componentId: string]: Ticket[] } = {};
 
   tags: Tags = {
     H1: 0,
@@ -21,6 +26,23 @@ export class CountService {
     taskTodo: 0,
     taskDone: 0,
   };
+
+  // KANBAN
+  updateKanbanItems(componentId: string, tickets: Ticket[]) {
+    this.componentKanban[componentId] = tickets;
+  }
+
+  getKanbanItems(componentId: string): Ticket[] {
+    return this.componentKanban[componentId] || [];
+  }
+
+  getAllKanban(): { [componentId: string]: Ticket[] } {
+    return this.componentKanban;
+  }
+
+  deleteKanban(componentId: string): void {
+    delete this.componentKanban[componentId];
+  }
 
   // TAG
   incrementTag(type: keyof Tags) {

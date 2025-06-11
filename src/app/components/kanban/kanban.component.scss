@@ -65,7 +65,7 @@ h2:focus {
   min-height: 60px;
 }
 
-.item-box {
+.ticket-box {
   background: white;
   border-bottom: 1px solid #ccc;
   border-radius: 5px;
@@ -78,15 +78,15 @@ h2:focus {
   padding: 0;
 }
 
-.item-box:last-child {
+.ticket-box:last-child {
   border-bottom: none;
 }
 
-.item-box p {
+.ticket-box p {
   margin: 0 0 0.5em 0;
 }
 
-[data-role="item-title"] {
+[data-role="ticket-title"] {
   font-weight: bold;
   font-size: 14px;
   padding: 10px;
@@ -96,25 +96,25 @@ h2:focus {
   border-top-right-radius: 5px;
 }
 
-[data-role="item-texte"] {
+[data-role="ticket-texte"] {
   font-size: 12px;
   padding: 10px;
   text-align: justify;
 }
 
-[data-role="item-estimate"],
-[data-role="item-timeSpent"],
-[data-role="item-progress"],
-[data-role="item-jira"] {
+[data-role="ticket-estimate"],
+[data-role="ticket-timeSpent"],
+[data-role="ticket-progress"],
+[data-role="ticket-jira"] {
   padding: 10px;
   padding-bottom: 0px;
 }
 
-[data-role="item-progress"] {
+[data-role="ticket-progress"] {
   margin-left: 10px;
 }
 
-[data-role="item-jira"] {
+[data-role="ticket-jira"] {
   padding-top: 0;
   text-align: right;
 }
@@ -202,17 +202,17 @@ h2:focus {
   background-color: rgb(32, 32, 32);
 }
 
-#add-item-btn,
+#add-ticket-btn,
 #add-column-btn,
 #delete-column-btn {
   cursor: pointer;
 }
 
-.add-item-btn {
+.add-ticket-btn {
   text-align: center;
 }
 
-#add-item-btn {
+#add-ticket-btn {
   margin-top: 20px;
   width: 25px;
   height: 25px;
@@ -244,7 +244,7 @@ h2:focus {
   transform: scale(1.1);
 }
 
-[data-role="item-title"] {
+[data-role="ticket-title"] {
   position: relative;
   padding-right: 30px;
 }
@@ -263,7 +263,7 @@ h2:focus {
 .delete-task-btn:hover {
   opacity: 1;
 }
-#add-item-btn:hover,
+#add-ticket-btn:hover,
 #add-column-btn:hover {
   animation: jump 0.8s forwards;
 }

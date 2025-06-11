@@ -2,6 +2,12 @@
 import { Component, OnInit } from '@angular/core';
 import { NgApexchartsModule } from 'ng-apexcharts';
 
+// Service
+import { CountService } from '../../services/count.service';
+
+// Model
+import { Ticket } from '../../models/ticket.model';
+
 // Shared
 import { fadeAnimation } from '../../shared/animation';
 import { BaseUiBehavior } from '../../shared/base-ui-behavior';
@@ -13,7 +19,6 @@ import {
   ApexPlotOptions,
   ApexStroke,
 } from 'ng-apexcharts';
-import { CountService } from '../../services/count.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -36,150 +41,7 @@ export class DashboardComponent extends BaseUiBehavior implements OnInit {
 
     this.overviewCircleChart = {};
 
-    this.overviewColumnChart = {
-      series: [
-        {
-          name: 'Actual',
-          data: [
-            {
-              x: '2011',
-              y: 1292,
-              goals: [
-                {
-                  name: 'Consommation',
-                  value: 1400,
-                  strokeWidth: 5,
-                  strokeColor: '#775DD0',
-                },
-              ],
-            },
-            {
-              x: '2012',
-              y: 4432,
-              goals: [
-                {
-                  name: 'Expected',
-                  value: 5400,
-                  strokeWidth: 5,
-                  strokeColor: '#775DD0',
-                },
-              ],
-            },
-            {
-              x: '2013',
-              y: 5423,
-              goals: [
-                {
-                  name: 'Expected',
-                  value: 5200,
-                  strokeWidth: 5,
-                  strokeColor: '#775DD0',
-                },
-              ],
-            },
-            {
-              x: '2014',
-              y: 6653,
-              goals: [
-                {
-                  name: 'Expected',
-                  value: 6500,
-                  strokeWidth: 5,
-                  strokeColor: '#775DD0',
-                },
-              ],
-            },
-            {
-              x: '2015',
-              y: 8133,
-              goals: [
-                {
-                  name: 'Expected',
-                  value: 6600,
-                  strokeWidth: 5,
-                  strokeColor: '#775DD0',
-                },
-              ],
-            },
-            {
-              x: '2016',
-              y: 7132,
-              goals: [
-                {
-                  name: 'Expected',
-                  value: 7500,
-                  strokeWidth: 5,
-                  strokeColor: '#775DD0',
-                },
-              ],
-            },
-            {
-              x: '2017',
-              y: 7332,
-              goals: [
-                {
-                  name: 'Expected',
-                  value: 8700,
-                  strokeWidth: 5,
-                  strokeColor: '#775DD0',
-                },
-              ],
-            },
-            {
-              x: '2018',
-              y: 6553,
-              goals: [
-                {
-                  name: 'Expected',
-                  value: 7300,
-                  strokeWidth: 5,
-                  strokeColor: '#775DD0',
-                },
-              ],
-            },
-          ],
-        },
-      ],
-      chart: {
-        height: 350,
-        type: 'bar',
-      },
-      plotOptions: {
-        bar: {
-          columnWidth: '60%',
-        },
-      },
-      colors: ['#f48fb1'],
-      dataLabels: {
-        enabled: false,
-      },
-
-      legend: {
-        labels: {
-          colors: 'white',
-        },
-        show: true,
-        showForSingleSeries: true,
-        customLegendItems: ['Consommation', 'Expected'],
-        markers: {
-          fillColors: ['#f48fb1', '#775DD0'],
-        },
-      },
-      xaxis: {
-        labels: {
-          style: {
-            colors: '#fff',
-          },
-        },
-      },
-      yaxis: {
-        labels: {
-          style: {
-            colors: '#fff',
-          },
-        },
-      },
-    };
+    this.overviewColumnChart = {};
 
     this.overviewPyramideChart = {
       series: [
@@ -331,6 +193,70 @@ export class DashboardComponent extends BaseUiBehavior implements OnInit {
         },
         formatter: function (seriesName, opts) {
           return `${seriesName}: ${opts.w.globals.series[opts.seriesIndex]}`;
+        },
+      },
+    };
+
+    const allKanban = this.countService.getAllKanban();
+
+    // allKanban est un objet { [componentId: string]: Item[] }, donc on va concaténer tous les tickets de tous les composants
+    const allTickets: Ticket[] = Object.values(allKanban).flat();
+
+    this.overviewColumnChart = {
+      series: [
+        {
+          name: 'Time Spent',
+          data: allTickets.map((item) => ({
+            x: item.jira, // numéro du ticket
+            y: item.timeSpent || 0, // temps passé, 0 si absent
+            goals: [
+              {
+                name: 'Estimated',
+                value: item.estimate || 0, // temps estimé, 0 si absent
+                strokeHeight: 10,
+                strokeWidth: 30,
+                strokeColor: '#775DD0',
+              },
+            ],
+          })),
+        },
+      ],
+      chart: {
+        height: 350,
+        type: 'bar',
+      },
+      plotOptions: {
+        bar: {
+          columnWidth: '60%',
+        },
+      },
+      colors: ['#f48fb1'],
+      dataLabels: {
+        enabled: false,
+      },
+      legend: {
+        labels: {
+          colors: 'white',
+        },
+        show: true,
+        showForSingleSeries: true,
+        customLegendItems: ['Time Spent', 'Estimated'],
+        markers: {
+          fillColors: ['#f48fb1', '#775DD0'],
+        },
+      },
+      xaxis: {
+        labels: {
+          style: {
+            colors: '#fff',
+          },
+        },
+      },
+      yaxis: {
+        labels: {
+          style: {
+            colors: '#fff',
+          },
         },
       },
     };
