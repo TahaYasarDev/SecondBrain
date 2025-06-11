@@ -3,6 +3,7 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  Input,
   Output,
   ViewChild,
 } from '@angular/core';
@@ -19,6 +20,8 @@ import { LayoutService } from '../../services/layout.service';
   styleUrl: './sidebar.component.scss',
 })
 export class SidebarComponent {
+  @Input() activeSection: 'dashboard' | 'note' | 'kanban' | null = null;
+
   @Output() noteSelected = new EventEmitter<string | null>();
   @Output() kanbanSelected = new EventEmitter<string | null>();
   @Output() dashboardSelected = new EventEmitter<void>();
@@ -37,6 +40,10 @@ export class SidebarComponent {
   shouldFocusInput = false;
 
   constructor(private layoutService: LayoutService, private el: ElementRef) {}
+
+  ngOnInit() {
+    this.isDashboardActive = this.activeSection === 'dashboard';
+  }
 
   ngAfterViewInit() {
     const width = this.el.nativeElement.offsetWidth;
@@ -61,6 +68,7 @@ export class SidebarComponent {
   selectNote(id: string) {
     this.selectedNoteId = id;
     this.selectedKanbanId = null;
+    this.isDashboardActive = false;
 
     this.noteSelected.emit(id);
   }
@@ -76,6 +84,7 @@ export class SidebarComponent {
 
     this.selectedNoteId = id;
     this.selectedKanbanId = null;
+    this.isDashboardActive = false;
 
     this.noteSelected.emit(id);
   }
@@ -115,6 +124,7 @@ export class SidebarComponent {
         this.selectedNoteId = next.id;
       } else {
         this.selectedNoteId = null;
+        this.isDashboardActive = false;
       }
     }
 
@@ -132,9 +142,20 @@ export class SidebarComponent {
 
   editingKanbanId: string | null = null;
 
+  isDashboardActive = false;
+
+  showDashboard() {
+    this.isDashboardActive = true;
+    this.selectedKanbanId = null;
+    this.selectedNoteId = null;
+
+    this.dashboardSelected.emit();
+  }
+
   selectKanban(id: string) {
     this.selectedKanbanId = id;
     this.selectedNoteId = null;
+    this.isDashboardActive = false;
 
     this.kanbanSelected.emit(id);
   }
@@ -150,6 +171,7 @@ export class SidebarComponent {
 
     this.selectedKanbanId = id;
     this.selectedNoteId = null;
+    this.isDashboardActive = false;
 
     this.kanbanSelected.emit(id);
   }
@@ -189,6 +211,7 @@ export class SidebarComponent {
         this.selectedKanbanId = next.id;
       } else {
         this.selectedKanbanId = null;
+        this.isDashboardActive = false;
       }
     }
 

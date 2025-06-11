@@ -30,12 +30,15 @@ export class AppComponent {
   @ViewChild('viewContainer', { read: ViewContainerRef, static: true })
   viewContainer!: ViewContainerRef;
 
+  sideBarActiveSection: 'dashboard' | 'note' | 'kanban' | null = null;
+
   noteInstances: Map<string, ComponentRef<NoteComponent>> = new Map();
   kanbanInstances: Map<string, ComponentRef<KanbanComponent>> = new Map();
   dashboardRef: ComponentRef<DashboardComponent> | null = null;
 
   ngOnInit() {
     this.dashboardRef = this.viewContainer.createComponent(DashboardComponent);
+    this.sideBarActiveSection = 'dashboard';
   }
 
   // DASHBOARD

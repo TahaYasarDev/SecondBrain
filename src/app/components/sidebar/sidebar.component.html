@@ -11,10 +11,12 @@
   <div>
     <nav class="sidebar-menu">
       <ul>
-        <li (click)="dashboardSelected.emit()">
+        <li>
           <a href="#">
             <img src="assets/icons/home.png" class="icon" alt="Dashboard" />
-            <span>Dashboard</span>
+            <span (click)="showDashboard()" [class.active]="isDashboardActive"
+              >Dashboard</span
+            >
           </a>
         </li>
         <li>
