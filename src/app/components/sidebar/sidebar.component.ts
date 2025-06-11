@@ -65,7 +65,11 @@ export class SidebarComponent {
     this.noteSelected.emit(id);
   }
 
-  addNote() {
+  addNote(formSidebarTitle: boolean = false) {
+    if (formSidebarTitle && this.notes.length > 0) {
+      return;
+    }
+
     const id = crypto.randomUUID();
     const title = `Note ${this.noteCounter++}`;
     this.notes.push({ id, title });
@@ -135,7 +139,11 @@ export class SidebarComponent {
     this.kanbanSelected.emit(id);
   }
 
-  addKanban() {
+  addKanban(formSidebarTitle: boolean = false) {
+    if (formSidebarTitle && this.kanbans.length > 0) {
+      return;
+    }
+
     const id = crypto.randomUUID();
     const title = `Kanban ${this.kanbanCounter++}`;
     this.kanbans.push({ id, title });

@@ -34,6 +34,10 @@ export class AppComponent {
   kanbanInstances: Map<string, ComponentRef<KanbanComponent>> = new Map();
   dashboardRef: ComponentRef<DashboardComponent> | null = null;
 
+  ngOnInit() {
+    this.dashboardRef = this.viewContainer.createComponent(DashboardComponent);
+  }
+
   // DASHBOARD
   openDashboard() {
     this.detachAll(this.noteInstances);
