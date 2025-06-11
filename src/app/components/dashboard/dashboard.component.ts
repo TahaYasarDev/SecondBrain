@@ -43,52 +43,7 @@ export class DashboardComponent extends BaseUiBehavior implements OnInit {
 
     this.overviewColumnChart = {};
 
-    this.overviewPyramideChart = {
-      series: [
-        {
-          name: '',
-          data: [200, 330, 548, 740, 880, 990],
-        },
-      ],
-      chart: {
-        type: 'bar',
-        height: 350,
-      },
-      plotOptions: {
-        bar: {
-          borderRadius: 0,
-          horizontal: true,
-          distributed: true,
-          barHeight: '70%',
-          isFunnel: true,
-        },
-      },
-      colors: [
-        '#f48fb1',
-        '#d98ec1',
-        '#bf8ccc',
-        '#a88bd6',
-        '#8f7ada',
-        '#7d69d0',
-        '#6b5ac7',
-        '#775DD0',
-      ],
-      dataLabels: {
-        enabled: true,
-        formatter: function (val, opt) {
-          return opt.w.globals.labels[opt.dataPointIndex];
-        },
-        dropShadow: {
-          enabled: true,
-        },
-      },
-      xaxis: {
-        categories: ['100%', '> 80%', '> 60%', '> 40%', '> 20%', '> 0%'],
-      },
-      legend: {
-        show: false,
-      },
-    };
+    this.overviewPyramideChart = {};
   }
 
   ngOnInit() {
@@ -258,6 +213,72 @@ export class DashboardComponent extends BaseUiBehavior implements OnInit {
             colors: '#fff',
           },
         },
+      },
+    };
+
+    const ranges = [
+      { min: 100, max: 100, label: '100%' },
+      { min: 80, max: 100, label: '> 80% – 100%' },
+      { min: 60, max: 80, label: '> 60% – 80%' },
+      { min: 40, max: 60, label: '> 40% – 60%' },
+      { min: 20, max: 40, label: '> 20% – 40%' },
+      { min: 0, max: 20, label: '> 0% – 20%' },
+    ];
+
+    const progressionCounts = ranges.map((range) => {
+      return allTickets.filter(
+        (ticket) =>
+          ticket.progress != null &&
+          ticket.progress > range.min &&
+          ticket.progress <= range.max
+      ).length;
+    });
+
+    this.overviewPyramideChart = {
+      series: [
+        {
+          name: '',
+          data: progressionCounts,
+        },
+      ],
+      chart: {
+        type: 'bar',
+        height: 350,
+      },
+      plotOptions: {
+        bar: {
+          borderRadius: 0,
+          horizontal: true,
+          distributed: true,
+          barHeight: '70%',
+          isFunnel: true,
+        },
+      },
+      colors: [
+        '#f48fb1',
+        '#d98ec1',
+        '#bf8ccc',
+        '#a88bd6',
+        '#8f7ada',
+        '#7d69d0',
+        '#6b5ac7',
+        '#775DD0',
+      ],
+      dataLabels: {
+        enabled: true,
+        formatter: function (val, opt) {
+          const label = opt.w.globals.labels[opt.dataPointIndex];
+          return `Tickets ${label} : ${val}`;
+        },
+        dropShadow: {
+          enabled: true,
+        },
+      },
+      xaxis: {
+        categories: ranges.map((r) => r.label),
+      },
+      legend: {
+        show: false,
       },
     };
   }
