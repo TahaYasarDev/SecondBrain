@@ -2,11 +2,12 @@
   <main>
     <app-sidebar
       [activeSection]="sideBarActiveSection"
+      (dashboardSelected)="openDashboard()"
       (noteSelected)="openNote($event)"
       (kanbanSelected)="openKanban($event)"
+      (settingSelected)="openSetting()"
       (deleteSelectedNote)="handleDeleteSelectedNote($event)"
       (deleteSelectedKanban)="handleDeleteSelectedKanban($event)"
-      (dashboardSelected)="openDashboard()"
     >
     </app-sidebar>
 

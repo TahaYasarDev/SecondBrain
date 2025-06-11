@@ -157,7 +157,9 @@
         <li>
           <a href="#">
             <img src="assets/icons/settings.png" class="icon" alt="Settings" />
-            <span>Settings</span>
+            <span (click)="showSetting()" [class.active]="isSettingActive"
+              >Settings</span
+            >
           </a>
         </li>
       </ul>

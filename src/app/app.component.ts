@@ -11,6 +11,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { NoteComponent } from './components/note/note.component';
 import { KanbanComponent } from './components/kanban/kanban.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { SettingComponent } from './components/setting/setting.component';
 
 @Component({
   selector: 'app-root',
@@ -20,6 +21,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     NoteComponent,
     KanbanComponent,
     DashboardComponent,
+    SettingComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
@@ -35,16 +37,18 @@ export class AppComponent {
   noteInstances: Map<string, ComponentRef<NoteComponent>> = new Map();
   kanbanInstances: Map<string, ComponentRef<KanbanComponent>> = new Map();
   dashboardRef: ComponentRef<DashboardComponent> | null = null;
+  settingRef: ComponentRef<SettingComponent> | null = null;
 
   ngOnInit() {
     this.dashboardRef = this.viewContainer.createComponent(DashboardComponent);
     this.sideBarActiveSection = 'dashboard';
   }
 
-  // DASHBOARD
+  //#region Dashboard
   openDashboard() {
     this.detachAll(this.noteInstances);
     this.detachAll(this.kanbanInstances);
+    this.destroySetting();
 
     // if already present, do not recreate
     if (!this.dashboardRef) {
@@ -53,11 +57,20 @@ export class AppComponent {
     }
   }
 
-  // NOTE
+  destroyDashboard() {
+    if (this.dashboardRef) {
+      this.dashboardRef.destroy();
+      this.dashboardRef = null;
+    }
+  }
+  //#endregion
+
+  //#region Note
   openNote(noteId: string | null = null) {
     this.detachAll(this.noteInstances);
     this.detachAll(this.kanbanInstances);
     this.destroyDashboard();
+    this.destroySetting();
 
     if (noteId && this.noteInstances.has(noteId)) {
       const existingRef = this.noteInstances.get(noteId)!;
@@ -88,12 +101,14 @@ export class AppComponent {
       this.openNote(newSelectedId);
     }
   }
+  //#endregion
 
-  // KANBAN
+  //#region Kanban
   openKanban(kanbanId: string | null = null) {
     this.detachAll(this.noteInstances);
     this.detachAll(this.kanbanInstances);
     this.destroyDashboard();
+    this.destroySetting();
 
     if (kanbanId && this.kanbanInstances.has(kanbanId)) {
       const existingRef = this.kanbanInstances.get(kanbanId)!;
@@ -125,6 +140,26 @@ export class AppComponent {
       this.openKanban(newSelectedId);
     }
   }
+  //#endregion
+
+  //#region Setting
+  openSetting() {
+    this.detachAll(this.noteInstances);
+    this.detachAll(this.kanbanInstances);
+    this.destroyDashboard();
+
+    if (!this.settingRef) {
+      this.settingRef = this.viewContainer.createComponent(SettingComponent);
+    }
+  }
+
+  destroySetting() {
+    if (this.settingRef) {
+      this.settingRef.destroy();
+      this.settingRef = null;
+    }
+  }
+  //#endregion
 
   detachAll(instances: Map<string, ComponentRef<any>>) {
     instances.forEach((ref) => {
@@ -133,12 +168,5 @@ export class AppComponent {
         this.viewContainer.detach(index);
       }
     });
-  }
-
-  destroyDashboard() {
-    if (this.dashboardRef) {
-      this.dashboardRef.destroy();
-      this.dashboardRef = null;
-    }
   }
 }

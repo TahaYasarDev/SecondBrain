@@ -25,6 +25,7 @@ export class SidebarComponent {
   @Output() noteSelected = new EventEmitter<string | null>();
   @Output() kanbanSelected = new EventEmitter<string | null>();
   @Output() dashboardSelected = new EventEmitter<void>();
+  @Output() settingSelected = new EventEmitter<void>();
 
   @Output() deleteSelectedNote = new EventEmitter<{
     deletedId: string;
@@ -57,8 +58,20 @@ export class SidebarComponent {
     }
   }
 
-  // NOTE
+  //#region Dashboard
+  isDashboardActive = false;
 
+  showDashboard() {
+    this.isDashboardActive = true;
+    this.selectedKanbanId = null;
+    this.selectedNoteId = null;
+    this.isSettingActive = false;
+
+    this.dashboardSelected.emit();
+  }
+  //#endregion
+
+  //#region Note
   notes: Note[] = [];
   noteCounter = 1;
   selectedNoteId: string | null = null;
@@ -69,6 +82,7 @@ export class SidebarComponent {
     this.selectedNoteId = id;
     this.selectedKanbanId = null;
     this.isDashboardActive = false;
+    this.isSettingActive = false;
 
     this.noteSelected.emit(id);
   }
@@ -133,29 +147,20 @@ export class SidebarComponent {
       newSelectedId: this.selectedNoteId,
     });
   }
+  //#endregion
 
-  // KANBAN
-
+  //#region Kanban
   kanbans: Kanban[] = [];
   kanbanCounter = 1;
   selectedKanbanId: string | null = null;
 
   editingKanbanId: string | null = null;
 
-  isDashboardActive = false;
-
-  showDashboard() {
-    this.isDashboardActive = true;
-    this.selectedKanbanId = null;
-    this.selectedNoteId = null;
-
-    this.dashboardSelected.emit();
-  }
-
   selectKanban(id: string) {
     this.selectedKanbanId = id;
     this.selectedNoteId = null;
     this.isDashboardActive = false;
+    this.isSettingActive = false;
 
     this.kanbanSelected.emit(id);
   }
@@ -172,6 +177,7 @@ export class SidebarComponent {
     this.selectedKanbanId = id;
     this.selectedNoteId = null;
     this.isDashboardActive = false;
+    this.isSettingActive = false;
 
     this.kanbanSelected.emit(id);
   }
@@ -212,6 +218,7 @@ export class SidebarComponent {
       } else {
         this.selectedKanbanId = null;
         this.isDashboardActive = false;
+        this.isSettingActive = false;
       }
     }
 
@@ -220,6 +227,20 @@ export class SidebarComponent {
       newSelectedId: this.selectedKanbanId,
     });
   }
+  //#endregion
+
+  //#region Setting
+  isSettingActive = false;
+
+  showSetting() {
+    this.isSettingActive = true;
+    this.isDashboardActive = false;
+    this.selectedKanbanId = null;
+    this.selectedNoteId = null;
+
+    this.settingSelected.emit();
+  }
+  //#endregion
 }
 
 interface Note {
