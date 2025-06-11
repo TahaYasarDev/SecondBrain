@@ -11,23 +11,29 @@
   <div>
     <nav class="sidebar-menu">
       <ul>
-        <li (click)="dashboardSelected.emit()">
+        <li>
           <a href="#">
             <img src="assets/icons/home.png" class="icon" alt="Dashboard" />
-            <span>Dashboard</span>
+            <span (click)="showDashboard()" [class.active]="isDashboardActive"
+              >Dashboard</span
+            >
           </a>
         </li>
         <li>
           <div class="note-container">
             <a href="#">
               <img src="assets/icons/note.png" class="icon" alt="Notes" />
-              <span (click)="addNote()">Notes</span>
+              <span
+                (click)="addNote(true)"
+                [class.active]="selectedNoteId !== null"
+                >Notes</span
+              >
             </a>
             <img
               src="assets/icons/plus.png"
               id="add-note-btn"
               alt="add-note"
-              (click)="addNote()"
+              (click)="addNote(false)"
             />
           </div>
 
@@ -85,13 +91,17 @@
           <div class="kanban-container">
             <a href="#">
               <img src="assets/icons/dashboard.png" class="icon" alt="Kanban" />
-              <span (click)="addKanban()">Kanban</span>
+              <span
+                (click)="addKanban(true)"
+                [class.active]="selectedKanbanId !== null"
+                >Kanban</span
+              >
             </a>
             <img
               src="assets/icons/plus.png"
               id="add-kanban-btn"
               alt="add-kanban"
-              (click)="addKanban()"
+              (click)="addKanban(false)"
             />
           </div>
 

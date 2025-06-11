@@ -1,6 +1,7 @@
 <div class="main">
   <main>
     <app-sidebar
+      [activeSection]="sideBarActiveSection"
       (noteSelected)="openNote($event)"
       (kanbanSelected)="openKanban($event)"
       (deleteSelectedNote)="handleDeleteSelectedNote($event)"
