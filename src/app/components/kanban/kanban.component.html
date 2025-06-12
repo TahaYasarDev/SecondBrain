@@ -15,7 +15,7 @@
       >
         <img
           src="assets/icons/delete-column.png"
-          class="delete-column-btn"
+          class="icon delete-column-btn"
           alt="delete-column"
           (click)="deleteColumn(i)"
         />
@@ -49,7 +49,7 @@
               <img
                 src="assets/icons/delete.png"
                 alt="delete-task"
-                class="delete-task-btn"
+                class="icon delete-task-btn"
                 (click)="deleteTask(i, j)"
               />
             </p>
@@ -72,6 +72,7 @@
 
           <div class="add-ticket-btn" *ngIf="i === 0">
             <img
+              class="icon"
               src="assets/icons/add.png"
               id="add-ticket-btn"
               alt="add-ticket-btn"
@@ -87,6 +88,7 @@
 
     <div class="add-column-btn">
       <img
+        class="icon"
         src="assets/icons/add-column.png"
         id="add-column-btn"
         alt="add-column-btn"

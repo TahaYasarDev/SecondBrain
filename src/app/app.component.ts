@@ -12,6 +12,7 @@ import { NoteComponent } from './components/note/note.component';
 import { KanbanComponent } from './components/kanban/kanban.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SettingComponent } from './components/setting/setting.component';
+import { ThemeService } from './services/theme.service';
 
 @Component({
   selector: 'app-root',
@@ -39,7 +40,20 @@ export class AppComponent {
   dashboardRef: ComponentRef<DashboardComponent> | null = null;
   settingRef: ComponentRef<SettingComponent> | null = null;
 
+  constructor(private themeService: ThemeService) {}
+
   ngOnInit() {
+    // Apply the correct icon colors from the start
+    this.themeService.updateIcons(this.themeService.currentTheme);
+
+    // Update icons every time the theme changes
+    this.themeService.isDarkTheme$.subscribe((isDark) => {
+      this.themeService.updateIcons(isDark);
+    });
+
+    // Also observe newly added elements to update their icons
+    this.themeService.observeIconChanges();
+
     this.dashboardRef = this.viewContainer.createComponent(DashboardComponent);
     this.sideBarActiveSection = 'dashboard';
   }

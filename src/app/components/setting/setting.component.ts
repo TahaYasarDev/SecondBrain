@@ -1,5 +1,6 @@
 // Angular
 import { Component } from '@angular/core';
+import { ThemeService } from '../../services/theme.service';
 
 @Component({
   selector: 'app-setting',
@@ -11,14 +12,10 @@ import { Component } from '@angular/core';
 export class SettingComponent {
   isDarkTheme = false;
 
-  toggleTheme() {
-    this.isDarkTheme = !this.isDarkTheme;
-    const body = document.body;
+  constructor(private themeService: ThemeService) {}
 
-    if (this.isDarkTheme) {
-      body.classList.add('light-theme');
-    } else {
-      body.classList.remove('light-theme');
-    }
+  toggleTheme() {
+    // Change theme and notify
+    this.themeService.toggleTheme();
   }
 }

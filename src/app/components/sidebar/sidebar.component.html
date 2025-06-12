@@ -1,6 +1,7 @@
 <div>
   <div class="secondBrain">
     <img
+      class="icon"
       src="assets/icons/electronic_dark.png"
       id="iconSeconbBrain"
       alt="SecondBrainIcon"
@@ -30,6 +31,7 @@
               >
             </a>
             <img
+              class="icon"
               src="assets/icons/plus.png"
               id="add-note-btn"
               alt="add-note"
@@ -50,6 +52,7 @@
                   <span class="note-title">{{ note.title }}</span>
                   <div class="note-icons">
                     <img
+                      class="icon"
                       src="assets/icons/delete.png"
                       id="delete-note-btn"
                       alt="delete-note"
@@ -57,6 +60,7 @@
                     />
 
                     <img
+                      class="icon"
                       src="assets/icons/pen.png"
                       id="edit-note-btn"
                       alt="edit-note"
@@ -77,7 +81,7 @@
                   />
 
                   <img
-                    class="check-icon"
+                    class="icon check-icon"
                     src="assets/icons/check.png"
                     alt="edit-valid"
                     (click)="editingNoteId = null"
@@ -98,6 +102,7 @@
               >
             </a>
             <img
+              class="icon"
               src="assets/icons/plus.png"
               id="add-kanban-btn"
               alt="add-kanban"
@@ -118,12 +123,14 @@
                   <span class="kanban-title">{{ kanban.title }}</span>
                   <div class="kanban-icons">
                     <img
+                      class="icon"
                       src="assets/icons/delete.png"
                       id="delete-kanban-btn"
                       alt="delete-kanban"
                       (click)="deleteKanban(kanban.id, $event)"
                     />
                     <img
+                      class="icon"
                       src="assets/icons/pen.png"
                       id="edit-kanban-btn"
                       alt="edit-kanban"
@@ -144,7 +151,7 @@
                   />
 
                   <img
-                    class="check-icon"
+                    class="icon check-icon"
                     src="assets/icons/check.png"
                     alt="edit-valid"
                     (click)="editingKanbanId = null"
