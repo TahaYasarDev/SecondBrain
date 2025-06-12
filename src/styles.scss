@@ -2,6 +2,7 @@
 :root {
   --sidebarColor: rgb(32, 32, 32);
   --backgroundColor: rgb(25, 25, 25);
+  --blockTextColor: white;
   --textColor: rgb(155, 155, 155);
   --textColorHover: white;
   --dashboardColor: rgb(32, 32, 32);
@@ -11,6 +12,7 @@
 .light-theme {
   --sidebarColor: #f7f7f7;
   --backgroundColor: #fff;
+  --blockTextColor: black;
   --textColor: black;
   --textColorHover: black;
   --dashboardColor: #625b5b;
@@ -64,7 +66,7 @@ a {
   padding: 14px 0 13px;
   background: transparent;
   border: none;
-  color: white;
+  color: var(--blockTextColor);
   outline: none;
   white-space: pre-wrap;
   word-break: break-word;
