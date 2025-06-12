@@ -9,5 +9,16 @@ import { Component } from '@angular/core';
   styleUrl: './setting.component.scss',
 })
 export class SettingComponent {
-  fontSize = 16;
+  isDarkTheme = false;
+
+  toggleTheme() {
+    this.isDarkTheme = !this.isDarkTheme;
+    const body = document.body;
+
+    if (this.isDarkTheme) {
+      body.classList.add('light-theme');
+    } else {
+      body.classList.remove('light-theme');
+    }
+  }
 }

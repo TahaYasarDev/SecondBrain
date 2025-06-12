@@ -1,9 +1,27 @@
+// Dark color
+:root {
+  --sidebarColor: rgb(32, 32, 32);
+  --backgroundColor: rgb(25, 25, 25);
+  --textColor: rgb(155, 155, 155);
+  --textColorHover: white;
+  --dashboardColor: rgb(32, 32, 32);
+}
+
+// Light color
+.light-theme {
+  --sidebarColor: #f7f7f7;
+  --backgroundColor: #fff;
+  --textColor: black;
+  --textColorHover: black;
+  --dashboardColor: #625b5b;
+}
+
 body {
   margin: 0;
 }
 
 html {
-  color: rgb(155, 155, 155);
+  color: var(--textColor);
   font-size: 15px;
   font-family: system-ui;
   font-weight: normal;
@@ -31,7 +49,7 @@ p {
 }
 
 a {
-  color: inherit;
+  color: var(--textColor);
 }
 
 .icon {
