@@ -1,0 +1,44 @@
+.container {
+  height: 100vh;
+  padding: 2rem;
+  box-sizing: border-box;
+  background-color: var(--backgroundColor);
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.settings {
+  color: var(--textColor);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  background-color: var(--sidebarColor);
+  border-radius: 8px;
+  padding: 1.1rem;
+  box-shadow: 0px 0px 10px 1px rgb(155, 155, 155);
+}
+
+.setting-row {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.themed-button {
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border: 1px solid var(--blockSettingsButtonBorder);
+  background-color: var(--blockSettingsButton);
+  color: var(--blockSettingsTextButtonColor);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+
+  &:hover {
+    background-color: var(--blockSettingsButtonHover);
+  }
+}

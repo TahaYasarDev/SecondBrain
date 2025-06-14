@@ -22,6 +22,11 @@
   --kanbanBackgroundColor: #202020;
   --kanbanBorderSolidColor: black;
   --kanbanTicketProgressBarColor: #7d7d7d;
+
+  --blockSettingsButton: #53527d;
+  --blockSettingsButtonBorder: #3f3b5c;
+  --blockSettingsButtonHover: #252540;
+  --blockSettingsTextButtonColor: white;
 }
 
 // Light color
@@ -49,6 +54,11 @@
   --kanbanBackgroundColor: #e1e1e1;
   --kanbanBorderSolidColor: #c2c2c2;
   --kanbanTicketProgressBarColor: #7d7d7d;
+
+  --blockSettingsButton: #bbb8b8;
+  --blockSettingsButtonBorder: #8e8e8e;
+  --blockSettingsButtonHover: #7a7a7a;
+  --blockSettingsTextButtonColor: black;
 }
 
 body {
