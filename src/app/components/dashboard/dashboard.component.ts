@@ -2,11 +2,12 @@
 import { Component, OnInit } from '@angular/core';
 import { NgApexchartsModule } from 'ng-apexcharts';
 
-// Service
-import { CountService } from '../../services/count.service';
-
 // Model
 import { Ticket } from '../../models/ticket.model';
+
+// Service
+import { CountService } from '../../services/count.service';
+import { ThemeService } from '../../services/theme.service';
 
 // Shared
 import { fadeAnimation } from '../../shared/animation';
@@ -34,7 +35,10 @@ export class DashboardComponent extends BaseUiBehavior implements OnInit {
   public overviewColumnChart: Partial<OverviewColumnChartOptions>;
   public overviewPyramideChart: Partial<OverviewPyramideChartOptions>;
 
-  constructor(private countService: CountService) {
+  constructor(
+    private countService: CountService,
+    private themeService: ThemeService
+  ) {
     super();
 
     this.overviewChart = {};
@@ -47,6 +51,16 @@ export class DashboardComponent extends BaseUiBehavior implements OnInit {
   }
 
   ngOnInit() {
+    const textColor = this.getCssVariableFromTheme(
+      '--dashboardLabelColor',
+      this.themeService.currentTheme
+    );
+
+    const pyramidTextColor = this.getCssVariableFromTheme(
+      '--dashboardPyramidLabelColor',
+      this.themeService.currentTheme
+    );
+
     const tags = this.countService.getAllTags();
     const tasks = this.countService.getAllTasks();
 
@@ -59,7 +73,6 @@ export class DashboardComponent extends BaseUiBehavior implements OnInit {
       ],
       chart: {
         type: 'bar',
-        height: 430,
       },
       plotOptions: {
         bar: {
@@ -83,26 +96,26 @@ export class DashboardComponent extends BaseUiBehavior implements OnInit {
         offsetX: -6,
         style: {
           fontSize: '12px',
-          colors: ['#fff'],
+          colors: [textColor],
         },
       },
       stroke: {
         show: true,
         width: 1,
-        colors: ['#fff'],
+        colors: [textColor],
       },
       xaxis: {
         categories: ['h1', 'h2', 'h3', 'h4', 'T'],
         labels: {
           style: {
-            colors: ['#fff'],
+            colors: [textColor],
           },
         },
       },
       yaxis: {
         labels: {
           style: {
-            colors: ['#fff'],
+            colors: [textColor],
           },
         },
       },
@@ -154,7 +167,6 @@ export class DashboardComponent extends BaseUiBehavior implements OnInit {
 
     const allKanban = this.countService.getAllKanban();
 
-    // allKanban est un objet { [componentId: string]: Item[] }, donc on va concaténer tous les tickets de tous les composants
     const allTickets: Ticket[] = Object.values(allKanban).flat();
 
     this.overviewColumnChart = {
@@ -177,7 +189,6 @@ export class DashboardComponent extends BaseUiBehavior implements OnInit {
         },
       ],
       chart: {
-        height: 350,
         type: 'bar',
       },
       plotOptions: {
@@ -191,7 +202,7 @@ export class DashboardComponent extends BaseUiBehavior implements OnInit {
       },
       legend: {
         labels: {
-          colors: 'white',
+          colors: textColor,
         },
         show: true,
         showForSingleSeries: true,
@@ -203,14 +214,14 @@ export class DashboardComponent extends BaseUiBehavior implements OnInit {
       xaxis: {
         labels: {
           style: {
-            colors: '#fff',
+            colors: textColor,
           },
         },
       },
       yaxis: {
         labels: {
           style: {
-            colors: '#fff',
+            colors: textColor,
           },
         },
       },
@@ -243,7 +254,6 @@ export class DashboardComponent extends BaseUiBehavior implements OnInit {
       ],
       chart: {
         type: 'bar',
-        height: 350,
       },
       plotOptions: {
         bar: {
@@ -265,13 +275,16 @@ export class DashboardComponent extends BaseUiBehavior implements OnInit {
         '#775DD0',
       ],
       dataLabels: {
+        style: {
+          colors: [pyramidTextColor],
+        },
         enabled: true,
         formatter: function (val, opt) {
           const label = opt.w.globals.labels[opt.dataPointIndex];
           return `Tickets ${label} : ${val}`;
         },
         dropShadow: {
-          enabled: true,
+          enabled: false,
         },
       },
       xaxis: {
@@ -281,6 +294,16 @@ export class DashboardComponent extends BaseUiBehavior implements OnInit {
         show: false,
       },
     };
+  }
+
+  getCssVariableFromTheme(name: string, isDark: boolean): string {
+    const element = isDark
+      ? document.documentElement // :root
+      : document.querySelector('.light-theme'); // thème clair
+
+    if (!element) return '';
+
+    return getComputedStyle(element).getPropertyValue(name).trim();
   }
 }
 

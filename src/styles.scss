@@ -5,7 +5,23 @@
   --blockTextColor: white;
   --textColor: rgb(155, 155, 155);
   --textColorHover: white;
+
   --dashboardColor: rgb(32, 32, 32);
+  --dashboardTitleColor: white;
+  --dashboardLabelColor: white;
+  --dashboardPyramidLabelColor: white;
+
+  --blockInsertColor: #53527d;
+  --blockInsertUl: #222;
+
+  --blockNewTasksButton: #53527d;
+  --blockNewTasksButtonBorder: #3f3b5c;
+  --blockNewTasksButtonHover: #252540;
+
+  --kanbanHeaderTextColor: white;
+  --kanbanBackgroundColor: #202020;
+  --kanbanBorderSolidColor: black;
+  --kanbanTicketProgressBarColor: #7d7d7d;
 }
 
 // Light color
@@ -15,7 +31,24 @@
   --blockTextColor: black;
   --textColor: black;
   --textColorHover: black;
-  --dashboardColor: #625b5b;
+
+  --dashboardColor: white;
+  --dashboardTitleColor: black;
+  --dashboardPyramidLabelColor: rgb(34, 33, 33);
+  --dashboardLabelColor: rgb(155, 155, 155);
+
+  --blockInsertColor: #bbb8b8;
+  --blockInsertUl: #5e5e5e;
+  --blockInsertIconRight: 0;
+
+  --blockNewTasksButton: #bbb8b8;
+  --blockNewTasksButtonBorder: #8e8e8e;
+  --blockNewTasksButtonHover: #7a7a7a;
+
+  --kanbanHeaderTextColor: #484848;
+  --kanbanBackgroundColor: #e1e1e1;
+  --kanbanBorderSolidColor: #c2c2c2;
+  --kanbanTicketProgressBarColor: #7d7d7d;
 }
 
 body {
@@ -70,4 +103,14 @@ a {
   outline: none;
   white-space: pre-wrap;
   word-break: break-word;
+}
+
+@media (max-width: 1024px) {
+  html {
+    font-size: 12px;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
 }

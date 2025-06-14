@@ -157,3 +157,47 @@ li:last-child {
   margin-right: 12px;
   cursor: pointer;
 }
+
+@media (max-width: 1024px) {
+  .secondBrain {
+    margin-left: 17px;
+  }
+
+  #iconSeconbBrain {
+    width: 35px;
+    height: 35px;
+  }
+
+  span {
+    margin-left: 0px;
+  }
+
+  .sidebar-menu ul {
+    padding-left: 15px;
+    .note-list,
+    .kanban-list {
+      padding-left: 20px;
+    }
+  }
+
+  #add-note-btn,
+  #add-kanban-btn {
+    margin-right: 7px;
+  }
+
+  #edit-note-btn,
+  #edit-kanban-btn {
+    margin-right: 0px;
+  }
+
+  #delete-note-btn,
+  #delete-kanban-btn {
+    margin-right: 7px;
+  }
+
+  .note-edit,
+  .kanban-edit {
+    width: 63px;
+    margin-right: 9px;
+  }
+}

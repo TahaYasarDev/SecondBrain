@@ -27,5 +27,16 @@
 
 h2 {
   text-align: center;
-  color: white;
+  color: var(--dashboardTitleColor);
+}
+
+@media (max-width: 1024px) {
+  .dashboard-grid {
+    grid-template-columns: 49% 49%;
+    column-gap: 2%;
+  }
+
+  .dashboard-box {
+    height: 350px;
+  }
 }
