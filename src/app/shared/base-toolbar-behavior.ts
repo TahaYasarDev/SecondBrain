@@ -12,8 +12,17 @@ export abstract class BaseToolbarBehavior extends BaseUiBehavior {
   }
 
   onBlur(): void {
-    this.isFocused = false;
-    this.updateToolbarVisibility();
+    var isDesktop = window.innerWidth > 1024;
+
+    if (isDesktop) {
+      this.isFocused = false;
+      this.updateToolbarVisibility();
+    } else {
+      setTimeout(() => {
+        this.isFocused = false;
+        this.updateToolbarVisibility();
+      }, 2000);
+    }
   }
 
   onMouseEnter(): void {
