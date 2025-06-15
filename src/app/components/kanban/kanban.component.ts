@@ -19,11 +19,12 @@ import { Ticket } from '../../models/ticket.model';
 // Shared
 import { fadeAnimation } from '../../shared/animation';
 import { BaseUiBehavior } from '../../shared/base-ui-behavior';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-kanban',
   standalone: true,
-  imports: [CdkDropList, CdkDrag, NgIf, NgFor, FormsModule],
+  imports: [CdkDropList, CdkDrag, NgIf, NgFor, FormsModule, TranslateModule],
   templateUrl: './kanban.component.html',
   styleUrl: './kanban.component.scss',
   animations: [fadeAnimation],
@@ -37,12 +38,7 @@ export class KanbanComponent extends BaseUiBehavior {
   inProgress: Ticket[] = [];
   done: Ticket[] = [];
 
-  columns = [
-    { title: 'Backlog', items: this.backlog },
-    { title: 'Development', items: this.development },
-    { title: 'In Progress', items: this.inProgress },
-    { title: 'Done', items: this.done },
-  ];
+  columns: Column[] = [];
 
   // Popup
   showPopup = false;
@@ -58,8 +54,15 @@ export class KanbanComponent extends BaseUiBehavior {
   timeSpentError = false;
   progressError = false;
 
-  constructor(private countService: CountService) {
+  constructor(
+    private countService: CountService,
+    private translate: TranslateService
+  ) {
     super();
+  }
+
+  ngOnInit() {
+    this.loadData();
   }
 
   ngAfterViewInit(): void {
@@ -71,6 +74,33 @@ export class KanbanComponent extends BaseUiBehavior {
 
   ngOnDestroy(): void {
     this.countService.deleteKanban(this.kanbanId);
+  }
+
+  loadData() {
+    this.translate
+      .get([
+        'kanban-column-one-title',
+        'kanban-column-two-title',
+        'kanban-column-three-title',
+        'kanban-column-four-title',
+      ])
+      .subscribe((translations) => {
+        this.columns = [
+          {
+            title: translations['kanban-column-one-title'],
+            items: this.backlog,
+          },
+          {
+            title: translations['kanban-column-two-title'],
+            items: this.development,
+          },
+          {
+            title: translations['kanban-column-three-title'],
+            items: this.inProgress,
+          },
+          { title: translations['kanban-column-four-title'], items: this.done },
+        ];
+      });
   }
 
   drop(event: CdkDragDrop<Ticket[]>) {
@@ -179,8 +209,9 @@ export class KanbanComponent extends BaseUiBehavior {
   //#region Handle columns
 
   addColumn() {
+    const newColumnTitle = this.translate.instant('kanban-new-column-title');
     this.columns.push({
-      title: 'New Column',
+      title: newColumnTitle,
       items: [],
     });
   }
@@ -256,4 +287,9 @@ export class KanbanComponent extends BaseUiBehavior {
       }
     }
   }
+}
+
+interface Column {
+  title: string;
+  items: Ticket[];
 }

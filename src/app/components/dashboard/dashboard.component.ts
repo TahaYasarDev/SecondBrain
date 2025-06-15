@@ -20,11 +20,12 @@ import {
   ApexPlotOptions,
   ApexStroke,
 } from 'ng-apexcharts';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [NgApexchartsModule],
+  imports: [TranslateModule, NgApexchartsModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
   animations: [fadeAnimation],

@@ -3,7 +3,7 @@
   (@fade.done)="onFadeDone($event)"
 >
   <div>
-    <h1 contenteditable="true">Kanban</h1>
+    <h1 contenteditable="true">{{ "kanban-title" | translate }}</h1>
   </div>
 
   <div class="container">
@@ -55,11 +55,13 @@
             </p>
             <p data-role="ticket-texte">{{ ticket.texte }}</p>
             <em data-role="ticket-estimate"
-              >Estimate: {{ ticket.estimate }} days</em
+              >{{ "kanban-ticket-label-estimated" | translate }}
+              {{ ticket.estimate }} days</em
             >
             <br />
             <em data-role="ticket-timeSpent"
-              >Time spent: {{ ticket.timeSpent }} days</em
+              >{{ "kanban-ticket-label-timeSpent" | translate }}
+              {{ ticket.timeSpent }} days</em
             >
             <br />
             <progress
@@ -106,70 +108,92 @@
     *ngIf="showPopup"
     class="popup-center"
   >
-    <h3 id="popup-title">{{ editingItem ? "Edit Task" : "Create Task" }}</h3>
+    <h3 id="popup-title">
+      {{
+        editingItem
+          ? ("kanban-ticket-modify-title" | translate)
+          : ("kanban-ticket-create-title" | translate)
+      }}
+    </h3>
 
     <div class="form-row">
-      <label>JIRA:</label>
-      <input [(ngModel)]="popupItem.jira" placeholder="ABCD-12345" />
+      <label>{{ "kanban-ticket-label-jira" | translate }}</label>
+      <input
+        [(ngModel)]="popupItem.jira"
+        [attr.placeholder]="'kanban-ticket-label-jira-placeholder' | translate"
+      />
     </div>
 
     <div class="form-row">
-      <label>Title:</label>
-      <input [(ngModel)]="popupItem.title" placeholder="Side project" />
+      <label>{{ "kanban-ticket-label-title" | translate }}</label>
+      <input
+        [(ngModel)]="popupItem.title"
+        [attr.placeholder]="'kanban-ticket-label-title-placeholder' | translate"
+      />
     </div>
 
     <div class="form-row">
-      <label>Texte:</label>
+      <label>{{ "kanban-ticket-label-texte" | translate }}</label>
       <textarea
         [(ngModel)]="popupItem.texte"
-        placeholder="Create a kanban component with 4 columns."
+        [attr.placeholder]="'kanban-ticket-label-texte-placeholder' | translate"
       ></textarea>
     </div>
 
     <div class="form-row">
-      <label>Estimate (days):</label>
+      <label>{{ "kanban-ticket-label-estimated" | translate }}</label>
       <input
         type="number"
         [(ngModel)]="popupItem.estimate"
         (keypress)="allowOnlyNumbers($event, 'estimate')"
-        placeholder="0,5"
+        [attr.placeholder]="
+          'kanban-ticket-label-estimated-placeholder' | translate
+        "
       />
       <p class="error-message" *ngIf="estimateError">
-        Seuls les chiffres sont autorisés.
+        {{ "kanban-error-label" | translate }}
       </p>
     </div>
 
     <div class="form-row">
-      <label>Time Spent (days):</label>
+      <label>{{ "kanban-ticket-label-timeSpent" | translate }}</label>
       <input
         type="number"
         [(ngModel)]="popupItem.timeSpent"
         (keypress)="allowOnlyNumbers($event, 'timeSpent')"
-        placeholder="0,5"
+        [attr.placeholder]="
+          'kanban-ticket-label-timeSpent-placeholder' | translate
+        "
       />
       <p class="error-message" *ngIf="timeSpentError">
-        Seuls les chiffres sont autorisés.
+        {{ "kanban-error-label" | translate }}
       </p>
     </div>
 
     <div class="form-row">
-      <label>Progress (%):</label>
+      <label>{{ "kanban-ticket-label-progress" | translate }}</label>
       <input
         type="number"
         [(ngModel)]="popupItem.progress"
         min="0"
         max="100"
         (keypress)="allowOnlyNumbers($event, 'progress')"
-        placeholder="0,5"
+        [attr.placeholder]="
+          'kanban-ticket-label-progress-placeholder' | translate
+        "
       />
       <p class="error-message" *ngIf="progressError">
-        Seuls les chiffres sont autorisés.
+        {{ "kanban-error-label" | translate }}
       </p>
     </div>
 
     <div class="form-actions">
-      <button (click)="savePopup()">Save</button>
-      <button (click)="cancelPopup()">Cancel</button>
+      <button (click)="savePopup()">
+        {{ "kanban-ticket-label-add-button" | translate }}
+      </button>
+      <button (click)="cancelPopup()">
+        {{ "kanban-ticket-label-cancel-button" | translate }}
+      </button>
     </div>
   </div>
 </div>

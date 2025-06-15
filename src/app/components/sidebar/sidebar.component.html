@@ -15,8 +15,10 @@
         <li>
           <a href="#">
             <img src="assets/icons/home.png" class="icon" alt="Dashboard" />
-            <span (click)="showDashboard()" [class.active]="isDashboardActive"
-              >Dashboard</span
+            <span
+              (click)="showDashboard()"
+              [class.active]="isDashboardActive"
+              >{{ "dashboard-ul" | translate }}</span
             >
           </a>
         </li>
@@ -27,7 +29,7 @@
               <span
                 (click)="addNote(true)"
                 [class.active]="selectedNoteId !== null"
-                >Notes</span
+                >{{ "note-ul" | translate }}</span
               >
             </a>
             <img
@@ -98,7 +100,7 @@
               <span
                 (click)="addKanban(true)"
                 [class.active]="selectedKanbanId !== null"
-                >Kanban</span
+                >{{ "kanban-ul" | translate }}</span
               >
             </a>
             <img
@@ -164,9 +166,9 @@
         <li>
           <a href="#">
             <img src="assets/icons/settings.png" class="icon" alt="Settings" />
-            <span (click)="showSetting()" [class.active]="isSettingActive"
-              >Settings</span
-            >
+            <span (click)="showSetting()" [class.active]="isSettingActive">{{
+              "setting-ul" | translate
+            }}</span>
           </a>
         </li>
       </ul>

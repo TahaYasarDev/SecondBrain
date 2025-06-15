@@ -20,8 +20,6 @@ import { BlockH4Component } from '../block-templates/block-h4/block-h4.component
 import { BlockTodoComponent } from '../block-templates/block-todo/block-todo.component';
 import { BlockParagraphComponent } from '../block-templates/block-paragraph/block-paragraph.component';
 
-// Shared
-
 @Component({
   selector: 'app-note',
   standalone: true,

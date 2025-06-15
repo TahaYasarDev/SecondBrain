@@ -16,6 +16,7 @@ import { fadeAnimation } from '../../../shared/animation';
 import { ToggleDraggableDirective } from '../../../shared/toggle-draggable.directive';
 import { BaseToolbarBehavior } from '../../../shared/base-toolbar-behavior';
 import { CountService } from '../../../services/count.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-block-todo',
@@ -24,6 +25,7 @@ import { CountService } from '../../../services/count.service';
     ToggleDraggableDirective,
     FormsModule,
     CommonModule,
+    TranslateModule,
     DragDropModule,
     BlockToolbarComponent,
   ],
@@ -32,7 +34,6 @@ import { CountService } from '../../../services/count.service';
   animations: [fadeAnimation],
 })
 export class BlockTodoComponent extends BaseToolbarBehavior {
-  informations: string = 'Aucune tâche pour le moment. 🎯';
   tasks: Task[] = [];
   newTask: string = '';
   componentId: string = '';

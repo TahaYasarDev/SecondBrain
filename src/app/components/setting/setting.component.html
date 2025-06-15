@@ -1,16 +1,27 @@
 <div class="container">
   <div class="settings">
     <div class="setting-row">
-      <span>Changer de thème</span>
+      <span>{{ "settings-theme-label" | translate }}</span>
       <button class="themed-button" (click)="toggleTheme()">
-        Toggle Theme
+        {{ "settings-button-theme-label" | translate }}
       </button>
     </div>
     <div class="setting-row">
-      <span>Changer de langue</span>
-      <button class="themed-button" (click)="toggleTheme()">
-        Toggle Theme
-      </button>
+      <span>{{ "settings-language-label" | translate }}</span>
+      <select (change)="changeLanguage($event)">
+        <option value="en">
+          {{ "settings-button-language-label-english" | translate }}
+        </option>
+        <option value="fr">
+          {{ "settings-button-language-label-french" | translate }}
+        </option>
+        <option value="jap">
+          {{ "settings-button-language-label-japanese" | translate }}
+        </option>
+        <option value="tr">
+          {{ "settings-button-language-label-turkish" | translate }}
+        </option>
+      </select>
     </div>
   </div>
 </div>
