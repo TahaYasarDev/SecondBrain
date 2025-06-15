@@ -22,3 +22,10 @@ span {
     top: 6px;
   }
 }
+
+@media (max-width: 375px) {
+  .placeholder {
+    font-size: 22px;
+    top: 8px;
+  }
+}

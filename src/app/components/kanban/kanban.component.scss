@@ -372,3 +372,29 @@ h2:focus {
     height: 15px;
   }
 }
+
+@media (max-width: 375px) {
+  h2 {
+    font-size: 10px;
+  }
+
+  .columns-wrapper {
+    display: block;
+  }
+
+  .container {
+    padding: 15px;
+    overflow-y: scroll;
+    height: 730px;
+  }
+
+  .column {
+    margin-bottom: 5px;
+    margin-right: 0px;
+  }
+
+  .popup-center {
+    top: 6%;
+    left: 7%;
+  }
+}

@@ -45,3 +45,10 @@ h2 {
     padding-top: 10px;
   }
 }
+
+@media (max-width: 375px) {
+  .dashboard-container {
+    padding: 20px;
+    margin-top: 40px;
+  }
+}

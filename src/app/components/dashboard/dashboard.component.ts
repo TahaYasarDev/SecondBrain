@@ -53,6 +53,8 @@ export class DashboardComponent extends BaseUiBehavior implements OnInit {
   }
 
   ngOnInit() {
+    var isPhone = window.innerWidth < 375;
+
     const textColor = this.getCssVariableFromTheme(
       '--dashboardLabelColor',
       this.themeService.currentTheme
@@ -75,6 +77,8 @@ export class DashboardComponent extends BaseUiBehavior implements OnInit {
       ],
       chart: {
         type: 'bar',
+        height: isPhone ? '280px' : 390,
+        width: isPhone ? '150px' : 'auto',
       },
       plotOptions: {
         bar: {
@@ -127,7 +131,8 @@ export class DashboardComponent extends BaseUiBehavior implements OnInit {
       series: [tasks.taskTodo, tasks.taskDone],
       chart: {
         type: 'donut',
-        height: 390,
+        height: isPhone ? '280px' : 390,
+        width: isPhone ? '150px' : 'auto',
         offsetX: 5,
       },
       labels: [
@@ -160,7 +165,7 @@ export class DashboardComponent extends BaseUiBehavior implements OnInit {
         show: true,
         position: 'bottom',
         horizontalAlign: 'center',
-        fontSize: '16px',
+        fontSize: isPhone ? '10px' : '16px',
         labels: {
           useSeriesColors: true,
         },
@@ -201,6 +206,8 @@ export class DashboardComponent extends BaseUiBehavior implements OnInit {
       ],
       chart: {
         type: 'bar',
+        height: isPhone ? '230px' : 390,
+        width: isPhone ? '150px' : 'auto',
       },
       plotOptions: {
         bar: {
@@ -268,6 +275,8 @@ export class DashboardComponent extends BaseUiBehavior implements OnInit {
       ],
       chart: {
         type: 'bar',
+        height: isPhone ? '230px' : 390,
+        width: isPhone ? '150px' : 'auto',
       },
       plotOptions: {
         bar: {

@@ -1,5 +1,12 @@
 <div>
-  <div class="secondBrain">
+  <div class="header-mobile">
+    <button class="burger-btn" (click)="toggleMenu()" aria-label="Toggle menu">
+      &#9776;
+      <!-- icône burger simple -->
+    </button>
+  </div>
+
+  <div class="secondBrain" [class.isVisible]="menuOpen">
     <img
       class="icon"
       src="assets/icons/electronic.png"
@@ -10,10 +17,10 @@
   </div>
 
   <div>
-    <nav class="sidebar-menu">
+    <nav class="sidebar-menu" [class.open]="menuOpen">
       <ul>
         <li>
-          <a href="#">
+          <a href="#" (click)="menuOpen = false">
             <img src="assets/icons/home.png" class="icon" alt="Dashboard" />
             <span
               (click)="showDashboard()"
@@ -24,7 +31,7 @@
         </li>
         <li>
           <div class="note-container">
-            <a href="#">
+            <a href="#" (click)="menuOpen = false">
               <img src="assets/icons/note.png" class="icon" alt="Notes" />
               <span
                 (click)="addNote(true)"
@@ -95,7 +102,7 @@
         </li>
         <li>
           <div class="kanban-container">
-            <a href="#">
+            <a href="#" (click)="menuOpen = false">
               <img src="assets/icons/dashboard.png" class="icon" alt="Kanban" />
               <span
                 (click)="addKanban(true)"
@@ -164,7 +171,7 @@
           </ul>
         </li>
         <li>
-          <a href="#">
+          <a href="#" (click)="menuOpen = false">
             <img src="assets/icons/settings.png" class="icon" alt="Settings" />
             <span (click)="showSetting()" [class.active]="isSettingActive">{{
               "setting-ul" | translate
