@@ -38,6 +38,7 @@
   "kanban-title": "Kanban",
   "kanban-ticket-create-title": "Yeni Bilet Oluştur",
   "kanban-ticket-modify-title": "Bileti Düzenle",
+  "kanban-ticket-delete": "Görevi sil",
   "kanban-ticket-label-ticket": "Biletler :",
   "kanban-ticket-label-ticket-placeholder": "ABCD-1234",
   "kanban-ticket-label-title": "Başlık:",

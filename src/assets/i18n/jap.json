@@ -38,6 +38,7 @@
   "kanban-title": "カンバン",
   "kanban-ticket-create-title": "新しいチケットを作成",
   "kanban-ticket-modify-title": "チケットを編集",
+  "kanban-ticket-delete": "タスクを削除する",
   "kanban-ticket-label-ticket": "チケット :",
   "kanban-ticket-label-ticket-placeholder": "ABCD-1234",
   "kanban-ticket-label-title": "タイトル：",

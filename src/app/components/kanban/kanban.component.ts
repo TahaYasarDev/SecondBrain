@@ -170,7 +170,10 @@ export class KanbanComponent extends BaseUiBehavior {
 
   deleteTask(columnIndex: number, itemIndex: number) {
     const task = this.columns[columnIndex].items[itemIndex];
-    const confirmed = confirm(`Supprimer la tâche "${task.title}" ?`);
+    const text = `${this.translate.instant('kanban-ticket-delete')} "${
+      task.title
+    }" ?`;
+    const confirmed = confirm(text);
     if (confirmed) {
       this.columns[columnIndex].items.splice(itemIndex, 1);
     }
@@ -252,9 +255,10 @@ export class KanbanComponent extends BaseUiBehavior {
   }
 
   deleteColumn(index: number) {
-    const confirmed = confirm(
-      `Supprimer la colonne "${this.columns[index].title}" ?`
-    );
+    const text = `${this.translate.instant('kanban-delete-column-label')} "${
+      this.columns[index].title
+    }" ?`;
+    const confirmed = confirm(text);
     if (!confirmed) return;
 
     this.kanbanService.deleteColumn(index);

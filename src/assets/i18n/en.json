@@ -38,6 +38,7 @@
   "kanban-title": "Kanban",
   "kanban-ticket-create-title": "Create New Ticket",
   "kanban-ticket-modify-title": "Edit Ticket",
+  "kanban-ticket-delete": "Delete task",
   "kanban-ticket-label-ticket": "Ticket :",
   "kanban-ticket-label-ticket-placeholder": "ABCD-1234",
   "kanban-ticket-label-title": "Title:",

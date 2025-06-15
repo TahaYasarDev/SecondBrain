@@ -33,11 +33,12 @@
   "kanban-column-three-title": "Développement",
   "kanban-column-four-title": "Terminé",
   "kanban-new-column-title": "Nouvelle colonne",
-  "kanban-delete-column-label": "Supprimer la colonne ",
+  "kanban-delete-column-label": "Supprimer la colonne",
 
   "kanban-title": "Kanban",
   "kanban-ticket-create-title": "Créer un nouveau ticket",
   "kanban-ticket-modify-title": "Modifier le ticket",
+  "kanban-ticket-delete": "Supprimer la tâche",
   "kanban-ticket-label-ticket": "Ticket :",
   "kanban-ticket-label-ticket-placeholder": "ABCD-1234",
   "kanban-ticket-label-title": "Titre :",
