@@ -1,4 +1,8 @@
-<div class="draggable dropdown block-insert">
+<div
+  [class.open]="dropdownOpen"
+  (click)="toggleDropdown()"
+  class="draggable dropdown block-insert"
+>
   <img
     id="block-insert-icon"
     src="assets/icons/here.png"

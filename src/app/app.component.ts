@@ -47,23 +47,21 @@ export class AppComponent {
     private themeService: ThemeService,
     private translate: TranslateService
   ) {
-    // Langue par défaut (français)
     this.translate.setDefaultLang('fr');
   }
 
   ngOnInit() {
-    // Apply the correct icon colors from the start
+    // apply the correct icon colors from the start
     this.themeService.updateIcons(this.themeService.currentTheme);
 
-    // Update icons every time the theme changes
+    // update icons every time the theme changes
     this.themeService.isDarkTheme$.subscribe((isDark) => {
       this.themeService.updateIcons(isDark);
     });
 
-    // Also observe newly added elements to update their icons
+    // also observe newly added elements to update their icons
     this.themeService.observeIconChanges();
 
-    // Délai avant la création du dashboard (500ms ici)
     setTimeout(() => {
       this.dashboardRef =
         this.viewContainer.createComponent(DashboardComponent);

@@ -31,7 +31,7 @@ export class SettingComponent {
   }
 
   toggleTheme() {
-    // Change theme and notify
+    // change theme and notify
     this.themeService.toggleTheme();
   }
 }

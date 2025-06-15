@@ -28,3 +28,19 @@
   padding: 0px;
   margin-right: 2px;
 }
+
+@media (max-width: 375px) {
+  #balise-toolbar {
+    display: inline-flex;
+    padding: 0px;
+  }
+
+  #balise-delete {
+    margin-left: -14px;
+    margin-top: 2px;
+  }
+
+  .icon {
+    display: inline-flex;
+  }
+}

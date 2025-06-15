@@ -1,7 +1,7 @@
 {
   "dashboard-ul": "Gösterge Paneli",
   "note-ul": "Notlar",
-  "kanban-ul": "Kanban",
+  "kanban-ul": "Kanbanlar",
   "setting-ul": "Ayarlar",
 
   "dashboard-title-one": "Not Etiketlerinin Genel Görünümü",
@@ -19,7 +19,7 @@
   "H2": "Yeni Metin",
   "H3": "Yeni Metin",
   "H4": "Yeni Metin",
-  "paragrahpe": "Dilediğiniz şeyi yazabilirsiniz",
+  "paragraph": "Dilediğiniz şeyi yazabilirsiniz",
   "todo": "Yeni Görev",
   "todo-do-title": "Yapılacaklar",
   "todo-done-title": "Tamamlandı",

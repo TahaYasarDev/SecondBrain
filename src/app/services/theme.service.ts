@@ -6,14 +6,14 @@ import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
   providedIn: 'root',
 })
 export class ThemeService {
-  // Dark theme by default
+  // dark theme by default
   private isDarkThemeSubject = new BehaviorSubject<boolean>(true);
 
   isDarkTheme$ = this.isDarkThemeSubject.asObservable();
 
   toggleTheme() {
     const newTheme = !this.isDarkThemeSubject.value;
-    // Send new theme
+    // send new theme
     this.isDarkThemeSubject.next(newTheme);
 
     const body = document.body;
@@ -28,7 +28,7 @@ export class ThemeService {
     return this.isDarkThemeSubject.value;
   }
 
-  // Updates all website icons based on the current theme (dark or light)
+  // updates all website icons based on the current theme (dark or light)
   updateIcons(isDark: boolean) {
     const icons = document.querySelectorAll('img.icon');
     icons.forEach((img) => {
@@ -46,7 +46,7 @@ export class ThemeService {
     });
   }
 
-  // Watches for DOM changes and updates icons dynamically to match the current theme
+  // watches for DOM changes and updates icons dynamically to match the current theme
   observeIconChanges() {
     const observer = new MutationObserver(() => {
       this.updateIcons(this.currentTheme);

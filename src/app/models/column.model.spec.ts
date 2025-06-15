@@ -1,7 +1,7 @@
-import { Ticket } from './ticket.model';
+import { Column } from './column';
 
-describe('Ticket', () => {
+describe('Column', () => {
   it('should create an instance', () => {
-    expect(new Ticket()).toBeTruthy();
+    expect(new Column()).toBeTruthy();
   });
 });

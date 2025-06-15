@@ -23,6 +23,25 @@ import { TranslateModule } from '@ngx-translate/core';
   styleUrl: './sidebar.component.scss',
 })
 export class SidebarComponent {
+  menuOpen = false;
+
+  toggleMenu() {
+    this.menuOpen = !this.menuOpen;
+
+    const el = document.querySelector('.secondBrain') as HTMLElement;
+    if (el) {
+      if (this.menuOpen) {
+        el.classList.add('isVisible');
+      } else {
+        el.classList.remove('isVisible');
+      }
+    }
+  }
+
+  isMobile(): boolean {
+    return window.innerWidth <= 375;
+  }
+
   @Input() activeSection: 'dashboard' | 'note' | 'kanban' | null = null;
 
   @Output() noteSelected = new EventEmitter<string | null>();

@@ -55,3 +55,9 @@
   transition: background-color 0.2s, transform 0.2s;
   outline: none;
 }
+
+@media (max-width: 375px) {
+  .settings {
+    margin-top: 50px;
+  }
+}

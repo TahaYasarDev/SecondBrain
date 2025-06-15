@@ -18,7 +18,7 @@
   background-color: var(--dashboardColor);
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  height: 350px; // ajuste selon tes besoins
+  height: 350px;
   display: block;
   padding: 5px;
   width: auto;
@@ -43,5 +43,12 @@ h2 {
 
   .dashboard-container {
     padding-top: 10px;
+  }
+}
+
+@media (max-width: 375px) {
+  .dashboard-container {
+    padding: 20px;
+    margin-top: 40px;
   }
 }
