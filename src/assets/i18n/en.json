@@ -13,6 +13,7 @@
   "dashboard-title-two-label-done": "Completed",
   "dashboard-title-three-label-spent": "Time Spent",
   "dashboard-title-three-label-estimated": "Estimated Time",
+  "dashboard-title-four-label-tickets": "Tickets",
 
   "H1": "New Text",
   "H2": "New Text",
@@ -37,8 +38,8 @@
   "kanban-title": "Kanban",
   "kanban-ticket-create-title": "Create New Ticket",
   "kanban-ticket-modify-title": "Edit Ticket",
-  "kanban-ticket-label-jira": "JIRA:",
-  "kanban-ticket-label-jira-placeholder": "ABCD-1234",
+  "kanban-ticket-label-ticket": "Ticket :",
+  "kanban-ticket-label-ticket-placeholder": "ABCD-1234",
   "kanban-ticket-label-title": "Title:",
   "kanban-ticket-label-title-placeholder": "Second Brain",
   "kanban-ticket-label-texte": "Description:",

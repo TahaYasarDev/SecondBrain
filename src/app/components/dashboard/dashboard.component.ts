@@ -20,7 +20,7 @@ import {
   ApexPlotOptions,
   ApexStroke,
 } from 'ng-apexcharts';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-dashboard',
@@ -38,7 +38,8 @@ export class DashboardComponent extends BaseUiBehavior implements OnInit {
 
   constructor(
     private countService: CountService,
-    private themeService: ThemeService
+    private themeService: ThemeService,
+    private translate: TranslateService
   ) {
     super();
 
@@ -68,7 +69,7 @@ export class DashboardComponent extends BaseUiBehavior implements OnInit {
     this.overviewChart = {
       series: [
         {
-          name: 'Tag',
+          name: this.translate.instant('dashboard-title-one-label-tag'),
           data: [tags.H1, tags.H2, tags.H3, tags.H4, tags.paragraph],
         },
       ],
@@ -129,7 +130,10 @@ export class DashboardComponent extends BaseUiBehavior implements OnInit {
         height: 390,
         offsetX: 5,
       },
-      labels: ['Tasks to do', 'Completed tasks'],
+      labels: [
+        this.translate.instant('dashboard-title-two-label-todo'),
+        this.translate.instant('dashboard-title-two-label-done'),
+      ],
       colors: ['#f48fb1', '#ab47bc'],
       plotOptions: {
         pie: {
@@ -170,16 +174,22 @@ export class DashboardComponent extends BaseUiBehavior implements OnInit {
 
     const allTickets: Ticket[] = Object.values(allKanban).flat();
 
+    const wordTickets = this.translate.instant(
+      'dashboard-title-four-label-tickets'
+    );
+
     this.overviewColumnChart = {
       series: [
         {
-          name: 'Time Spent',
+          name: this.translate.instant('dashboard-title-three-label-spent'),
           data: allTickets.map((item) => ({
-            x: item.jira, // numéro du ticket
+            x: item.ticket, // numéro du ticket
             y: item.timeSpent || 0, // temps passé, 0 si absent
             goals: [
               {
-                name: 'Estimated',
+                name: this.translate.instant(
+                  'dashboard-title-three-label-estimated'
+                ),
                 value: item.estimate || 0, // temps estimé, 0 si absent
                 strokeHeight: 10,
                 strokeWidth: 30,
@@ -207,7 +217,10 @@ export class DashboardComponent extends BaseUiBehavior implements OnInit {
         },
         show: true,
         showForSingleSeries: true,
-        customLegendItems: ['Time Spent', 'Estimated'],
+        customLegendItems: [
+          this.translate.instant('dashboard-title-three-label-spent'),
+          this.translate.instant('dashboard-title-three-label-estimated'),
+        ],
         markers: {
           fillColors: ['#f48fb1', '#775DD0'],
         },
@@ -282,7 +295,7 @@ export class DashboardComponent extends BaseUiBehavior implements OnInit {
         enabled: true,
         formatter: function (val, opt) {
           const label = opt.w.globals.labels[opt.dataPointIndex];
-          return `Tickets ${label} : ${val}`;
+          return `${wordTickets} ${label} : ${val}`;
         },
         dropShadow: {
           enabled: false,

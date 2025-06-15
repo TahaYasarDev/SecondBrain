@@ -126,7 +126,7 @@ h2:focus {
 [data-role="ticket-estimate"],
 [data-role="ticket-timeSpent"],
 [data-role="ticket-progress"],
-[data-role="ticket-jira"] {
+[data-role="ticket-ticket"] {
   padding: 10px;
   padding-bottom: 0px;
 }
@@ -135,7 +135,7 @@ h2:focus {
   margin-left: 10px;
 }
 
-[data-role="ticket-jira"] {
+[data-role="ticket-ticket"] {
   padding-top: 0;
   text-align: right;
 }

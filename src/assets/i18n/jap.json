@@ -13,6 +13,7 @@
   "dashboard-title-two-label-done": "完了済みタスク",
   "dashboard-title-three-label-spent": "経過時間",
   "dashboard-title-three-label-estimated": "予定時間",
+  "dashboard-title-four-label-tickets": "チケット",
 
   "H1": "新規テキスト",
   "H2": "新規テキスト",
@@ -37,8 +38,8 @@
   "kanban-title": "カンバン",
   "kanban-ticket-create-title": "新しいチケットを作成",
   "kanban-ticket-modify-title": "チケットを編集",
-  "kanban-ticket-label-jira": "JIRA：",
-  "kanban-ticket-label-jira-placeholder": "ABCD-1234",
+  "kanban-ticket-label-ticket": "チケット :",
+  "kanban-ticket-label-ticket-placeholder": "ABCD-1234",
   "kanban-ticket-label-title": "タイトル：",
   "kanban-ticket-label-title-placeholder": "セカンドブレイン",
   "kanban-ticket-label-texte": "内容：",

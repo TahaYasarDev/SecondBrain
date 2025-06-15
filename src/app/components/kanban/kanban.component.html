@@ -70,7 +70,7 @@
               [value]="ticket.progress"
               max="100"
             ></progress>
-            <p data-role="ticket-jira">{{ ticket.jira }}</p>
+            <p data-role="ticket-ticket">{{ ticket.ticket }}</p>
           </div>
 
           <div class="add-ticket-btn" *ngIf="i === 0">
@@ -117,10 +117,12 @@
     </h3>
 
     <div class="form-row">
-      <label>{{ "kanban-ticket-label-jira" | translate }}</label>
+      <label>{{ "kanban-ticket-label-ticket" | translate }}</label>
       <input
-        [(ngModel)]="popupItem.jira"
-        [attr.placeholder]="'kanban-ticket-label-jira-placeholder' | translate"
+        [(ngModel)]="popupItem.ticket"
+        [attr.placeholder]="
+          'kanban-ticket-label-ticket-placeholder' | translate
+        "
       />
     </div>
 

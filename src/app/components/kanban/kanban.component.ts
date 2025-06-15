@@ -123,7 +123,7 @@ export class KanbanComponent extends BaseUiBehavior {
 
   createEmptyItem(): Ticket {
     return {
-      jira: '',
+      ticket: '',
       title: '',
       texte: '',
       estimate: null,
@@ -296,7 +296,7 @@ export class KanbanComponent extends BaseUiBehavior {
   //#endregion
 
   trackByFn(index: number, ticket: Ticket): string {
-    return ticket.jira;
+    return ticket.ticket;
   }
 
   // Form verification

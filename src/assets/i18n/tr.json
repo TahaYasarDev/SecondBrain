@@ -13,6 +13,7 @@
   "dashboard-title-two-label-done": "Tamamlanan Görevler",
   "dashboard-title-three-label-spent": "Harcanan Süre",
   "dashboard-title-three-label-estimated": "Tahmini Süre",
+  "dashboard-title-four-label-tickets": "Biletler",
 
   "H1": "Yeni Metin",
   "H2": "Yeni Metin",
@@ -37,8 +38,8 @@
   "kanban-title": "Kanban",
   "kanban-ticket-create-title": "Yeni Bilet Oluştur",
   "kanban-ticket-modify-title": "Bileti Düzenle",
-  "kanban-ticket-label-jira": "JIRA:",
-  "kanban-ticket-label-jira-placeholder": "ABCD-1234",
+  "kanban-ticket-label-ticket": "Biletler :",
+  "kanban-ticket-label-ticket-placeholder": "ABCD-1234",
   "kanban-ticket-label-title": "Başlık:",
   "kanban-ticket-label-title-placeholder": "İkinci Beyin",
   "kanban-ticket-label-texte": "Metin:",
