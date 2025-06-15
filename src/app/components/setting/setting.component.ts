@@ -14,11 +14,14 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 })
 export class SettingComponent {
   isDarkTheme = false;
+  currentLang: string;
 
   constructor(
     private themeService: ThemeService,
     private translate: TranslateService
-  ) {}
+  ) {
+    this.currentLang = this.translate.currentLang || 'fr';
+  }
 
   changeLanguage(event: Event) {
     const target = event.target as HTMLSelectElement;

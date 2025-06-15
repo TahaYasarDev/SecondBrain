@@ -12,7 +12,10 @@ import { NoteComponent } from './components/note/note.component';
 import { KanbanComponent } from './components/kanban/kanban.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SettingComponent } from './components/setting/setting.component';
+
+// Service
 import { ThemeService } from './services/theme.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -40,7 +43,13 @@ export class AppComponent {
   dashboardRef: ComponentRef<DashboardComponent> | null = null;
   settingRef: ComponentRef<SettingComponent> | null = null;
 
-  constructor(private themeService: ThemeService) {}
+  constructor(
+    private themeService: ThemeService,
+    private translate: TranslateService
+  ) {
+    // Langue par défaut (français)
+    this.translate.setDefaultLang('fr');
+  }
 
   ngOnInit() {
     // Apply the correct icon colors from the start
@@ -54,8 +63,12 @@ export class AppComponent {
     // Also observe newly added elements to update their icons
     this.themeService.observeIconChanges();
 
-    this.dashboardRef = this.viewContainer.createComponent(DashboardComponent);
-    this.sideBarActiveSection = 'dashboard';
+    // Délai avant la création du dashboard (500ms ici)
+    setTimeout(() => {
+      this.dashboardRef =
+        this.viewContainer.createComponent(DashboardComponent);
+      this.sideBarActiveSection = 'dashboard';
+    }, 200);
   }
 
   //#region Dashboard

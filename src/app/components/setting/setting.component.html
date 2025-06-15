@@ -8,7 +8,11 @@
     </div>
     <div class="setting-row">
       <span>{{ "settings-language-label" | translate }}</span>
-      <select (change)="changeLanguage($event)">
+      <select
+        class="lang-list"
+        [value]="currentLang"
+        (change)="changeLanguage($event)"
+      >
         <option value="en">
           {{ "settings-button-language-label-english" | translate }}
         </option>

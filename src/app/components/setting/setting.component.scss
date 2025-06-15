@@ -28,7 +28,7 @@
 }
 
 .themed-button {
-  padding: 0.6rem 1.2rem;
+  padding: 0.5rem 1rem;
   font-size: 1rem;
   font-weight: 500;
   border: 1px solid var(--blockSettingsButtonBorder);
@@ -41,4 +41,17 @@
   &:hover {
     background-color: var(--blockSettingsButtonHover);
   }
+}
+
+.lang-list {
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border: 1px solid var(--blockSettingsButtonBorder);
+  background-color: var(--blockSettingsButton);
+  color: var(--blockSettingsTextButtonColor);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+  outline: none;
 }
