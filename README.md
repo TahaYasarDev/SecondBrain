@@ -8,7 +8,7 @@
 - Global overview of your content: tags, tasks, tickets, estimations, and more.
 - Real-time statistics: number of tasks to do, tasks done, tag usage, etc.
 
-### 📝 Notes
+### 📝 Note
 - Create and edit **dynamic notes** with:
   - H1, H2, H3, H4 tags
   - Paragraphs
