@@ -78,7 +78,7 @@ export class DashboardComponent extends BaseUiBehavior implements OnInit {
       chart: {
         type: 'bar',
         height: isPhone ? '280px' : 390,
-        width: isPhone ? '150px' : 'auto',
+        width: isPhone ? '150px' : '100%',
       },
       plotOptions: {
         bar: {
@@ -132,7 +132,7 @@ export class DashboardComponent extends BaseUiBehavior implements OnInit {
       chart: {
         type: 'donut',
         height: isPhone ? '280px' : 390,
-        width: isPhone ? '150px' : 'auto',
+        width: isPhone ? '150px' : '100%',
         offsetX: 5,
       },
       labels: [
@@ -207,7 +207,7 @@ export class DashboardComponent extends BaseUiBehavior implements OnInit {
       chart: {
         type: 'bar',
         height: isPhone ? '230px' : 390,
-        width: isPhone ? '150px' : 'auto',
+        width: isPhone ? '150px' : '100%',
       },
       plotOptions: {
         bar: {
@@ -276,7 +276,7 @@ export class DashboardComponent extends BaseUiBehavior implements OnInit {
       chart: {
         type: 'bar',
         height: isPhone ? '230px' : 390,
-        width: isPhone ? '150px' : 'auto',
+        width: isPhone ? '150px' : '100%',
       },
       plotOptions: {
         bar: {
