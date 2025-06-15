@@ -7,7 +7,7 @@
 >
   <div #draggableWrapper class="draggable-wrapper draggable">
     <label [@fade]="'visible'" class="floating-label" *ngIf="!hasContent">{{
-      placeHolder
+      "paragraph" | translate
     }}</label>
     <p
       #editableParagraph

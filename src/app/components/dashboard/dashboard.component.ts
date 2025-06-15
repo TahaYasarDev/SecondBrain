@@ -2,11 +2,12 @@
 import { Component, OnInit } from '@angular/core';
 import { NgApexchartsModule } from 'ng-apexcharts';
 
-// Service
-import { CountService } from '../../services/count.service';
-
 // Model
 import { Ticket } from '../../models/ticket.model';
+
+// Service
+import { CountService } from '../../services/count.service';
+import { ThemeService } from '../../services/theme.service';
 
 // Shared
 import { fadeAnimation } from '../../shared/animation';
@@ -19,11 +20,12 @@ import {
   ApexPlotOptions,
   ApexStroke,
 } from 'ng-apexcharts';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [NgApexchartsModule],
+  imports: [TranslateModule, NgApexchartsModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
   animations: [fadeAnimation],
@@ -34,7 +36,11 @@ export class DashboardComponent extends BaseUiBehavior implements OnInit {
   public overviewColumnChart: Partial<OverviewColumnChartOptions>;
   public overviewPyramideChart: Partial<OverviewPyramideChartOptions>;
 
-  constructor(private countService: CountService) {
+  constructor(
+    private countService: CountService,
+    private themeService: ThemeService,
+    private translate: TranslateService
+  ) {
     super();
 
     this.overviewChart = {};
@@ -47,19 +53,28 @@ export class DashboardComponent extends BaseUiBehavior implements OnInit {
   }
 
   ngOnInit() {
+    const textColor = this.getCssVariableFromTheme(
+      '--dashboardLabelColor',
+      this.themeService.currentTheme
+    );
+
+    const pyramidTextColor = this.getCssVariableFromTheme(
+      '--dashboardPyramidLabelColor',
+      this.themeService.currentTheme
+    );
+
     const tags = this.countService.getAllTags();
     const tasks = this.countService.getAllTasks();
 
     this.overviewChart = {
       series: [
         {
-          name: 'Tag',
+          name: this.translate.instant('dashboard-title-one-label-tag'),
           data: [tags.H1, tags.H2, tags.H3, tags.H4, tags.paragraph],
         },
       ],
       chart: {
         type: 'bar',
-        height: 430,
       },
       plotOptions: {
         bar: {
@@ -83,26 +98,26 @@ export class DashboardComponent extends BaseUiBehavior implements OnInit {
         offsetX: -6,
         style: {
           fontSize: '12px',
-          colors: ['#fff'],
+          colors: [textColor],
         },
       },
       stroke: {
         show: true,
         width: 1,
-        colors: ['#fff'],
+        colors: [textColor],
       },
       xaxis: {
         categories: ['h1', 'h2', 'h3', 'h4', 'T'],
         labels: {
           style: {
-            colors: ['#fff'],
+            colors: [textColor],
           },
         },
       },
       yaxis: {
         labels: {
           style: {
-            colors: ['#fff'],
+            colors: [textColor],
           },
         },
       },
@@ -115,7 +130,10 @@ export class DashboardComponent extends BaseUiBehavior implements OnInit {
         height: 390,
         offsetX: 5,
       },
-      labels: ['Tasks to do', 'Completed tasks'],
+      labels: [
+        this.translate.instant('dashboard-title-two-label-todo'),
+        this.translate.instant('dashboard-title-two-label-done'),
+      ],
       colors: ['#f48fb1', '#ab47bc'],
       plotOptions: {
         pie: {
@@ -154,19 +172,24 @@ export class DashboardComponent extends BaseUiBehavior implements OnInit {
 
     const allKanban = this.countService.getAllKanban();
 
-    // allKanban est un objet { [componentId: string]: Item[] }, donc on va concaténer tous les tickets de tous les composants
     const allTickets: Ticket[] = Object.values(allKanban).flat();
+
+    const wordTickets = this.translate.instant(
+      'dashboard-title-four-label-tickets'
+    );
 
     this.overviewColumnChart = {
       series: [
         {
-          name: 'Time Spent',
+          name: this.translate.instant('dashboard-title-three-label-spent'),
           data: allTickets.map((item) => ({
-            x: item.jira, // numéro du ticket
+            x: item.ticket, // numéro du ticket
             y: item.timeSpent || 0, // temps passé, 0 si absent
             goals: [
               {
-                name: 'Estimated',
+                name: this.translate.instant(
+                  'dashboard-title-three-label-estimated'
+                ),
                 value: item.estimate || 0, // temps estimé, 0 si absent
                 strokeHeight: 10,
                 strokeWidth: 30,
@@ -177,7 +200,6 @@ export class DashboardComponent extends BaseUiBehavior implements OnInit {
         },
       ],
       chart: {
-        height: 350,
         type: 'bar',
       },
       plotOptions: {
@@ -191,11 +213,14 @@ export class DashboardComponent extends BaseUiBehavior implements OnInit {
       },
       legend: {
         labels: {
-          colors: 'white',
+          colors: textColor,
         },
         show: true,
         showForSingleSeries: true,
-        customLegendItems: ['Time Spent', 'Estimated'],
+        customLegendItems: [
+          this.translate.instant('dashboard-title-three-label-spent'),
+          this.translate.instant('dashboard-title-three-label-estimated'),
+        ],
         markers: {
           fillColors: ['#f48fb1', '#775DD0'],
         },
@@ -203,14 +228,14 @@ export class DashboardComponent extends BaseUiBehavior implements OnInit {
       xaxis: {
         labels: {
           style: {
-            colors: '#fff',
+            colors: textColor,
           },
         },
       },
       yaxis: {
         labels: {
           style: {
-            colors: '#fff',
+            colors: textColor,
           },
         },
       },
@@ -243,7 +268,6 @@ export class DashboardComponent extends BaseUiBehavior implements OnInit {
       ],
       chart: {
         type: 'bar',
-        height: 350,
       },
       plotOptions: {
         bar: {
@@ -265,13 +289,16 @@ export class DashboardComponent extends BaseUiBehavior implements OnInit {
         '#775DD0',
       ],
       dataLabels: {
+        style: {
+          colors: [pyramidTextColor],
+        },
         enabled: true,
         formatter: function (val, opt) {
           const label = opt.w.globals.labels[opt.dataPointIndex];
-          return `Tickets ${label} : ${val}`;
+          return `${wordTickets} ${label} : ${val}`;
         },
         dropShadow: {
-          enabled: true,
+          enabled: false,
         },
       },
       xaxis: {
@@ -281,6 +308,16 @@ export class DashboardComponent extends BaseUiBehavior implements OnInit {
         show: false,
       },
     };
+  }
+
+  getCssVariableFromTheme(name: string, isDark: boolean): string {
+    const element = isDark
+      ? document.documentElement // :root
+      : document.querySelector('.light-theme'); // thème clair
+
+    if (!element) return '';
+
+    return getComputedStyle(element).getPropertyValue(name).trim();
   }
 }
 

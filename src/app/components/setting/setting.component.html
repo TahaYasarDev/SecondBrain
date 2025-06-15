@@ -1,8 +1,31 @@
-<label for="fontSizeInput">Font size (px):</label>
-<input
-  type="number"
-  id="fontSizeInput"
-  [(ngModel)]="fontSize"
-  min="8"
-  max="72"
-/>
+<div class="container">
+  <div class="settings">
+    <div class="setting-row">
+      <span>{{ "settings-theme-label" | translate }}</span>
+      <button class="themed-button" (click)="toggleTheme()">
+        {{ "settings-button-theme-label" | translate }}
+      </button>
+    </div>
+    <div class="setting-row">
+      <span>{{ "settings-language-label" | translate }}</span>
+      <select
+        class="lang-list"
+        [value]="currentLang"
+        (change)="changeLanguage($event)"
+      >
+        <option value="en">
+          {{ "settings-button-language-label-english" | translate }}
+        </option>
+        <option value="fr">
+          {{ "settings-button-language-label-french" | translate }}
+        </option>
+        <option value="jap">
+          {{ "settings-button-language-label-japanese" | translate }}
+        </option>
+        <option value="tr">
+          {{ "settings-button-language-label-turkish" | translate }}
+        </option>
+      </select>
+    </div>
+  </div>
+</div>

@@ -5,7 +5,9 @@
   <div class="dashboard-container">
     <div class="dashboard-grid">
       <div class="dashboard-box">
-        <h2 style="margin-bottom: 15px">Notes Overview</h2>
+        <h2 style="margin-bottom: 15px">
+          {{ "dashboard-title-one" | translate }}
+        </h2>
 
         <apx-chart
           id="overview-chart"
@@ -20,7 +22,9 @@
       </div>
 
       <div class="dashboard-box">
-        <h2 style="margin-bottom: 15px">Tasks Overview</h2>
+        <h2 style="margin-bottom: 15px">
+          {{ "dashboard-title-two" | translate }}
+        </h2>
 
         <apx-chart
           id="overview-circle-chart"
@@ -34,7 +38,9 @@
       </div>
 
       <div class="dashboard-box">
-        <h2 style="margin-bottom: 15px">Kanban's Items Overview</h2>
+        <h2 style="margin-bottom: 15px">
+          {{ "dashboard-title-three" | translate }}
+        </h2>
 
         <apx-chart
           [series]="overviewColumnChart.series!"
@@ -49,7 +55,9 @@
       </div>
 
       <div class="dashboard-box">
-        <h2 style="margin-bottom: 15px">Tickets Progression Overview</h2>
+        <h2 style="margin-bottom: 15px">
+          {{ "dashboard-title-four" | translate }}
+        </h2>
 
         <apx-chart
           [series]="overviewPyramideChart.series!"

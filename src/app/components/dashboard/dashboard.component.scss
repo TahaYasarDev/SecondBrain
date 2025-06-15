@@ -15,7 +15,7 @@
 }
 
 .dashboard-box {
-  background-color: rgb(32, 32, 32);
+  background-color: var(--dashboardColor);
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   height: 350px; // ajuste selon tes besoins
@@ -27,5 +27,21 @@
 
 h2 {
   text-align: center;
-  color: white;
+  color: var(--dashboardTitleColor);
+}
+
+@media (max-width: 1024px) {
+  .dashboard-grid {
+    grid-template-columns: 49% 49%;
+    column-gap: 2%;
+    row-gap: 1%;
+  }
+
+  .dashboard-box {
+    height: 350px;
+  }
+
+  .dashboard-container {
+    padding-top: 10px;
+  }
 }

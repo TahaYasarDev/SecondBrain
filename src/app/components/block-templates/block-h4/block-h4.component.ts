@@ -13,11 +13,17 @@ import { CountService } from '../../../services/count.service';
 import { fadeAnimation } from '../../../shared/animation';
 import { ToggleDraggableDirective } from '../../../shared/toggle-draggable.directive';
 import { BaseToolbarBehavior } from '../../../shared/base-toolbar-behavior';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-block-h4',
   standalone: true,
-  imports: [CommonModule, ToggleDraggableDirective, BlockToolbarComponent],
+  imports: [
+    CommonModule,
+    TranslateModule,
+    ToggleDraggableDirective,
+    BlockToolbarComponent,
+  ],
   templateUrl: './block-h4.component.html',
   styleUrl: './block-h4.component.scss',
   animations: [fadeAnimation],

@@ -9,14 +9,16 @@
         <input
           id="new-task-input"
           type="text"
-          placeholder="Nouvelle tâche"
+          [attr.placeholder]="'new-task' | translate"
           [(ngModel)]="newTask"
           (keyup.enter)="addTask()"
           appToggleDraggable
           (focus)="onFocus()"
           (blur)="onBlur()"
         />
-        <button id="new-task-button" (click)="addTask()">Ajouter</button>
+        <button id="new-task-button" (click)="addTask()">
+          {{ "todo-add-button" | translate }}
+        </button>
 
         <img
           src="assets/icons/delete.png"
@@ -31,12 +33,12 @@
         id="new-task-information"
         *ngIf="!hasTasks"
       >
-        {{ informations }}
+        {{ "task-do-placeholder" | translate }}
       </p>
     </div>
     <ng-container *ngIf="hasTasks">
       <div [@fade]="!hasContent ? 'visible' : 'hidden'">
-        <h1 class="editable-todo-h1">A faire</h1>
+        <h1 class="editable-todo-h1">{{ "todo-do-title" | translate }}</h1>
         <div
           cdkDropList
           (cdkDropListDropped)="drop($event)"
@@ -63,7 +65,9 @@
                 alt="Dashboard"
               />
             </li>
-            <li *ngIf="todoTasks.length === 0">Aucune tâche à faire 🎉</li>
+            <li *ngIf="todoTasks.length === 0">
+              {{ "todo-done-nothing-placeholder" | translate }}
+            </li>
           </ul>
         </div>
       </div>
@@ -71,7 +75,7 @@
         *ngIf="doneTasks.length > 0"
         [@fade]="!hasContent ? 'visible' : 'hidden'"
       >
-        <h1 class="editable-todo-h1">Faites</h1>
+        <h1 class="editable-todo-h1">{{ "todo-done-title" | translate }}</h1>
         <div
           cdkDropList
           (cdkDropListDropped)="drop($event)"
@@ -101,7 +105,7 @@
               />
             </li>
             <li *ngIf="doneTasks.length === 0">
-              Aucune tâche faite pour l’instant
+              {{ "todo-do-placeholder" | translate }}
             </li>
           </ul>
         </div>

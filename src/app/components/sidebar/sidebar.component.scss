@@ -1,3 +1,7 @@
+h1 {
+  color: var(--textColor);
+}
+
 .secondBrain,
 .button {
   display: flex;
@@ -34,12 +38,12 @@
   align-items: center;
   margin-bottom: 15px;
   text-decoration: none;
-  color: inherit;
   transition: color 0.5s ease;
 }
 
 .sidebar-menu a:hover {
-  color: white;
+  color: var(--textColorHover);
+  font-weight: 600;
   text-decoration: none;
 }
 
@@ -50,7 +54,8 @@
 }
 
 .sidebar-menu span.active {
-  color: white;
+  color: var(--textColorHover);
+  font-weight: 600;
 }
 
 span {
@@ -114,12 +119,14 @@ li:last-child {
 
 .note-item.selected,
 .kanban-item.selected {
-  color: white;
+  color: var(--textColorHover);
+  font-weight: 600;
 }
 
 .note-item:hover,
 .kanban-item:hover {
-  color: white;
+  color: var(--textColorHover);
+  font-weight: 600;
 }
 
 .edit-template {
@@ -151,22 +158,46 @@ li:last-child {
   cursor: pointer;
 }
 
-#modeButton {
-  background-color: #20203e;
-  color: white;
-  border-radius: 5px;
-  height: 35px;
-  width: 120px;
-  border: 2px solid #3f3b5c;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.5s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
+@media (max-width: 1024px) {
+  .secondBrain {
+    margin-left: 17px;
+  }
 
-#modeButton:hover {
-  background-color: #1b1b2c;
+  #iconSeconbBrain {
+    width: 35px;
+    height: 35px;
+  }
+
+  span {
+    margin-left: 0px;
+  }
+
+  .sidebar-menu ul {
+    padding-left: 15px;
+    .note-list,
+    .kanban-list {
+      padding-left: 20px;
+    }
+  }
+
+  #add-note-btn,
+  #add-kanban-btn {
+    margin-right: 7px;
+  }
+
+  #edit-note-btn,
+  #edit-kanban-btn {
+    margin-right: 0px;
+  }
+
+  #delete-note-btn,
+  #delete-kanban-btn {
+    margin-right: 7px;
+  }
+
+  .note-edit,
+  .kanban-edit {
+    width: 63px;
+    margin-right: 9px;
+  }
 }

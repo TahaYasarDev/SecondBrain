@@ -19,7 +19,7 @@
       *ngIf="!hasContent"
       [@fade]="!hasContent ? 'visible' : 'hidden'"
     >
-      Nouveau titre
+      {{ "H4" | translate }}
     </span>
     <app-block-toolbar
       *ngIf="showToolbar"

@@ -1,7 +1,8 @@
 <div>
   <div class="secondBrain">
     <img
-      src="assets/icons/electronic_dark.png"
+      class="icon"
+      src="assets/icons/electronic.png"
       id="iconSeconbBrain"
       alt="SecondBrainIcon"
     />
@@ -14,8 +15,10 @@
         <li>
           <a href="#">
             <img src="assets/icons/home.png" class="icon" alt="Dashboard" />
-            <span (click)="showDashboard()" [class.active]="isDashboardActive"
-              >Dashboard</span
+            <span
+              (click)="showDashboard()"
+              [class.active]="isDashboardActive"
+              >{{ "dashboard-ul" | translate }}</span
             >
           </a>
         </li>
@@ -26,10 +29,11 @@
               <span
                 (click)="addNote(true)"
                 [class.active]="selectedNoteId !== null"
-                >Notes</span
+                >{{ "note-ul" | translate }}</span
               >
             </a>
             <img
+              class="icon"
               src="assets/icons/plus.png"
               id="add-note-btn"
               alt="add-note"
@@ -50,6 +54,7 @@
                   <span class="note-title">{{ note.title }}</span>
                   <div class="note-icons">
                     <img
+                      class="icon"
                       src="assets/icons/delete.png"
                       id="delete-note-btn"
                       alt="delete-note"
@@ -57,6 +62,7 @@
                     />
 
                     <img
+                      class="icon"
                       src="assets/icons/pen.png"
                       id="edit-note-btn"
                       alt="edit-note"
@@ -77,7 +83,7 @@
                   />
 
                   <img
-                    class="check-icon"
+                    class="icon check-icon"
                     src="assets/icons/check.png"
                     alt="edit-valid"
                     (click)="editingNoteId = null"
@@ -94,10 +100,11 @@
               <span
                 (click)="addKanban(true)"
                 [class.active]="selectedKanbanId !== null"
-                >Kanban</span
+                >{{ "kanban-ul" | translate }}</span
               >
             </a>
             <img
+              class="icon"
               src="assets/icons/plus.png"
               id="add-kanban-btn"
               alt="add-kanban"
@@ -118,12 +125,14 @@
                   <span class="kanban-title">{{ kanban.title }}</span>
                   <div class="kanban-icons">
                     <img
+                      class="icon"
                       src="assets/icons/delete.png"
                       id="delete-kanban-btn"
                       alt="delete-kanban"
                       (click)="deleteKanban(kanban.id, $event)"
                     />
                     <img
+                      class="icon"
                       src="assets/icons/pen.png"
                       id="edit-kanban-btn"
                       alt="edit-kanban"
@@ -144,7 +153,7 @@
                   />
 
                   <img
-                    class="check-icon"
+                    class="icon check-icon"
                     src="assets/icons/check.png"
                     alt="edit-valid"
                     (click)="editingKanbanId = null"
@@ -157,17 +166,12 @@
         <li>
           <a href="#">
             <img src="assets/icons/settings.png" class="icon" alt="Settings" />
-            <span>Settings</span>
+            <span (click)="showSetting()" [class.active]="isSettingActive">{{
+              "setting-ul" | translate
+            }}</span>
           </a>
         </li>
       </ul>
     </nav>
-  </div>
-
-  <div class="button">
-    <button id="modeButton">
-      <img src="assets/icons/moon.png" class="icon" alt="ModeButton" />
-      Dark mode
-    </button>
   </div>
 </div>

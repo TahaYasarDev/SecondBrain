@@ -56,7 +56,7 @@ li + li {
 
 #new-task-input {
   background: transparent;
-  color: white;
+  color: var(--blockTextColor);
   border: none;
   font-size: 15px;
   outline: none;
@@ -64,8 +64,8 @@ li + li {
 }
 
 #new-task-button {
-  background-color: #53527d;
-  border: 2px solid #3f3b5c;
+  background-color: var(--blockNewTasksButton);
+  border: 2px solid var(--blockNewTasksButtonBorder);
   color: white;
   width: 65px;
   height: 30px;
@@ -75,8 +75,8 @@ li + li {
 
 #new-task-button:hover {
   cursor: pointer;
-  background-color: #252540;
-  color: rgb(207, 204, 204);
+  background-color: var(--blockNewTasksButtonHover);
+  color: white;
 }
 
 #new-task-information {

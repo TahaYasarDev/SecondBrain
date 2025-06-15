@@ -1,5 +1,5 @@
 export class Ticket {
-  jira: string;
+  ticket: string;
   title: string;
   texte: string;
   estimate?: number | null;
@@ -7,14 +7,14 @@ export class Ticket {
   progress?: number | null;
 
   constructor(
-    jira: string,
+    ticket: string,
     title: string,
     texte: string,
     estimate?: number | null,
     timeSpent?: number | null,
     progress?: number | null
   ) {
-    this.jira = jira;
+    this.ticket = ticket;
     this.title = title;
     this.texte = texte;
     this.estimate = estimate ?? null;
