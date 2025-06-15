@@ -1,59 +1,56 @@
-# SecondBrain
+# 🧠 Second Brain
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.13.
+**Second Brain** is an all-in-one Angular application designed to efficiently organize your ideas, tasks, and projects through a modern interface divided into several tabs: **Dashboard**, **Notes**, and **Kanban**.
 
-## Development server
+## ✨ Main Features
 
-To start a local development server, run:
+### 📊 Dashboard
+- Global overview of your content: tags, tasks, tickets, estimations, and more.
+- Real-time statistics: number of tasks to do, tasks done, tag usage, etc.
+
+### 📝 Notes
+- Create and edit **dynamic notes** with:
+  - H1, H2, H3, H4 tags
+  - Paragraphs
+  - Tasks (checkboxes)
+- Freely modify, delete, and rearrange elements.
+- Rename notes at any time.
+
+### 🗂️ Kanban
+- Create unlimited **custom kanbans**.
+- Add, rename, and delete columns.
+- Create and manage **tickets** with:
+  - Drag & drop between columns
+  - Task estimation
+  - Live editing
+
+### ⚙️ Settings
+- Switch between **themes** (e.g., light/dark)
+- Change **language**
+
+## 🚀 Getting Started
 
 ```bash
+npm install
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Then open your browser and go to: `http://localhost:4200`
 
-## Code scaffolding
+## 🛠️ Tech Stack
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- Angular
+- TypeScript
+- SCSS
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## 📁 Project Structure (simplified)
 
 ```bash
-ng generate --help
+src/
+├── app/
+│   ├── components/
+│   ├── models/
+│   ├── services/
+│   ├── shared/
 ```
 
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
