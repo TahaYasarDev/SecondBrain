@@ -129,6 +129,7 @@ export class AppComponent {
       this.viewContainer.insert(existingRef.hostView);
       existingRef.instance.show();
       existingRef.instance.loadData();
+      existingRef.instance.refreshTranslations();
     } else {
       const newId = kanbanId ?? crypto.randomUUID();
       const kanbanRef = this.viewContainer.createComponent(KanbanComponent);

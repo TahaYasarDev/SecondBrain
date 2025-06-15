@@ -228,14 +228,18 @@ export class KanbanComponent extends BaseUiBehavior {
   }
 
   addColumn() {
-    const newColumnTitle = this.translate.instant('kanban-new-column-title');
-    this.kanbanService.addColumn(newColumnTitle);
+    const newTitle = this.translate.instant('kanban-new-column-title');
+    this.columns.push({ title: newTitle, items: [], isTitleCustom: false });
+    this.kanbanService.updateColumns(this.columns);
   }
 
-  renameColumn(event: FocusEvent, index: number) {
-    const newName = (event.target as HTMLElement).innerText.trim();
-    if (newName) {
-      this.kanbanService.renameColumn(index, newName);
+  // Renommer une colonne
+  renameColumn(event: any, index: number) {
+    const newTitle = event.target.innerText.trim();
+    if (newTitle.length > 0) {
+      this.columns[index].title = newTitle;
+      this.columns[index].isTitleCustom = true;
+      this.kanbanService.updateColumns(this.columns);
     }
   }
 
@@ -254,6 +258,39 @@ export class KanbanComponent extends BaseUiBehavior {
     if (!confirmed) return;
 
     this.kanbanService.deleteColumn(index);
+  }
+
+  refreshTranslations() {
+    this.translate
+      .get([
+        'kanban-column-one-title',
+        'kanban-column-two-title',
+        'kanban-column-three-title',
+        'kanban-column-four-title',
+        'kanban-new-column-title',
+      ])
+      .subscribe((translations) => {
+        this.columns.forEach((col, i) => {
+          if (!col.isTitleCustom) {
+            switch (i) {
+              case 0:
+                col.title = translations['kanban-column-one-title'];
+                break;
+              case 1:
+                col.title = translations['kanban-column-two-title'];
+                break;
+              case 2:
+                col.title = translations['kanban-column-three-title'];
+                break;
+              case 3:
+                col.title = translations['kanban-column-four-title'];
+                break;
+              default:
+                col.title = translations['kanban-new-column-title'];
+            }
+          }
+        });
+      });
   }
 
   //#endregion
