@@ -12,9 +12,11 @@ import { FormsModule } from '@angular/forms';
 
 // Service
 import { CountService } from '../../services/count.service';
+import { KanbanService } from '../../services/kanban.service';
 
 // Model
 import { Ticket } from '../../models/ticket.model';
+import { Column } from '../../models/column';
 
 // Shared
 import { fadeAnimation } from '../../shared/animation';
@@ -31,6 +33,8 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 })
 export class KanbanComponent extends BaseUiBehavior {
   @Input() kanbanId!: string;
+
+  kanbanService!: KanbanService;
 
   // Columns
   backlog: Ticket[] = [];
@@ -62,6 +66,7 @@ export class KanbanComponent extends BaseUiBehavior {
   }
 
   ngOnInit() {
+    this.kanbanService = new KanbanService(this.kanbanId);
     this.loadData();
   }
 
@@ -74,33 +79,6 @@ export class KanbanComponent extends BaseUiBehavior {
 
   ngOnDestroy(): void {
     this.countService.deleteKanban(this.kanbanId);
-  }
-
-  loadData() {
-    this.translate
-      .get([
-        'kanban-column-one-title',
-        'kanban-column-two-title',
-        'kanban-column-three-title',
-        'kanban-column-four-title',
-      ])
-      .subscribe((translations) => {
-        this.columns = [
-          {
-            title: translations['kanban-column-one-title'],
-            items: this.backlog,
-          },
-          {
-            title: translations['kanban-column-two-title'],
-            items: this.development,
-          },
-          {
-            title: translations['kanban-column-three-title'],
-            items: this.inProgress,
-          },
-          { title: translations['kanban-column-four-title'], items: this.done },
-        ];
-      });
   }
 
   drop(event: CdkDragDrop<Ticket[]>) {
@@ -208,17 +186,57 @@ export class KanbanComponent extends BaseUiBehavior {
 
   //#region Handle columns
 
+  loadData() {
+    const savedColumns = this.kanbanService.getColumns();
+
+    // Si des colonnes sont déjà sauvegardées, on les utilise directement
+    if (savedColumns.length > 0) {
+      this.columns = savedColumns;
+      return;
+    }
+
+    // Sinon, on charge les titres traduits et on crée les colonnes
+    this.translate
+      .get([
+        'kanban-column-one-title',
+        'kanban-column-two-title',
+        'kanban-column-three-title',
+        'kanban-column-four-title',
+      ])
+      .subscribe((translations) => {
+        this.columns = [
+          {
+            title: translations['kanban-column-one-title'],
+            items: this.backlog,
+          },
+          {
+            title: translations['kanban-column-two-title'],
+            items: this.development,
+          },
+          {
+            title: translations['kanban-column-three-title'],
+            items: this.inProgress,
+          },
+          {
+            title: translations['kanban-column-four-title'],
+            items: this.done,
+          },
+        ];
+
+        this.kanbanService.updateColumns(this.columns);
+      });
+  }
+
   addColumn() {
     const newColumnTitle = this.translate.instant('kanban-new-column-title');
-    this.columns.push({
-      title: newColumnTitle,
-      items: [],
-    });
+    this.kanbanService.addColumn(newColumnTitle);
   }
 
   renameColumn(event: FocusEvent, index: number) {
     const newName = (event.target as HTMLElement).innerText.trim();
-    if (newName) this.columns[index].title = newName;
+    if (newName) {
+      this.kanbanService.renameColumn(index, newName);
+    }
   }
 
   getConnectedDropLists(index: number): string[] {
@@ -235,17 +253,7 @@ export class KanbanComponent extends BaseUiBehavior {
     );
     if (!confirmed) return;
 
-    const removedColumn = this.columns[index];
-
-    if (removedColumn.items.length > 0) {
-      if (index > 0) {
-        this.columns[index - 1].items.push(...removedColumn.items);
-      } else if (this.columns.length > 1) {
-        this.columns[index + 1].items.push(...removedColumn.items);
-      }
-    }
-
-    this.columns.splice(index, 1);
+    this.kanbanService.deleteColumn(index);
   }
 
   //#endregion
@@ -287,9 +295,4 @@ export class KanbanComponent extends BaseUiBehavior {
       }
     }
   }
-}
-
-interface Column {
-  title: string;
-  items: Ticket[];
 }
