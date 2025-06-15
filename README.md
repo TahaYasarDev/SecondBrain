@@ -43,7 +43,7 @@ Then open your browser and go to: `http://localhost:4200`
 - TypeScript
 - SCSS
 
-## 📁 Project Structure (simplified)
+## 📁 Project Structure
 
 ```bash
 src/
