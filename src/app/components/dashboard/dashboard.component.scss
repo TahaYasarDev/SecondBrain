@@ -34,9 +34,14 @@ h2 {
   .dashboard-grid {
     grid-template-columns: 49% 49%;
     column-gap: 2%;
+    row-gap: 1%;
   }
 
   .dashboard-box {
     height: 350px;
+  }
+
+  .dashboard-container {
+    padding-top: 10px;
   }
 }

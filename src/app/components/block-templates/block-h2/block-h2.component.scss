@@ -16,3 +16,9 @@
 span {
   font-size: 27px;
 }
+
+@media (max-width: 1024px) {
+  .placeholder {
+    top: 7px;
+  }
+}
