@@ -54,3 +54,5 @@ src/
 │   ├── shared/
 ```
 
+## 🖼️ Screenshot
+![Second Brain Overview](src/assets/screenshots/Second%20Brain%20Overview.png)
