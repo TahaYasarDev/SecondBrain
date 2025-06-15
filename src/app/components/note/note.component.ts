@@ -88,7 +88,7 @@ export class NoteComponent implements AfterViewInit {
 
     const defaultPos = { x: 0, y: this.componentsRefs.length * 120 };
 
-    // Applies the position to the component's DOM
+    // applies the position to the component's DOM
     compRef.location.nativeElement.style.position = 'absolute';
     compRef.location.nativeElement.style.top = defaultPos.y + 'px';
     compRef.location.nativeElement.style.left = defaultPos.x + 'px';
@@ -96,7 +96,7 @@ export class NoteComponent implements AfterViewInit {
 
     this.componentsRefs.push(compRef);
 
-    // Listens to the child's events
+    // listens to the child's events
     if (compRef.instance.deleteBalise) {
       compRef.instance.deleteBalise.subscribe(() =>
         this.removeComponent(compRef)

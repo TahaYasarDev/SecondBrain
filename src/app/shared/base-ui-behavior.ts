@@ -6,14 +6,10 @@ import { AnimationEvent } from '@angular/animations';
 export abstract class BaseUiBehavior {
   @Output() deleteBalise = new EventEmitter<void>();
 
-  placeHolder: string = 'Écrivez, tapez « / » pour afficher les commandes…';
-
   isVisible = true;
 
   hasContent = false;
 
-  // Temporarily set isVisible to false, then back to true
-  // This triggers Angular's animation to play again when the component becomes visible
   show() {
     this.isVisible = false;
     setTimeout(() => {

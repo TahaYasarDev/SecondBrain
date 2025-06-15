@@ -202,7 +202,6 @@ li:last-child {
   }
 }
 
-/* Burger button caché par défaut */
 .burger-btn {
   display: none;
 }
@@ -215,7 +214,7 @@ li:last-child {
     left: 10px;
     top: -5px;
     opacity: 0;
-    transform: translateX(-30px); /* départ 30px à gauche */
+    transform: translateX(-30px);
     transition: opacity 1s ease 0.2s, transform 0.5s ease 0.2s;
   }
 
@@ -229,7 +228,6 @@ li:last-child {
     display: none;
   }
 
-  /* Sidebar cachée par défaut */
   .sidebar-menu {
     position: fixed;
     top: 0;
@@ -241,13 +239,11 @@ li:last-child {
     z-index: 1;
   }
 
-  /* Sidebar visible quand .open */
   .sidebar-menu.open {
     opacity: 1;
     transform: translateX(0);
   }
 
-  /* Affiche le burger uniquement en mobile */
   .burger-btn {
     z-index: 2;
     display: block;

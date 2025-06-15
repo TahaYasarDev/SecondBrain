@@ -1,6 +1,15 @@
 // Angular
 import { Component, OnInit } from '@angular/core';
 import { NgApexchartsModule } from 'ng-apexcharts';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import {
+  ApexAxisChartSeries,
+  ApexChart,
+  ApexDataLabels,
+  ApexXAxis,
+  ApexPlotOptions,
+  ApexStroke,
+} from 'ng-apexcharts';
 
 // Model
 import { Ticket } from '../../models/ticket.model';
@@ -12,15 +21,6 @@ import { ThemeService } from '../../services/theme.service';
 // Shared
 import { fadeAnimation } from '../../shared/animation';
 import { BaseUiBehavior } from '../../shared/base-ui-behavior';
-import {
-  ApexAxisChartSeries,
-  ApexChart,
-  ApexDataLabels,
-  ApexXAxis,
-  ApexPlotOptions,
-  ApexStroke,
-} from 'ng-apexcharts';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-dashboard',
@@ -188,14 +188,14 @@ export class DashboardComponent extends BaseUiBehavior implements OnInit {
         {
           name: this.translate.instant('dashboard-title-three-label-spent'),
           data: allTickets.map((item) => ({
-            x: item.ticket, // numéro du ticket
-            y: item.timeSpent || 0, // temps passé, 0 si absent
+            x: item.ticket,
+            y: item.timeSpent || 0,
             goals: [
               {
                 name: this.translate.instant(
                   'dashboard-title-three-label-estimated'
                 ),
-                value: item.estimate || 0, // temps estimé, 0 si absent
+                value: item.estimate || 0,
                 strokeHeight: 10,
                 strokeWidth: 30,
                 strokeColor: '#775DD0',
@@ -322,7 +322,7 @@ export class DashboardComponent extends BaseUiBehavior implements OnInit {
   getCssVariableFromTheme(name: string, isDark: boolean): string {
     const element = isDark
       ? document.documentElement // :root
-      : document.querySelector('.light-theme'); // thème clair
+      : document.querySelector('.light-theme'); // light theme
 
     if (!element) return '';
 

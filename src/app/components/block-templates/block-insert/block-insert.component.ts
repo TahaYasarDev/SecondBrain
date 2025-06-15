@@ -50,7 +50,7 @@ export class BlockInsertComponent implements AfterViewInit {
   onClickOutside(event: MouseEvent) {
     const target = event.target as HTMLElement;
 
-    // Check if the click occurred outside the .dropdown element
+    // check if the click occurred outside the .dropdown element
     if (!target.closest('.dropdown')) {
       this.dropdownOpen = false;
     }

@@ -7,16 +7,18 @@ import {
   DragDropModule,
   moveItemInArray,
 } from '@angular/cdk/drag-drop';
+import { TranslateModule } from '@ngx-translate/core';
 
 // Component
 import { BlockToolbarComponent } from '../block-toolbar/block-toolbar.component';
+
+// Service
+import { CountService } from '../../../services/count.service';
 
 // Shared
 import { fadeAnimation } from '../../../shared/animation';
 import { ToggleDraggableDirective } from '../../../shared/toggle-draggable.directive';
 import { BaseToolbarBehavior } from '../../../shared/base-toolbar-behavior';
-import { CountService } from '../../../services/count.service';
-import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-block-todo',

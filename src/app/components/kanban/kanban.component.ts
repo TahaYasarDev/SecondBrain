@@ -134,7 +134,8 @@ export class KanbanComponent extends BaseUiBehavior {
   openEditPopup(ticket?: Ticket) {
     if (ticket) {
       this.editingItem = ticket;
-      this.popupItem = { ...ticket }; // clone to avoid modifying directly
+      // clone to avoid modifying directly
+      this.popupItem = { ...ticket };
     } else {
       this.editingItem = null;
       this.popupItem = this.createEmptyItem();
@@ -192,13 +193,11 @@ export class KanbanComponent extends BaseUiBehavior {
   loadData() {
     const savedColumns = this.kanbanService.getColumns();
 
-    // Si des colonnes sont déjà sauvegardées, on les utilise directement
     if (savedColumns.length > 0) {
       this.columns = savedColumns;
       return;
     }
 
-    // Sinon, on charge les titres traduits et on crée les colonnes
     this.translate
       .get([
         'kanban-column-one-title',
@@ -236,7 +235,6 @@ export class KanbanComponent extends BaseUiBehavior {
     this.kanbanService.updateColumns(this.columns);
   }
 
-  // Renommer une colonne
   renameColumn(event: any, index: number) {
     const newTitle = event.target.innerText.trim();
     if (newTitle.length > 0) {
